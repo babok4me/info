@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="uk" data-bs-theme="dark">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-0W56NT0Y62"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-0W56NT0Y62");
+    </script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Глосарій &mdash; babok4me</title>
+    <meta
+      name="description"
+      content="Перелік основних термінів, понять, скорочень та їх визначень, що використовуються в бізнес-аналізі."
+    />
+    <link rel="icon" type="image/png" sizes="32х32" href="../favicon.png" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link href="../src/css/style.css" rel="stylesheet" />
+  </head>
+
+  <body class="container">
+    <a href="#main-content" class="visually-hidden-focusable">
+      Перейти до основного вмісту
+    </a>
+
+    <header class="row">
+      <!--Logo-->
+      <div class="col-6 col-md-4 col-xl-2 text-center fw-semibold">
+        <div class="mt-2 fs-3 lh-1 mb-0">BABOK4ME</div>
+        <div class="lh-1 mb-3">знати &middot; вміти &middot; діяти</div>
+      </div>
+
+      <!--Search for tablet+PC-->
+      <div
+        class="d-none d-md-flex col-md-6 col-xl-8 align-items-center justify-content-center"
+      >
+        <div class="d-flex align-items-center w-75">
+          <input
+            class="page-search-input form-control form-control-sm"
+            type="search"
+            placeholder="Пошук на сторінці..."
+            aria-label="Пошук на сторінці"
+            autocomplete="off"
+          />
+          <span
+            class="search-counter ms-2 text-body-secondary text-nowrap"
+            aria-live="polite"
+          ></span>
+        </div>
+      </div>
+
+      <!--Main menu-->
+      <div class="col-6 col-md-2 col-xl-2 d-flex justify-content-end">
+        <nav class="navbar">
+          <div class="container-fluid" aria-label="Головна навігація">
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasNavbar"
+              aria-controls="offcanvasNavbar"
+              aria-label="Відкрити головне меню"
+            >
+              <span class="navbar-toggler-icon" aria-hidden="true"></span>
+            </button>
+            <div
+              class="offcanvas offcanvas-end"
+              tabindex="1"
+              id="offcanvasNavbar"
+              aria-labelledby="offcanvasNavbarLabel"
+            >
+              <div class="ms-1 mb-0 offcanvas-header">
+                <h2 class="fs-4 offcanvas-title" id="offcanvasNavbarLabel">
+                  Від потреби до рішення
+                </h2>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Закрити меню"
+                ></button>
+              </div>
+              <hr class="mt-0 mb-0" />
+              <div class="ms-2 offcanvas-body">
+                <ul
+                  class="fs-5 navbar-nav justify-content-end flex-grow-1 pe-3"
+                >
+                  <li class="nav-item">
+                    <a class="nav-link active" href="#"><b>Бізнес-аналіз</b></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Тестування</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Технології</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Інструменти</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Корпоративні системи</a>
+                  </li>
+                </ul>
+
+                <div class="mt-2">
+                  <a href="../sitemap.html">Мапа сайту</a>&emsp;
+                  <a href="../support.html">Підтримка</a>
+                </div>
+
+                <!--Settings-->
+                <div class="mt-5 position-relative">
+                  <p class="fs-5 mb-2 fw-semibold">Налаштування</p>
+
+                  <!--https://gtranslate.io/website-translator-widget-->
+                  <div class="gtranslate_wrapper">
+                    <span class="text-body-secondary"
+                      >Змінити мову сайту:&emsp;</span
+                    >
+                  </div>
+                  <script>
+                    window.gtranslateSettings = {
+                      default_language: "uk",
+                      native_language_names: true,
+                      detect_browser_language: true,
+                      languages: ["uk", "en"],
+                      wrapper_selector: ".gtranslate_wrapper",
+                    };
+                  </script>
+                  <script
+                    src="https://cdn.gtranslate.net/widgets/latest/lc.js"
+                    defer
+                  ></script>
+
+                  <!--theme light/dark-->
+                  <div class="mt-1">
+                    <span class="text-body-secondary"
+                      >Змінити тему сайту: &emsp;</span
+                    >
+                    <button
+                      id="themeToggle"
+                      class="btn btn-outline-secondary"
+                      type="button"
+                      aria-label="Змінити тему"
+                    >
+                      🌙
+                    </button>
+                  </div>
+                </div>
+
+                <!--Statistics-->
+                <div class="mt-4">
+                  <p class="fs-5 mb-0 fw-semibold">Статистика сайту</p>
+
+                  <!-- I.UA counter --><a
+                    href="https://www.i.ua/"
+                    target="_blank"
+                    onclick="this.href = 'https://i.ua/r.php?240065'"
+                    title="Rated by I.UA"
+                  >
+                    <script type="text/javascript">
+                      <!--
+                      iS =
+                        "http" +
+                        (window.location.protocol == "https:" ? "s" : "") +
+                        "://r.i.ua/s?u240065&p191&n" +
+                        Math.random();
+                      iD = document;
+                      if (!iD.cookie) iD.cookie = "b=b; path=/";
+                      if (iD.cookie) iS += "&c1";
+                      iS +=
+                        "&d" +
+                        (screen.colorDepth
+                          ? screen.colorDepth
+                          : screen.pixelDepth) +
+                        "&w" +
+                        screen.width +
+                        "&h" +
+                        screen.height;
+                      iT = iR = iD.referrer.replace((iP = /^[a-z]*:\/\//), "");
+                      iH = window.location.href.replace(iP, "");
+                      (iI = iT.indexOf("/")) != -1
+                        ? (iT = iT.substring(0, iI))
+                        : (iI = iT.length);
+                      if (iT != iH.substring(0, iI)) iS += "&f" + escape(iR);
+                      iS += "&r" + escape(iH);
+                      iD.write(
+                        '<img src="' +
+                          iS +
+                          '" border="0" width="160" height="19" />',
+                      );
+                      //-->
+                    </script></a
+                  >
+                  <!-- End of I.UA counter -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <hr class="mt-0 mb-4" />
+
+      <!-- Search for mobile -->
+      <div class="col-12 mb-4 d-md-none">
+        <div class="d-flex align-items-center w-100">
+          <input
+            class="page-search-input form-control form-control-sm"
+            type="search"
+            placeholder="Пошук на сторінці..."
+            aria-label="Пошук на сторінці"
+            autocomplete="off"
+          />
+          <span
+            class="search-counter ms-2 text-body-secondary text-nowrap"
+            aria-live="polite"
+          ></span>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <div>
+        <span
+          ><a href="../index.html">Головна</a> &gt;
+          <a href="./main.html">Довідник бізнес-аналітика</a> &gt; Глосарій
+        </span>
+      </div>
+      <h1 class="mt-4">Глосарій</h1>
+      <p>
+        Джерело:
+        <a
+          href="https://www.iiba.org/career-resources/a-business-analysis-professionals-foundation-for-success/babok/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i>
+            A Guide to the Business Analysis Body of Knowledge® (BABOK® Guide),
+            Version 3, International Institute of Business Analysis
+          </i>
+        </a>
+      </p>
+
+      <div class="mt-5">
+        <input
+          type="search"
+          id="glossary-search"
+          class="form-control"
+          placeholder="Пошук терміну..."
+          aria-label="Пошук терміну"
+        />
+      </div>
+
+      <div class="mt-4">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">
+                <button
+                  type="button"
+                  class="sort-header"
+                  data-sort="en"
+                  title="Сортувати за алфавітом"
+                >
+                  Термін EN
+                </button>
+              </th>
+              <th scope="col">
+                <button type="button" class="sort-header" data-sort="uk">
+                  Термін UK
+                </button>
+              </th>
+              <th scope="col">Пояснення</th>
+              <th scope="col">Посилання</th>
+            </tr>
+          </thead>
+          <tbody id="glossary-body">
+            <tr
+              id="acceptance-criteria"
+              data-en="acceptance criteria"
+              data-uk="Критерії приймання"
+            >
+              <td>acceptance criteria</td>
+              <td>Критерії приймання</td>
+              <td>
+                Критерії щодо вимог, продуктів або циклу постачання,
+                відповідність яким призведе до схвалення зацікавленими сторонами
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="acceptance-criteria"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="actor-business-analysis"
+              data-en="actor (business analysis)"
+              data-uk="Актор (бізнес-аналіз)"
+            >
+              <td>actor (business analysis)</td>
+              <td>Актор (бізнес-аналіз)</td>
+              <td>
+                Людина, пристрій або система, які відіграють певну специфічну
+                роль у взаємодії з певним рішенням
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="actor-business-analysis"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="adaptive-approach"
+              data-en="adaptive approach"
+              data-uk="Адаптивний підхід"
+            >
+              <td>adaptive approach</td>
+              <td>Адаптивний підхід</td>
+              <td>
+                Підхід, колирішення розвивається на основі циклів навчання та
+                відкриттів, з безперервним зворотним зв'язком, який дозволяє
+                приймати рішення якомога пізніше
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="adaptive-approach"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="Agile-Extension"
+              data-en="Agile Extension to the BABOK® Guide"
+              data-uk="Розширення BABOK Guide щодо Agile"
+            >
+              <td>Agile Extension to the BABOK® Guide</td>
+              <td>Розширення BABOK Guide щодо Agile</td>
+              <td>
+                Стандарти практик бізнес аналізу в контексті Agile. Додаток до
+                BABOK Guide був вперше опублікований в 2013 році IIBA, в
+                партнерстві з Agile Alliance
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="Agile-Extension"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="allocation" data-en="allocation" data-uk="Розподіл">
+              <td>allocation</td>
+              <td>Розподіл</td>
+              <td>
+                Див. <a href="#requirements-allocation">розподіл вимог</a>
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="allocation"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="architecture" data-en="architecture" data-uk="Архітектура">
+              <td>architecture</td>
+              <td>Архітектура</td>
+              <td>
+                Дизайн, структура і поведінка існуючих і майбутніх станів
+                структури системичиІТ сервісів, з точкизору її компонентів і
+                їхньої взаємодії, а такожі до середовища, у якому вони
+                знаходяться. Див. також архітектура бізнесу, архітектура
+                підприємства, архітектура вимог.
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="architecture"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="artifact"
+              data-en="artifact (business analysis)"
+              data-uk="Артефакт (бізнес-аналіз)"
+            >
+              <td>artifact (business analysis)</td>
+              <td>Артефакт (бізнес-аналіз)</td>
+              <td>
+                Будь-який об'єкт, який стосується рішення і створюється в рамках
+                зусиль бізнес-аналізу
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="artifact"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="assumption" data-en="assumption" data-uk="Припущення">
+              <td>assumption</td>
+              <td>Припущення</td>
+              <td>
+                Фактори, які мають вплив і вважаються правильними але не були
+                підтверджені, або ті, які є істинними зараз, проте можуть не
+                бути такими в майбутньому
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="assumption"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="behavioural-business-rule"
+              data-en="behavioural business rule"
+              data-uk="Поведінкове бізнес-правило"
+            >
+              <td>behavioural business rule</td>
+              <td>Поведінкове бізнес-правило</td>
+              <td>
+                Бізнес-правило, що зобов'язує (або забороняє) певну поведінку,
+                дію, практику чи процедуру; бізнес-правило, що визначає
+                (регулює) підприємницьку діяльність. Також відоме, як операційне
+                правило
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="behavioural-business-rule"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="requirements-allocation"
+              data-en="requirements allocation"
+              data-uk="Розподіл вимог"
+            >
+              <td>requirements allocation</td>
+              <td>Розподіл вимог</td>
+              <td>
+                Процес розподілу вимог, котрі будуть втілені певними
+                компонентами рішення
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="requirements-allocation"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <footer class="mb-3">
+      <div class="text-center">
+        <hr class="mt-4 mb-1" />
+        &copy; babok4me, 2026<br />
+        Весь контент доступний за ліцензією
+        <a
+          href="https://creativecommons.org/licenses/by/4.0/deed.uk"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Creative Commons Attribution 4.0 International license</a
+        >, якщо не зазначено інше
+      </div>
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../src/js/theme.js"></script>
+    <script src="../src/js/search.js"></script>
+    <script src="../src/js/glossaryCopyLink.js"></script>
+  </body>
+</html>

@@ -2,3 +2,17 @@ main h1,
 main h2 {
     color: rgb(100, 100, 100);
 }
+
+.table tbody tr:target > td {
+  background-color: var(--bs-warning-bg-subtle);
+}
+
+.sort-header {
+  all: unset;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.sort-header:hover {
+  text-decoration: underline;
+}
