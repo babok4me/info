@@ -1,8 +1,10 @@
 main h1,
 main h2 {
-    color: rgb(100, 100, 100);
+  color: rgb(100, 100, 100);
 }
 
+
+/*Glossary*/
 .table tbody tr:target > td {
   background-color: var(--bs-warning-bg-subtle);
 }
@@ -16,3 +18,43 @@ main h2 {
 .sort-header:hover {
   text-decoration: underline;
 }
+
+.alphabet {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 12px 0;
+}
+
+.alphabet-button {
+  border: 1px solid #495057;
+  background: transparent;
+  color: #e9ecef;
+
+  min-width: 32px;
+  height: 32px;
+
+  padding: 0 8px;
+
+  border-radius: 5px;
+
+  cursor: pointer;
+  font-size: 14px;
+
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.alphabet-button:hover {
+  border-color: #6ea8fe;
+  color: #6ea8fe;
+}
+
+.alphabet-button.active {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  color: #fff;
+}
+/*Glossary end*/
