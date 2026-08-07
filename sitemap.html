@@ -31,9 +31,26 @@
       crossorigin="anonymous"
     />
     <link href="./src/css/style.css" rel="stylesheet" />
+    <link href="./src/css/topbutton.css" rel="stylesheet" />
   </head>
 
   <body class="container">
+    <button
+      onclick="topFunction()"
+      id="myBtn"
+      title="Go to top"
+      aria-label="Перейти на початок сторінки"
+    >
+      Top
+    </button>
+    <button
+      onclick="topFunction()"
+      id="myBtn"
+      title="Go to top"
+      aria-label="Перейти на початок сторінки"
+    >
+      Top
+    </button>
     <a href="#main-content" class="visually-hidden-focusable">
       Перейти до основного вмісту
     </a>
@@ -173,7 +190,6 @@
                     title="Rated by I.UA"
                   >
                     <script type="text/javascript">
-                      <!--
                       iS =
                         "http" +
                         (window.location.protocol == "https:" ? "s" : "") +
@@ -203,7 +219,6 @@
                           iS +
                           '" border="0" width="160" height="19" />',
                       );
-                      //-->
                     </script></a
                   >
                   <!-- End of I.UA counter -->
@@ -267,5 +282,6 @@
     ></script>
     <script src="./src/js/theme.js"></script>
     <script src="./src/js/search.js"></script>
+    <script src="./src/js/topbutton.js"></script>
   </body>
 </html>

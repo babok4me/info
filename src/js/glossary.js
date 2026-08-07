@@ -148,13 +148,15 @@ function filterGlossary() {
     const en = row.dataset.en || "";
     const uk = row.dataset.uk || "";
 
-    const description =
-      row.cells[2].dataset.originalText ||
-      row.cells[2].textContent.trim();
+    const descriptionCell = row.cells[2];
 
-    if (!row.cells[2].dataset.originalText) {
-      row.cells[2].dataset.originalText = description;
+    if (!descriptionCell.dataset.originalHtml) {
+      descriptionCell.dataset.originalHtml = descriptionCell.innerHTML;
+      descriptionCell.dataset.originalText =
+        descriptionCell.textContent.trim();
     }
+
+    const description = descriptionCell.dataset.originalText;
 
     const matchesSearch =
       !query ||
@@ -180,8 +182,7 @@ function filterGlossary() {
         .startsWith(selectedLetter);
     }
 
-    const isVisible =
-      matchesSearch && matchesLetter;
+    const isVisible = matchesSearch && matchesLetter;
 
     row.hidden = !isVisible;
 
@@ -191,7 +192,13 @@ function filterGlossary() {
 
     highlightMatch(row.cells[0], en, query);
     highlightMatch(row.cells[1], uk, query);
-    highlightMatch(row.cells[2], description, query);
+
+    if (query) {
+      highlightMatch(descriptionCell, description, query);
+    } else {
+      descriptionCell.innerHTML =
+        descriptionCell.dataset.originalHtml;
+    }
   });
 
   glossaryCount.textContent = `(${visibleCount})`;
@@ -199,49 +206,76 @@ function filterGlossary() {
 
 
 /** Підсвічування знайденого тексту */
+/** Підсвічування знайденого тексту */
 function highlightMatch(cell, text, query) {
-  cell.textContent = "";
+  if (!cell.dataset.originalHtml) {
+    cell.dataset.originalHtml = cell.innerHTML;
+  }
+
+  // Завжди відновлюємо оригінальний HTML
+  cell.innerHTML = cell.dataset.originalHtml;
 
   if (!query) {
-    cell.textContent = text;
     return;
   }
 
-  const normalizedText = text.toLocaleLowerCase();
-  const normalizedQuery = query.toLocaleLowerCase();
+  const walker = document.createTreeWalker(
+    cell,
+    NodeFilter.SHOW_TEXT
+  );
 
-  let startIndex = 0;
-  let index;
+  const textNodes = [];
 
-  while (
-    (index = normalizedText.indexOf(
-      normalizedQuery,
-      startIndex
-    )) !== -1
-  ) {
-    cell.append(
+  while (walker.nextNode()) {
+    textNodes.push(walker.currentNode);
+  }
+
+  textNodes.forEach((node) => {
+    const value = node.nodeValue;
+    const normalizedValue = value.toLocaleLowerCase();
+    const normalizedQuery = query.toLocaleLowerCase();
+
+    if (!normalizedValue.includes(normalizedQuery)) {
+      return;
+    }
+
+    const fragment = document.createDocumentFragment();
+
+    let startIndex = 0;
+    let index;
+
+    while (
+      (index = normalizedValue.indexOf(
+        normalizedQuery,
+        startIndex
+      )) !== -1
+    ) {
+      fragment.append(
+        document.createTextNode(
+          value.slice(startIndex, index)
+        )
+      );
+
+      const mark = document.createElement("mark");
+
+      mark.textContent = value.slice(
+        index,
+        index + query.length
+      );
+
+      fragment.append(mark);
+
+      startIndex = index + query.length;
+    }
+
+    fragment.append(
       document.createTextNode(
-        text.slice(startIndex, index)
+        value.slice(startIndex)
       )
     );
 
-    const mark = document.createElement("mark");
-
-    mark.textContent = text.slice(
-      index,
-      index + query.length
-    );
-
-    cell.append(mark);
-
-    startIndex = index + query.length;
-  }
-
-  cell.append(
-    document.createTextNode(
-      text.slice(startIndex)
-    )
-  );
+    node.replaceWith(fragment);
+  });
 }
 
 

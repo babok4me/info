@@ -29,8 +29,7 @@ main h2 {
 .alphabet-button {
   border: 1px solid #495057;
   background: transparent;
-  color: #e9ecef;
-
+  
   min-width: 32px;
   height: 32px;
 
@@ -56,5 +55,14 @@ main h2 {
   background-color: #0d6efd;
   border-color: #0d6efd;
   color: #fff;
+}
+
+#glossary-body td a {
+  color: var(--bs-link-color);
+  text-decoration: underline;
+}
+
+#glossary-body td a:hover {
+  color: var(--bs-link-hover-color);
 }
 /*Glossary end*/

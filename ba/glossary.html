@@ -35,9 +35,18 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
     <link href="../src/css/style.css" rel="stylesheet" />
+    <link href="../src/css/topbutton.css" rel="stylesheet" />
   </head>
 
   <body class="container">
+    <button
+      onclick="topFunction()"
+      id="myBtn"
+      title="Go to top"
+      aria-label="Перейти на початок сторінки"
+    >
+      Top
+    </button>
     <a href="#main-content" class="visually-hidden-focusable">
       Перейти до основного вмісту
     </a>
@@ -177,7 +186,6 @@
                     title="Rated by I.UA"
                   >
                     <script type="text/javascript">
-                      <!--
                       iS =
                         "http" +
                         (window.location.protocol == "https:" ? "s" : "") +
@@ -207,7 +215,6 @@
                           iS +
                           '" border="0" width="160" height="19" />',
                       );
-                      //-->
                     </script></a
                   >
                   <!-- End of I.UA counter -->
@@ -255,8 +262,15 @@
           <i>
             A Guide to the Business Analysis Body of Knowledge® (BABOK® Guide),
             Version 3, International Institute of Business Analysis
-          </i>
-        </a>
+          </i> </a
+        ><br />
+        Глосарій українською мовою у форматі pdf:
+        <a
+          href="https://www.iiba.org/globalassets/standards-and-resources/glossary/files/babok-v3-glossary-ukrainian.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          >перейти</a
+        >
       </p>
 
       <!--Filter-->
@@ -375,10 +389,10 @@
             </tr>
             <tr
               id="Agile-Extension"
-              data-en="Agile Extension to the BABOK® Guide"
+              data-en="Agile Extension to the BABOK Guide"
               data-uk="Розширення BABOK Guide щодо Agile"
             >
-              <td>Agile Extension to the BABOK® Guide</td>
+              <td>Agile Extension to the BABOK Guide</td>
               <td>Розширення BABOK Guide щодо Agile</td>
               <td>
                 Стандарти практик бізнес аналізу в контексті Agile. Додаток до
@@ -422,8 +436,8 @@
                 Дизайн, структура і поведінка існуючих і майбутніх станів
                 структури системичиІТ сервісів, з точкизору її компонентів і
                 їхньої взаємодії, а такожі до середовища, у якому вони
-                знаходяться. Див. також архітектура бізнесу, архітектура
-                підприємства, архітектура вимог.
+                знаходяться. Див. також <a href="#business-architecture">бізнес-архітектура</a>, <a href="#enterprise-architecture">архітектура
+                підприємства</a>, <a href="#requirements-architecture">архітектура вимог</a>.
               </td>
               <td class="text-center">
                 <button
@@ -438,7 +452,7 @@
               </td>
             </tr>
             <tr
-              id="artifact"
+              id="artifact-ba"
               data-en="artifact (business analysis)"
               data-uk="Артефакт (бізнес-аналіз)"
             >
@@ -452,7 +466,7 @@
                 <button
                   type="button"
                   class="btn btn-link p-0 copy-link"
-                  data-anchor="artifact"
+                  data-anchor="artifact-ba"
                   title="Копіювати посилання"
                   aria-label="Копіювати посилання на термін"
                 >
@@ -549,22 +563,6 @@
                 </button>
               </td>
             </tr>
-            <tr id="BPM" data-en="BPM" data-uk="BPM">
-              <td>BPM</td>
-              <td>BPM</td>
-              <td>Див. управління бізнес-процесами</td>
-              <td class="text-center">
-                <button
-                  type="button"
-                  class="btn btn-link p-0 copy-link"
-                  data-anchor="BPM"
-                  title="Копіювати посилання"
-                  aria-label="Копіювати посилання на термін"
-                >
-                  <i class="bi bi-link-45deg"></i>
-                </button>
-              </td>
-            </tr>
             <tr
               id="brainstorming"
               data-en="brainstorming"
@@ -597,7 +595,7 @@
             >
               <td>business (business analysis)</td>
               <td>Бізнес (бізнес-аналіз)</td>
-              <td>Див. підприємство</td>
+              <td>Див. <a href="#enterprise">підприємство</a></td>
               <td class="text-center">
                 <button
                   type="button"
@@ -625,7 +623,7 @@
                 <button
                   type="button"
                   class="btn btn-link p-0 copy-link"
-                  data-anchor="business (business world)"
+                  data-anchor="business-bw"
                   title="Копіювати посилання"
                   aria-label="Копіювати посилання на термін"
                 >
@@ -785,7 +783,7 @@
               <td>
                 Опис запланованих активностей, що проводитиме бізнес-аналітик
                 задля виконання робіт по бізнес-аналізу умежах конкретної
-                ініціативи. Див. також план управління вимогами
+                ініціативи. Див. також <a href="#requirements-management-plan">план управління вимогами</a>
               </td>
               <td class="text-center">
                 <button
@@ -903,7 +901,7 @@
             >
               <td>business domain</td>
               <td>Бізнес-домен</td>
-              <td>Див. предметна галузь</td>
+              <td>Див. <a href="#domain">предметна галузь</a></td>
               <td class="text-center">
                 <button
                   type="button"
@@ -1173,8 +1171,2474 @@
                 </button>
               </td>
             </tr>
+            <tr
+              id="cause-and-effect-diagram"
+              data-en="cause-and-effect diagram"
+              data-uk="Причинно-наслідкова діаграма"
+            >
+              <td>cause-and-effect diagram</td>
+              <td>Причинно-наслідкова діаграма</td>
+              <td>Див. <a href="#fishbone-diagram">діаграма «риб'ячого кістяка»</a></td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="cause-and-effect-diagram"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="change" data-en="change" data-uk="Зміна">
+              <td>change</td>
+              <td>Зміна</td>
+              <td>Трансформація у відповідь на потребу</td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="change"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="change-agent" data-en="change agent" data-uk="Агент змін">
+              <td>change agent</td>
+              <td>Агент змін</td>
+              <td>Той, хто є каталізатором для змін</td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="change-agent"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="change-control"
+              data-en="change control"
+              data-uk="Контроль змін"
+            >
+              <td>change control</td>
+              <td>Контроль змін</td>
+              <td>
+                Процес, який забезпечує контроль над змінами до вимог і дизайну,
+                з метою розуміння і погодження впливу цих змін всіма учасниками
+                процесу, до того як зміни будуть реалізовані
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="change-control"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="change-management"
+              data-en="change management"
+              data-uk="Управління змінами"
+            >
+              <td>change management</td>
+              <td>Управління змінами</td>
+              <td>
+                Заплановані дії, інструменти та техніки, спрямовані на те, щоб
+                врахувати людський фактор, що виникає підчас ініційованої зміни,
+                в першу чергу щоб врахувати потреби людей, на яких зміна вплине
+                найбільше
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="change-management"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="change-strategy"
+              data-en="change strategy"
+              data-uk="Стратегія змін"
+            >
+              <td>change strategy</td>
+              <td>Стратегія змін</td>
+              <td>
+                План переходу з поточного в майбутній стан для досягнення
+                бажаних цілей бізнесу
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="change-strategy"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="change-team" data-en="change team" data-uk="Команда змін">
+              <td>change team</td>
+              <td>Команда змін</td>
+              <td>
+                Крос-функціональна група осіб, які уповноважені впроваджувати
+                зміни. Ця група може складатися з власників продуктів,
+                бізнес-аналітиків, розробників, керівників проектів, експертів в
+                предметних галузях, чи будь-яка інша особа, з відповідним
+                набором навичок і компетенцій, необхідних для реалізації змін
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="change-team"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="checklist-business-analysis"
+              data-en="checklist (business analysis)"
+              data-uk="Контрольний список, чекліст (бізнес-аналіз)"
+            >
+              <td>checklist (business analysis)</td>
+              <td>Контрольний список, чекліст (бізнес-аналіз)</td>
+              <td>
+                Стандартний перелік показників якості, які рецензенти
+                використовують для перевірки вимог
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="checklist-business-analysis"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="collaboration" data-en="collaboration" data-uk="Співпраця">
+              <td>collaboration</td>
+              <td>Співпраця</td>
+              <td>
+                Процес, коли двоє або більше людей працюють разом для досягнення
+                спільної мети
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="collaboration"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="commercial-offthe-shelf-COTS"
+              data-en="commercial offthe-shelf (COTS)"
+              data-uk="Готове комерційне рішення"
+            >
+              <td>commercial offthe-shelf (COTS)</td>
+              <td>Готове комерційне рішення</td>
+              <td>
+                Готове рішення доступне на ринку, що забезпечує найпоширеніші
+                потреби великої частини покупців цих рішень. Готове комерційне
+                рішення може потребувати додаткових конфігурацій для задоволення
+                специфічних потреб підприємства
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="commercial-offthe-shelf-COTS"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="competitive-analysis"
+              data-en="competitive analysis"
+              data-uk="Аналіз конкурентів"
+            >
+              <td>competitive analysis</td>
+              <td>Аналіз конкурентів</td>
+              <td>
+                Структурована оцінка що аналізує ключові параметри індустрії щоб
+                передбачити довгострокові перспективи прибутковості та визначити
+                методи роботи найбільш значущих конкурентів
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="competitive-analysis"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="component" data-en="component" data-uk="Компонент">
+              <td>component</td>
+              <td>Компонент</td>
+              <td>
+                Елемент, що може бути однозначно визначений і є частиною цілого
+                та виконує конкретну функцію
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="component"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="concept-model"
+              data-en="concept model"
+              data-uk="Концептуальна модель"
+            >
+              <td>concept model</td>
+              <td>Концептуальна модель</td>
+              <td>
+                Модель аналізу, яка розкриває значення основних понять для
+                проблемної області, визначає їхню спільну структуру та формує
+                відповідний словник, необхідний для послідовної комунікації щодо
+                цієї області
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="concept-model"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="constraint-ba"
+              data-en="constraint (business analysis)"
+              data-uk="Обмеження (бізнес-аналіз)"
+            >
+              <td>constraint (business analysis)</td>
+              <td>Обмеження (бізнес-аналіз)</td>
+              <td>
+                Незмінний фактор який має вплив і накладає обмеження чи заборону
+                на рішення в цілому, або на можливий варіант такого рішення
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="constraint-ba"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="context" data-en="context" data-uk="Контекст">
+              <td>context</td>
+              <td>Контекст</td>
+              <td>
+                Обставини, які впливають, знаходяться під впливом, і
+                забезпечують розуміння змін
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="context"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="core-concept-ba"
+              data-en="core concept (business analysis)"
+              data-uk="Основна концепція (бізнес-аналіз)"
+            >
+              <td>core concept (business analysis)</td>
+              <td>Основна концепція (бізнес-аналіз)</td>
+              <td>
+                Одна з шести ідей, які мають основоположне значення для практики
+                бізнес-аналізу
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="core concept-ba"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="cost-benefit-analysis"
+              data-en="cost-benefit analysis"
+              data-uk="Аналіз витрат та вигод"
+            >
+              <td>cost-benefit analysis</td>
+              <td>Аналіз витрат та вигод</td>
+              <td>
+                Аналіз, який порівнює і кількісно виражає фінансові і не
+                фінансові витрати на внесення змін або впровадження рішення в
+                порівнянні з перевагами, які будуть отримані
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="cost-benefit-analysis"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="CRUD-matrix"
+              data-en="create, read, update, and delete matrix (CRUD matrix)"
+              data-uk="Матриця CRUD"
+            >
+              <td>create, read, update, and delete matrix (CRUD matrix)</td>
+              <td>Матриця CRUD</td>
+              <td>
+                Двовимірна матриця, що показує, які ролі користувачів мають
+                дозвіл на доступ до певних інформаційних об'єктів, а також для
+                створення нових записів в цих об'єктах, переглядати дані в
+                існуючих записах, оновлювати або змінювати дані в існуючих
+                записах або видаляти існуючі записи. Той же тип матриці може
+                бути використаний, щоб показати, які процеси мають наступні
+                права: створити (Create), читати (Read), редагувати (Update)
+                видалити (Delete)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="CRUD-matrix"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="customer" data-en="customer" data-uk="Споживач">
+              <td>customer</td>
+              <td>Споживач</td>
+              <td>
+                Зацікавлена сторона, яка використовує продукт чи сервіс, які
+                надаються певною організацією і може мати обумовлені контрактом
+                чи моральні права, які підприємство зобов'язане задовільнити
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="customer"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+
+            <!--D-->
+            <tr
+              id="decision-analysis"
+              data-en="decision analysis"
+              data-uk="Аналіз рішення"
+            >
+              <td>decision analysis</td>
+              <td>Аналіз рішення</td>
+              <td>
+                Підхід до прийняття рішень, який допомагає проаналізувати та
+                змоделювати можливі наслідки різних рішень. Аналіз рішень
+                допомагає прийняти оптимальне рішення в умовах невизначеності
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="decision-analysis"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="decomposition"
+              data-en="decomposition"
+              data-uk="Декомпозиція"
+            >
+              <td>decomposition</td>
+              <td>Декомпозиція</td>
+              <td>
+                Техніка, яка розділяє проблему на складові частини з метою
+                спрощення аналізу та розуміння її компонентів
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="decomposition"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="defect" data-en="defect" data-uk="Дефект">
+              <td>defect</td>
+              <td>Дефект</td>
+              <td>
+                Ознака продукту чи сервісу, яка знижує його якість або відрізняє
+                його атрибути, стан чи функціональність від бажаних
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="defect"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="definitional-business-rule"
+              data-en="definitional business rule"
+              data-uk="Визначальне бізнес-правило"
+            >
+              <td>definitional business rule</td>
+              <td>Визначальне бізнес-правило</td>
+              <td>
+                Правило, яке вказує на те, що щось є обов'язково вірним (або не
+                вірним); правило, яке виконує роль дефініційного критерію для
+                концепцій, знання або інформації. Також відоме як структурне
+                правило
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="definitional-business-rule"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="deliverable"
+              data-en="deliverable"
+              data-uk="Доробок (результат роботи)"
+            >
+              <td>deliverable</td>
+              <td>Доробок (результат роботи)</td>
+              <td>
+                Будь-який унікальний та визначений (описаний) продукт чи сервіс,
+                який компанія погодилась виробити або надати
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="deliverable"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="design" data-en="design" data-uk="Дизайн">
+              <td>design</td>
+              <td>Дизайн</td>
+              <td>Придатна для використання презентація рішення</td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="design"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="document-analysis-ba"
+              data-en="document analysis (business analysis)"
+              data-uk="Аналіз документації (бізнес-аналіз)"
+            >
+              <td>document analysis (business analysis)</td>
+              <td>Аналіз документації (бізнес-аналіз)</td>
+              <td>
+                Вивчення документації існуючої системи з метою виявлення вимог
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="document-analysis-ba"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="domain" data-en="domain" data-uk="Предметна галузь">
+              <td>domain</td>
+              <td>Предметна галузь</td>
+              <td>
+                Певна галузь знань, яка визначає сукупність спільних вимог,
+                термінології та функціонал для програм чи ініціативного
+                вирішення проблеми
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="domain"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="domain-subject-matter-expert"
+              data-en="domain subject matter expert"
+              data-uk="Експерт з предметної галузі"
+            >
+              <td>domain subject matter expert</td>
+              <td>Експерт з предметної галузі</td>
+              <td>
+                Людина, що володіє конкретною експертизою в темі, що має
+                відношення до бізнес-потреби чи рішення
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="domain-subject-matter-expert"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="DSDM"
+              data-en="dynamic systems development method (DSDM)"
+              data-uk="Метод розробки динамічних систем (DSDM)"
+            >
+              <td>dynamic systems development method (DSDM)</td>
+              <td>Метод розробки динамічних систем (DSDM)</td>
+              <td>
+                Методика розробки програмного забезпечення, що фокусується на
+                фіксації коштів, якості та часу на початку розробки, а
+                непередбачувані обставини регулюються зміною функцій продукту
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="DSDM"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+
+            <!--E-->
+            <tr id="elicitation" data-en="elicitation" data-uk="Виявлення">
+              <td>elicitation</td>
+              <td>Виявлення</td>
+              <td>
+                Повторювальне виявлення та виокремлення інформації від
+                зацікавлених сторін та з інших джерел
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="elicitation"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="end-user" data-en="end user" data-uk="Кінцевий користувач">
+              <td>end user</td>
+              <td>Кінцевий користувач</td>
+              <td>
+                Людина чи система, яка буде напряму взаємодіяти із рішенням
+                (ІТсистемою)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="end-user"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="enterprise" data-en="enterprise" data-uk="Підприємство">
+              <td>enterprise</td>
+              <td>Підприємство</td>
+              <td>
+                Система з однієї чи більше організацій та рішень, які вони
+                використовують з метою досягнення спільних цілей
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="enterprise"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="enterprise-architecture"
+              data-en="enterprise architecture"
+              data-uk="Архітектура підприємства"
+            >
+              <td>enterprise architecture</td>
+              <td>Архітектура підприємства</td>
+              <td>
+                Опис бізнес-процесів організації, її програмного та апаратного
+                забезпечення, персоналу, діяльності, проектів, а також зв’язків
+                між ними
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="enterprise-architecture"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="enterprise-readiness-assessment"
+              data-en="enterprise readiness assessment"
+              data-uk="Оцінка готовності підприємства"
+            >
+              <td>enterprise readiness assessment</td>
+              <td>Оцінка готовності підприємства</td>
+              <td>
+                Оцінка, що описує чи готове підприємство до змін спричинених
+                впровадженням рішення і чи зможе воно його ефективно використати
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="enterprise-readiness-assessment"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="entity-relationship-diagram"
+              data-en="entity-relationship diagram"
+              data-uk="Діаграма «сутність-зв'язок»"
+            >
+              <td>entity-relationship diagram</td>
+              <td>Діаграма «сутність-зв'язок»</td>
+              <td>
+                Графічне зображення сутностей та зв'язків між ними, котрі мають
+                відношення до обраної предметної галузі
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="entity-relationship diagram"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="estimate" data-en="estimate" data-uk="Оцінка">
+              <td>estimate</td>
+              <td>Оцінка</td>
+              <td>
+                Кількісна оцінка запланованого результату, вимог до ресурсів та
+                розклад де невизначеності та невідомості систематично
+                враховуються в оцінці
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="estimate"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="evaluation" data-en="evaluation" data-uk="Оцінювання">
+              <td>evaluation</td>
+              <td>Оцінювання</td>
+              <td>
+                Систематичне та об'єктивне оцінювання рішення з метою встановити
+                його статус та здатність з часом задовольнити цілі, а також
+                визначити шляхи покращення рішення, щоб підвищити його
+                ефективність. Див. також <a href="#metric">метрика</a>, <a href="#indicator">показник</a>, <a href="#monitoring">моніторинг</a>
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="evaluation"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="event-ba"
+              data-en="event (business analysis)"
+              data-uk="Подія (бізнес-аналіз)"
+            >
+              <td>event (business analysis)</td>
+              <td>Подія (бізнес-аналіз)</td>
+              <td>
+                Випадок або інцидент, який підрозділ організації, система чи
+                процес мають опрацювати або на який мають відреагувати
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="event-ba"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="evolutionary-prototype"
+              data-en="evolutionary prototype"
+              data-uk="Еволюційний прототип"
+            >
+              <td>evolutionary prototype</td>
+              <td>Еволюційний прототип</td>
+              <td>
+                Прототип, який постійно змінюється та оновлюється на основі
+                зворотного зв'язку від зацікавлених сторін
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="evolutionary-prototype"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="experiment" data-en="experiment" data-uk="Експеримент">
+              <td>experiment</td>
+              <td>Експеримент</td>
+              <td>
+                Виявлення, що здійснюється контрольованим чином з метою
+                проведення дослідження, тестування гіпотези або демонстрації
+                відомого факту
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="experiment"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="external-interface"
+              data-en="external interface"
+              data-uk="Зовнішній інтерфейс"
+            >
+              <td>external interface</td>
+              <td>Зовнішній інтерфейс</td>
+              <td>
+                Взаємодія, яка відбувається за межами запропонованого рішення.
+                Це може бути взаємодія з іншою апаратною чи програмною системою
+                або людиною, з якою запропоноване рішення буде взаємодіяти
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="external-interface"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+
+            <!--F-->
+            <tr id="facilitation" data-en="facilitation" data-uk="Фасилітація">
+              <td>facilitation</td>
+              <td>Фасилітація</td>
+              <td>
+                Мистецтво направлення та заохочення людей через систематичні
+                зусилля щодо попередньо узгоджених цілей шляхом підвищення
+                залученості, співпраці, продуктивності та синергії
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="facilitation"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="feasibility-study"
+              data-en="feasibility study"
+              data-uk="Техніко-економічне обґрунтування"
+            >
+              <td>feasibility study</td>
+              <td>Техніко-економічне обґрунтування</td>
+              <td>
+                Оцінка запропонованих альтернатив, щоб визначити, чиє вони
+                технічно, організаційно та економічно можливими в умовах
+                обмежень даного підприємства та чи принесуть вони бажану вигоду
+                для підприємства
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="feasibility-study"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="feature"
+              data-en="feature"
+              data-uk="Елемент функціональності"
+            >
+              <td>feature</td>
+              <td>Елемент функціональності</td>
+              <td>
+                Характерна особливість рішення, яка реалізує пов'язаний між
+                собою набір вимог та приносить цінність для певних зацікавлених
+                осіб
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="feature"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="fishbone-diagram"
+              data-en="fishbone diagram"
+              data-uk="Діаграма «риб'ячого кістяка»"
+            >
+              <td>fishbone diagram</td>
+              <td>Діаграма «риб'ячого кістяка»</td>
+              <td>
+                Техніка побудови діаграм, що використовується в аналізі
+                першопричин для виявлення глибинних причин досліджуваної
+                проблеми та зв’язків, які існують між цими причинами. Див. також
+                <a href="#Ishikawa-diagram">діаграма Ішикави</a>, <a href="#cause-and-effect-diagram">причинно-наслідкова діаграма</a>
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="fishbone-diagram"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="focus-group" data-en="focus group" data-uk="Фокус-група">
+              <td>focus group</td>
+              <td>Фокус-група</td>
+              <td>
+                Група, що формується з метою виявлення ідей та ставлень стосовно
+                конкретного продукту, послуги або можливості в інтерактивному
+                груповому середовищі. Учасники діляться своїми враженнями,
+                вподобаннями та потребами під керівництвом модератора
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="focus-group"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="force-field-analysis"
+              data-en="force field analysis"
+              data-uk="Аналіз силового поля"
+            >
+              <td>force field analysis</td>
+              <td>Аналіз силового поля</td>
+              <td>
+                Графічний метод зображення сил, які сприяють або протидіють
+                зміні. Включає в себе визначення таких сил, зображення їх на
+                протилежних сторонах лінії (сприяючі та протидіючі сили) та
+                подальше оцінювання впливу кожного набору сил
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="force-field-analysis"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="functional-requirement"
+              data-en="functional requirement"
+              data-uk="Функціональна вимога"
+            >
+              <td>functional requirement</td>
+              <td>Функціональна вимога</td>
+              <td>
+                Можливість, що рішення повинно мати, щодо поведінки та
+                інформації, якою це рішення буде управляти
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="functional-requirement"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+
+            <!--G-->
+            <tr
+              id="gap-analysis"
+              data-en="gap analysis"
+              data-uk="Аналіз прогалин"
+            >
+              <td>gap analysis</td>
+              <td>Аналіз прогалин</td>
+              <td>
+                Порівняння поточного стану та бажаного майбутнього стану
+                підприємства для визначення розбіжностей, які потребують
+                вирішення
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="gap-analysis"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="goal" data-en="goal" data-uk="Мета">
+              <td>goal</td>
+              <td>Мета</td>
+              <td>Див. <a href="#business-goal">бізнес-мета</a></td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="goal"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="governance-process-change"
+              data-en="governance process (change)"
+              data-uk="Процесс врядування (зміна)"
+            >
+              <td>governance process (change)</td>
+              <td>Процесс врядування (зміна)</td>
+              <td>
+                Процес, згідно з яким відповідні особи, що приймають рішення,
+                використовують релевантну інформацію для прийняття рішень щодо
+                зміни або рішення, включаючи засоби для отримання погоджень та
+                пріоритетів
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="governance-process-change"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="guideline-ba"
+              data-en="guideline (business analysis)"
+              data-uk="Керівництво (бізнес-аналіз)"
+            >
+              <td>guideline (business analysis)</td>
+              <td>Керівництво (бізнес-аналіз)</td>
+              <td>Інструкція чи опис того, навіщо або як виконувати задачу</td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="guideline-ba"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+
+            <!--H-->
+            <tr
+              id="horizontal-prototype"
+              data-en="horizontal prototype"
+              data-uk="Горизонтальний прототип"
+            >
+              <td>horizontal prototype</td>
+              <td>Горизонтальний прототип</td>
+              <td>
+                Прототип, що використовується для дослідження вимог та дизайнів
+                на одному рівні запропонованого рішення, таких як представлення
+                для споживача або інтерфейс для іншої організації
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="horizontal-prototype"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+
+            <!--I-->
+            <tr
+              id="impact-analysis"
+              data-en="impact analysis"
+              data-uk="Аналіз впливу"
+            >
+              <td>impact analysis</td>
+              <td>Аналіз впливу</td>
+              <td>
+                Оцінка впливів запропонованої зміни на зацікавлену сторону чи
+                групу зацікавлених сторін, проєкт або систему
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="impact-analysis"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="implementation-subject-matter-expert"
+              data-en="implementation subject matter expert"
+              data-uk="Профільний експерт із впровадження"
+            >
+              <td>implementation subject matter expert</td>
+              <td>Профільний експерт із впровадження</td>
+              <td>
+                Зацікавлена сторона, що має спеціалізовані знання щодо
+                впровадження одного або кількох компонентів рішення
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="implementation-subject-matter-expert"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="indicator" data-en="indicator" data-uk="Показник">
+              <td>indicator</td>
+              <td>Показник</td>
+              <td>
+                Певний проєкт, програма або дія, яка спрямована на вирішення
+                бізнес-проблем(и) чи досягнення визначеної цілі(ей) зміни
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="indicator"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="input-ba"
+              data-en="input (business analysis)"
+              data-uk="Вхідні дані (бізнес-аналіз)"
+            >
+              <td>input (business analysis)</td>
+              <td>Вхідні дані (бізнес-аналіз)</td>
+              <td>
+                Інформація, що використовується або трансформується для
+                отримання результату. Вхідні дані – це інформація, необхідна для
+                того, щоб розпочати задачу
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="input-ba"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="inspection" data-en="inspection" data-uk="Інспекція">
+              <td>inspection</td>
+              <td>Інспекція</td>
+              <td>
+                Формальна перевірка результату роботи кваліфікованими особами,
+                яка слідує заздалегідь визначеному процесу та використовує
+                заздалегідь визначені критерії, для виявлення та усунення
+                дефектів
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="inspection"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="interface" data-en="interface" data-uk="Інтерфейс">
+              <td>interface</td>
+              <td>Інтерфейс</td>
+              <td>
+                Спільна межа між будь-якими двома особами та/або системами,
+                через яку інформація передається
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="interface"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="interoperability"
+              data-en="interoperability"
+              data-uk="Інтероперабельність"
+            >
+              <td>interoperability</td>
+              <td>Інтероперабельність</td>
+              <td>
+                Здатність систем комунікувати через обмін даними чи сервісами
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="interoperability"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="interview" data-en="interview" data-uk="Інтерв'ю">
+              <td>interview</td>
+              <td>Інтерв'ю</td>
+              <td>
+                Виявлення інформації у особи чи групи людей у неформальній чи
+                формальній атмосфері, шляхом постановки релевантних запитань та
+                запису відповідей
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="interview"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="Ishikawa-diagram"
+              data-en="Ishikawa diagram"
+              data-uk="Діаграма Ішикави"
+            >
+              <td>Ishikawa diagram</td>
+              <td>Діаграма Ішикави</td>
+              <td>Див. <a href="#fishbone-diagram">діаграма «риб'ячого кістяка»</a></td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="Ishikawa-diagram"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="iteration-ba"
+              data-en="iteration (business analysis)"
+              data-uk="Ітерація (бізнес-аналіз)"
+            >
+              <td>iteration (business analysis)</td>
+              <td>Ітерація (бізнес-аналіз)</td>
+              <td>
+                Окремий екземпляр послідовних циклів аналізу, розробки,
+                тестування або виконання
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="iteration-ba"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+
+            <!--K-->
+            <tr
+              id="knowledge-area-ba"
+              data-en="knowledge area (business analysis)"
+              data-uk="Галузь знань (бізнес-аналіз)"
+            >
+              <td>knowledge area (business analysis)</td>
+              <td>Галузь знань (бізнес-аналіз)</td>
+              <td>
+                Область експертизи, яка включає в себе декілька конкретних задач
+                бізнес-аналізу
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="knowledge-area-ba"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+
+            <!--L-->
+            <tr
+              id="lessons-learned-process"
+              data-en="lessons learned process"
+              data-uk="Процес засвоєння уроків"
+            >
+              <td>lessons learned process</td>
+              <td>Процес засвоєння уроків</td>
+              <td>
+                Техніка вдосконалення процесу, що використовується для вивчення
+                та покращення процесу чи проєкту. Сесія засвоєння уроків
+                передбачає окрему зустріч, підчас якої команда досліджує, що
+                спрацювало, що не спрацювало, чого можна навчитися зі щойно
+                завершеноїі терації, а також як адаптувати роцеси та техніки
+                перед тим, як продовжувати або починати заново
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="lessons-learned-process"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="life-cycle" data-en="life cycle" data-uk="Життєвий цикл">
+              <td>life cycle</td>
+              <td>Життєвий цикл</td>
+              <td>
+                Послідовність змін, яких зазнає предмет або об'єкт з моменту
+                зародження до завершення використання
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="life-cycle"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+
+            <!--M-->
+            <tr id="matrix" data-en="matrix" data-uk="Матриця">
+              <td>matrix</td>
+              <td>Матриця</td>
+              <td>
+                Текстова форма моделювання, що використовується для
+                представлення інформації, яку можна категоризувати, перехресно
+                пов'язувати та подавати у форматі таблиці
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="matrix"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="metadata" data-en="metadata" data-uk="Метадані">
+              <td>metadata</td>
+              <td>Метадані</td>
+              <td>
+                Опис даних, що допомагає зрозуміти, як використовувати ці дані
+                або з огляду на структуру та специфікацію даних, або з огляду на
+                опис конкретного екземпляра об'єкта
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="metadata"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="methodology" data-en="methodology" data-uk="Методологія">
+              <td>methodology</td>
+              <td>Методологія</td>
+              <td>
+                Сукупність методів, технік, процедур, робочих концепцій та
+                правил, що використовуються для вирішення проблеми
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="methodology"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="metric" data-en="metric" data-uk="Метрика">
+              <td>metric</td>
+              <td>Метрика</td>
+              <td>
+                Кількісно визначений рівень показника, виміряний у конкретний
+                момент часу
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="metric"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="mission-statement"
+              data-en="mission statement"
+              data-uk="Опис місії"
+            >
+              <td>mission statement</td>
+              <td>Опис місії</td>
+              <td>
+                Формальна декларація цінностей та мети, що виражають основне
+                призначення підприємства
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="mission-statement"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="model" data-en="model" data-uk="Модель">
+              <td>model</td>
+              <td>Модель</td>
+              <td>
+                Представлення та спрощення реальності з метою донесення
+                інформації до певної аудиторії для підтримки аналізу,
+                комунікації та розуміння
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="model"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="monitoring" data-en="monitoring" data-uk="Моніторинг">
+              <td>monitoring</td>
+              <td>Моніторинг</td>
+              <td>
+                Збір даних з рішення на постійній основі для визначення,
+                наскільки добре рішення реалізовано порівняно з очікуваними
+                результатами. Див. також <a href="#metric">метрика</a>, <a href="#indicator">показник</a>
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="monitoring"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+
+            <!--N-->
+            <tr id="need" data-en="need" data-uk="Потреба">
+              <td>need</td>
+              <td>Потреба</td>
+              <td>Проблема або можливість, яку потрібно розглянути</td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="need"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="non-functional-requiremen"
+              data-en="non-functional requiremen"
+              data-uk="Нефункціональна вимога"
+            >
+              <td>non-functional requiremen</td>
+              <td>Нефункціональна вимога</td>
+              <td>
+                Тип вимог, що описує характеристики продуктивності або якості,
+                яким повинно відповідати рішення. Нефункціональні вимоги
+                зазвичай можна виміряти і вони є обмеженнями для дизайну рішення
+                в цілому
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="non-functional-requiremen"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+
+            <!--O-->
+            <tr id="objective" data-en="objective" data-uk="Ціль">
+              <td>objective</td>
+              <td>Ціль</td>
+              <td>Див. <a href="#business-objective">бізнес-ціль</a></td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="objective"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="observation-ba"
+              data-en="observation (business analysis)"
+              data-uk="Спостереження (бізнес-аналіз)"
+            >
+              <td>observation (business analysis)</td>
+              <td>Спостереження (бізнес-аналіз)</td>
+              <td>
+                Вивчення та аналіз одної або кількох зацікавлених сторін у
+                їхньому робочому середовищі з метою виявлення вимог
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="observation-ba"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="OLAP"
+              data-en="online analytical processing (OLAP)"
+              data-uk="Аналітична обробка в реальному часі (OLAP)"
+            >
+              <td>online analytical processing (OLAP)</td>
+              <td>Аналітична обробка в реальному часі (OLAP)</td>
+              <td>
+                Підхід в бізнес-аналітиці, який дозволяє користувачам
+                аналізувати великі обсяги даних з різних точок зору
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="OLAP"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="operational-support"
+              data-en="operational support"
+              data-uk="Операційна підтримка"
+            >
+              <td>operational support</td>
+              <td>Операційна підтримка</td>
+              <td>
+                Зацікавлена сторона, що відповідає за щоденне управління та
+                підтримку системи чи продукту
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="operational-support"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="operative-rule"
+              data-en="operative rule"
+              data-uk="Операційне правило"
+            >
+              <td>operative rule</td>
+              <td>Операційне правило</td>
+              <td>Див. <a href="#behavioural-business-rule">поведінкове бізнес-правило</a></td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="operative-rule"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="organization" data-en="organization" data-uk="Організація">
+              <td>organization</td>
+              <td>Організація</td>
+              <td>
+                Автономна група людей під керівництвом однієї особи або ради,
+                яка працює над досягненням спільних цілей та мети
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="organization"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="organization-modelling"
+              data-en="organization modelling"
+              data-uk="Моделювання організації"
+            >
+              <td>organization modelling</td>
+              <td>Моделювання організації</td>
+              <td>
+                Техніка аналізу, яку використовують для опису ролей, обов'язків
+                і структури підпорядкування, які існують на підприємстві
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="organization-modelling"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="organizational-capability"
+              data-en="organizational capability"
+              data-uk="Організаційна можливість"
+            >
+              <td>organizational capability</td>
+              <td>Організаційна можливість</td>
+              <td>
+                Функція всередині підприємства, що складається з таких
+                компонентів, як процеси, технології та інформація, і
+                використовується організаціями для досягнення своїх цілей
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="organizational-capability"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="organizational-change-management"
+              data-en="organizational change management"
+              data-uk="Управління організаційними змінами"
+            >
+              <td>organizational change management</td>
+              <td>Управління організаційними змінами</td>
+              <td>Див. <a href="#change-management">управління змінами</a></td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="organizational-change-management"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="organizational-unit"
+              data-en="organizational unit"
+              data-uk="Підрозділ організації"
+            >
+              <td>organizational unit</td>
+              <td>Підрозділ організації</td>
+              <td>
+                Будь-яке визнане об'єднання людей в організації чи на
+                підприємстві
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="organizational-unit"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+
+            <!--P-->
+            <tr
+              id="peer-review"
+              data-en="peer review"
+              data-uk="Експертна оцінка"
+            >
+              <td>peer review</td>
+              <td>Експертна оцінка</td>
+              <td>
+                Формальний або неформальний перегляд результату роботи з метою
+                виявлення помилок або можливостей для вдосконалення. Див. також
+                <a href="#inspection">інспекція</a>
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="peer-review"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="plan" data-en="plan" data-uk="План">
+              <td>plan</td>
+              <td>План</td>
+              <td>
+                Детальна схема виконання або досягнення чогось, яка за звичай
+                включає набір подій, залежностей, очікувану послідовність,
+                розклад, результати, потрібні матеріали і ресурси, а також як
+                мають бути залучені зацікавлені сторони
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="plan"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="policy" data-en="policy" data-uk="Політика">
+              <td>policy</td>
+              <td>Політика</td>
+              <td>Див. <a href="#business-policy">бізнес-політика</a></td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="policy"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="predictive-approach"
+              data-en="predictive approach"
+              data-uk="Предиктивний підхід"
+            >
+              <td>predictive approach</td>
+              <td>Предиктивний підхід</td>
+              <td>
+                Підхід, за яким планування та узгодження версій встановлюються
+                на ранній стадії життєвого циклу ініціативи для максимізації
+                контролю та мінімізації ризику
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="predictive approach"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="prioritization"
+              data-en="prioritization"
+              data-uk="Пріоритезація"
+            >
+              <td>prioritization</td>
+              <td>Пріоритезація</td>
+              <td>
+                Визначення відносної важливості набору елементів з метою
+                встановлення порядку, у якому вони будуть розглянуті
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="prioritization"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="process" data-en="process" data-uk="Процес">
+              <td>process</td>
+              <td>Процес</td>
+              <td>
+                Набір активностей, призначених для досягнення конкретної цілі
+                шляхом використання одного або кількох визначених входів і
+                перетворення їх на визначені виходи
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="process"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="process-model"
+              data-en="process model"
+              data-uk="Модель процесу"
+            >
+              <td>process model</td>
+              <td>Модель процесу</td>
+              <td>
+                Набір діаграм та допоміжної інформації про певний процес та
+                фактори, які можуть впливати на нього. Деякі моделі процесу
+                використовуються для симуляції виконання процесу
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="process-model"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="product-ba"
+              data-en="product (business analysis)"
+              data-uk="Продукт (бізнес-аналіз)"
+            >
+              <td>product (business analysis)</td>
+              <td>Продукт (бізнес-аналіз)</td>
+              <td>
+                Рішення або компонент рішення, що є результатом ініціативи
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="product-ba"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="product-backlog"
+              data-en="product backlog"
+              data-uk="Беклог продукту"
+            >
+              <td>product backlog</td>
+              <td>Беклог продукту</td>
+              <td>
+                Набір історій користувачів, вимог або елементів
+                функціональності, що були визначені як кандидати для
+                потенційного впровадження, пріоритезовані та оцінені
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="product-backlog"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="product-scope"
+              data-en="product scope"
+              data-uk="Обсяг продукту"
+            >
+              <td>product scope</td>
+              <td>Обсяг продукту</td>
+              <td>Див. <a href="#solution-scope">обсяг рішення</a></td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="product-scope"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="product-vision-statement"
+              data-en="product vision statement"
+              data-uk="Опис бачення продукту"
+            >
+              <td>product vision statement</td>
+              <td>Опис бачення продукту</td>
+              <td>
+                Коротке твердження чи абзац, що описує цілі рішення та як воно
+                підтримує стратегію організації чи підприємства
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="product-vision-statement"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="project" data-en="project" data-uk="Проєкт">
+              <td>project</td>
+              <td>Проєкт</td>
+              <td>
+                Тимчасова діяльність, спрямована на створення унікального
+                продукту, послуги або результату
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="project"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="project-manager"
+              data-en="project manager"
+              data-uk="Керівник проєкту"
+            >
+              <td>project manager</td>
+              <td>Керівник проєкту</td>
+              <td>
+                Зацікавлена сторона, яка відповідає за управління роботою,
+                необхідною для надання рішення, що відповідає бізнес-потребам, і
+                для забезпечення досягнення цілей проекту, балансуючи
+                обмеженнями проєкту, включно з обсягом, бюджетом, графіком,
+                ресурсами, якістю та ризиками
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="project-manager"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="project-scope"
+              data-en="project scope"
+              data-uk="Обсяг проєкту"
+            >
+              <td>project scope</td>
+              <td>Обсяг проєкту</td>
+              <td>
+                Робота, яку необхідно виконати для надання продукту, сервісу або
+                результату із визначеними характеристиками та функціями
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="project-scope"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="proof-of-concept"
+              data-en="proof of concept"
+              data-uk="Підтвердження концепції"
+            >
+              <td>proof of concept</td>
+              <td>Підтвердження концепції</td>
+              <td>
+                Модель, яку створюють для валідації дизайну рішення без
+                моделювання його зовнішнього вигляду, матеріалів, що
+                використовуватимуться під час роботи, чи процесів та потоків
+                робіт, які зрештою використовуватимуться певними зацікавленими
+                сторонами
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="proof-of-concept"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="prototype" data-en="prototype" data-uk="Прототип">
+              <td>prototype</td>
+              <td>Прототип</td>
+              <td>
+                Часткова або імітаційна апроксимація рішення з метою виявлення
+                або перевірки вимог із зацікавленими сторонами
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="prototype"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+
+            <!--Q-->
+            <tr id="quality" data-en="quality" data-uk="Якість">
+              <td>quality</td>
+              <td>Якість</td>
+              <td>
+                Ступінь, до котрого набір притаманних характеристик задовольняє
+                потреби
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="quality"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="quality-assurance"
+              data-en="quality assurance"
+              data-uk="Забезпечення якості"
+            >
+              <td>quality assurance</td>
+              <td>Забезпечення якості</td>
+              <td>
+                Набір активностей, що виконуються для забезпечення створення
+                процесом продуктів, які відповідають належному рівню якості
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="quality-assurance"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="quality-attributes"
+              data-en="quality attributes"
+              data-uk="Атрибути якості"
+            >
+              <td>quality attributes</td>
+              <td>Атрибути якості</td>
+              <td>
+                Сукупність показників, що використовуються для оцінки загальної
+                якості системи. Див. також <a href="#non-functional-requiremen">нефункціональна вимога</a>
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="quality-attributes"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="questionnaire"
+              data-en="questionnaire"
+              data-uk="Опитувальник"
+            >
+              <td>questionnaire</td>
+              <td>Опитувальник</td>
+              <td>
+                Набір визначених запитань з вибором відповідей, що
+                використовується для збору інформації від респондентів
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="questionnaire"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
 
             <!--R-->
+            <tr id="regulator" data-en="regulator" data-uk="Регулятор">
+              <td>regulator</td>
+              <td>Регулятор</td>
+              <td>
+                Зацікавлена сторонапо за межами організації, що відповідає за
+                визначення та виконання стандартів
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="regulator"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="repository" data-en="repository" data-uk="Сховище">
+              <td>repository</td>
+              <td>Сховище</td>
+              <td>
+                Реальне або віртуальне місце, де зберігається і є доступною для
+                отримання вся інформація з певної тематики
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="repository"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="RFI"
+              data-en="request for information (RFI)"
+              data-uk="Запит інформації (RFI)"
+            >
+              <td>request for information (RFI)</td>
+              <td>Запит інформації (RFI)</td>
+              <td>
+                Формальний метод виявлення, призначений для збору інформації
+                щодо можливостей постачальника або будь-якої іншої інформації
+                щодо потенційної майбутньої закупівлі
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="RFI"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="RFP"
+              data-en="request for proposal (RFP)"
+              data-uk="Запит комерційної пропозиції (RFP)"
+            >
+              <td>request for proposal (RFP)</td>
+              <td>Запит комерційної пропозиції (RFP)</td>
+              <td>
+                Документ з вимогами, що видається, коли організація шукає
+                формальну пропозицію від постачальників. Зазвичай запит
+                комерційної пропозиції вимагає, щоб заявки були подані
+                відповідно до певного процесу та з використанням запечатаних
+                пропозицій, які будуть оцінюватися згідно формальної методології
+                оцінки
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="RFP"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="RFQ"
+              data-en="request for quote (RFQ)"
+              data-uk="Запит цінової пропозиції (RFQ)"
+            >
+              <td>request for quote (RFQ)</td>
+              <td>Запит цінової пропозиції (RFQ)</td>
+              <td>
+                Метод закупівлі, що полягає в запиті варіантів цін і рішень від
+                постачальників
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="RFQ"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="RFT"
+              data-en="request for tender (RFT)"
+              data-uk="Запит тендерної пропозиції (RFT)"
+            >
+              <td>request for tender (RFT)</td>
+              <td>Запит тендерної пропозиції (RFT)</td>
+              <td>
+                Відкрите запрошення до постачальників подавати пропозиції щодо
+                товарів або послуг
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="RFT"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="requirement" data-en="requirement" data-uk="Вимога">
+              <td>requirement</td>
+              <td>Вимога</td>
+              <td>Придатне для використання представлення потреби</td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="requirement"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
             <tr
               id="requirements-allocation"
               data-en="requirements allocation"
@@ -1191,6 +3655,1801 @@
                   type="button"
                   class="btn btn-link p-0 copy-link"
                   data-anchor="requirements-allocation"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="requirements-architecture"
+              data-en="requirements architecture"
+              data-uk="Архітектура вимог"
+            >
+              <td>requirements architecture</td>
+              <td>Архітектура вимог</td>
+              <td>Вимоги щодо ініціативи та взаємозв'язки між ними</td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="requirements-architecture"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="requirements-artifact"
+              data-en="requirements artifact"
+              data-uk="Артефакт вимог"
+            >
+              <td>requirements artifact</td>
+              <td>Артефакт вимог</td>
+              <td>
+                Артефакт бізнес-аналізу, що містить інформацію про вимоги, такі
+                як діаграма, матриця, документ чи модель
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="requirements-artifact"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="requirements-attribute"
+              data-en="requirements attribute"
+              data-uk="Атрибут вимог"
+            >
+              <td>requirements attribute</td>
+              <td>Атрибут вимог</td>
+              <td>
+                Характеристика або властивість вимоги, що використовується для
+                допомоги в управлінні вимогами
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="requirements-attribute"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="requirements-defect"
+              data-en="requirements defect"
+              data-uk="Дефект вимог"
+            >
+              <td>requirements defect</td>
+              <td>Дефект вимог</td>
+              <td>
+                Проблема або помилка у вимозі. Дефекти можуть виникати через
+                низьку якість вимоги (див. <a href="#requirements-verification">верифікація вимог</a>) або тому, що вона
+                не описує потребу, яка у разі її задоволення, створила б
+                цінність для зацікавлених сторін (див. <a href="#requirements-validation">валідація вимог</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="requirements-defect"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="requirements-document"
+              data-en="requirements document"
+              data-uk="Документ вимог"
+            >
+              <td>requirements document</td>
+              <td>Документ вимог</td>
+              <td>Див. <a href="#requirements-package">пакет вимог</a></td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="requirements-document"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="requirements-life-cycle"
+              data-en="requirements life cycle"
+              data-uk="Життєвий цикл вимог"
+            >
+              <td>requirements life cycle</td>
+              <td>Життєвий цикл вимог</td>
+              <td>
+                Етапи, через які проходить вимога від її виникнення до
+                завершення використання
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="requirements-life-cycle"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="requirements-management"
+              data-en="requirements management"
+              data-uk="Управління вимогами"
+            >
+              <td>requirements management</td>
+              <td>Управління вимогами</td>
+              <td>
+                Планування, виконання, моніторинг і контроль будь-якої частини
+                або всієї роботи, пов’язаної з виявленням вимог і співпрацею,
+                аналізом вимог і дизайном, а також управлінням життєвим циклом
+                вимог
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="requirements-management"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="requirements-management-plan"
+              data-en="requirements management plan"
+              data-uk="План управління вимогами"
+            >
+              <td>requirements management plan</td>
+              <td>План управління вимогами</td>
+              <td>
+                Складова частина плану бізнес-аналізу для конкретної ініціативи
+                змін, що описує конкретні інструменти, дії, ролі та обов'язки,
+                які будуть використовуватися в рамках ініціативи для управління
+                вимогами. Див. <a href="#business-analysis-plan">план бізнес-аналізу</a>
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="requirements-management-plan"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="requirements-management-tool"
+              data-en="requirements management tool"
+              data-uk="Інструмент управління вимогами"
+            >
+              <td>requirements management tool</td>
+              <td>Інструмент управління вимогами</td>
+              <td>
+                Спеціалізоване програмне забезпечення, що забезпечує підтримку
+                будь-якої комбінації наступних можливостей: виявлення та
+                співпраця, моделювання та/або специфікація вимог,
+                простежуваності вимог, керування та узгодження версій,
+                визначення атрибутів для відстеження та моніторингу, генерації
+                документів та контролю зміни вимог
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="requirements-management-tool"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="requirements-model"
+              data-en="requirements model"
+              data-uk="Модель вимог"
+            >
+              <td>requirements model</td>
+              <td>Модель вимог</td>
+              <td>
+                Абстрактне (зазвичай графічне) представлення деякого аспекту
+                поточного або майбутнього стану
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="requirements-model"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="requirements-package"
+              data-en="requirements package"
+              data-uk="Пакет вимог"
+            >
+              <td>requirements package</td>
+              <td>Пакет вимог</td>
+              <td>
+                Спеціалізована форма пакету бізнес-аналізу, що, в першу чергу,
+                стосується вимог. Пакет вимог може представляти погоджену версію
+                набору вимог
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="requirements-package"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="requirements-traceability"
+              data-en="requirements traceability"
+              data-uk="Простежуваність вимог"
+            >
+              <td>requirements traceability</td>
+              <td>Простежуваність вимог</td>
+              <td>
+                Здатність відстежувати взаємозв'язки між наборами вимог та
+                дизайнів від початкової потреби зацікавленої сторони до фактично
+                реалізованого рішення. Простежуваність підтримує контроль змін,
+                забезпечуючи, що джерело вимоги чи дизайну може бути визначено
+                та відомі інші пов’язані вимоги і дизайни, на які потенційно
+                може вплинути зміна
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="requirements-traceability"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="requirements-validation"
+              data-en="requirements validation"
+              data-uk="Валідація вимог"
+            >
+              <td>requirements validation</td>
+              <td>Валідація вимог</td>
+              <td>
+                Робота, яка виконується для оцінки вимог, щоб переконатися, що
+                вони сприяють наданню очікуваних вигод і не виходять за
+                визначений обсяг рішення
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="requirements-validation"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="requirements-verification"
+              data-en="requirements verification"
+              data-uk="Верифікація вимог"
+            >
+              <td>requirements verification</td>
+              <td>Верифікація вимог</td>
+              <td>
+                Робота, яка виконується для оцінки вимог, щоб переконатися, що
+                вони визначені правильно та мають прийнятний рівень якості. Вона
+                гарантує, що вимоги визначені та структуровані на достатньому
+                рівні для того, щоб команда розробки рішення могла
+                використовувати їх під час дизайну, розробки та впровадження
+                рішення
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="requirements-verification"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="requirements-workshop"
+              data-en="requirements workshop"
+              data-uk="Робочий семінар з вимог"
+            >
+              <td>requirements workshop</td>
+              <td>Робочий семінар з вимог</td>
+              <td>
+                Структурована зустріч, на якій ретельно відібрана група
+                зацікавлених сторін співпрацює, щоб визначити та/або уточнити
+                вимоги під керівництвом кваліфікованого нейтрального
+                фасилітатора
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="requirements-workshop"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="residual-risk"
+              data-en="residual risk"
+              data-uk="Залишковий ризик"
+            >
+              <td>residual risk</td>
+              <td>Залишковий ризик</td>
+              <td>
+                Деякий ризик, який залишається після того, як були вжиті заходи
+                або реалізовані плани для опрацювання початкового ризику
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="residual-risk"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="RACI-matrix"
+              data-en="responsible, accountable, consulted, and informed matrix (RACI matrix)"
+              data-uk="Матриця «виконує, відповідає, консультує, поінформований» (RACI матриця)"
+            >
+              <td>
+                responsible, accountable, consulted, and informed matrix (RACI
+                matrix)
+              </td>
+              <td>
+                Матриця «виконує, відповідає, консультує, поінформований» (RACI
+                матриця)
+              </td>
+              <td>
+                Інструмент, що використовується для визначення обов'язків ролей
+                або членів команди, а також активностей або доробків, до яких
+                вони будуть залучені як виконавці (які виконують роботу),
+                відповідальні (які затверджують результати), консультанти (які
+                надають консультації) або будуть проінформовані про виконану
+                роботу після її завершення
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="RACI-matrix"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="retrospective"
+              data-en="retrospective"
+              data-uk="Ретроспектива"
+            >
+              <td>retrospective</td>
+              <td>Ретроспектива</td>
+              <td>Див. <a href="#lessons-learned-process">процес засвоєння уроків</a></td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="retrospective"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="ROI"
+              data-en="return on investment (ROI) (business analysis)"
+              data-uk="Рентабельність інвестицій(ROI) (бізнес-аналіз)"
+            >
+              <td>return on investment (ROI) (business analysis)</td>
+              <td>Рентабельність інвестицій(ROI) (бізнес-аналіз)</td>
+              <td>Показник прибутковості проекту або інвестиції</td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="ROI"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="risk-ba"
+              data-en="risk (business analysis)"
+              data-uk="Ризик (бізнес-аналіз)"
+            >
+              <td>risk (business analysis)</td>
+              <td>Ризик (бізнес-аналіз)</td>
+              <td>
+                Вплив невизначеності на цінність зміни, рішення або
+                підприємства. Див. також <a href="#residual-risk">залишковий ризик</a>
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="risk-ba"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="risk-assessment"
+              data-en="risk assessment"
+              data-uk="Оцінка ризику"
+            >
+              <td>risk assessment</td>
+              <td>Оцінка ризику</td>
+              <td>Визначення, аналіз та оцінювання ризиків</td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="risk-assessment"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="root-cause" data-en="root cause" data-uk="Першопричина">
+              <td>root cause</td>
+              <td>Першопричина</td>
+              <td>
+                Причина проблеми, що немає глибшої причини, зазвичай одна з
+                декількох можливих причин
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="root-cause"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="root-cause-analysis"
+              data-en="root cause analysis"
+              data-uk="Аналіз першопричини"
+            >
+              <td>root cause analysis</td>
+              <td>Аналіз першопричини</td>
+              <td>
+                Структуроване дослідження виявленої проблеми для розуміння
+                основоположних причин
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="root-cause-analysis"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+
+            <!--S-->
+            <tr id="scope" data-en="scope" data-uk="Обсяг">
+              <td>scope</td>
+              <td>Обсяг</td>
+              <td>Межі контролю, зміни, рішення або потреби</td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="scope"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="scope-model" data-en="scope model" data-uk="Модель обсягу">
+              <td>scope model</td>
+              <td>Модель обсягу</td>
+              <td>
+                Модель, що визначає межі предметної галузі бізнесу або рішення
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="scope-model"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="secondary-actor"
+              data-en="secondary actor"
+              data-uk="Вторинний актор"
+            >
+              <td>secondary actor</td>
+              <td>Вторинний актор</td>
+              <td>
+                Зовнішній відносно проектованої системи актор, який сприяє
+                виконанню певного варіанту використання
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="secondary-actor"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="sequence-diagram"
+              data-en="sequence diagram"
+              data-uk="Діаграма послідовності"
+            >
+              <td>sequence diagram</td>
+              <td>Діаграма послідовності</td>
+              <td>
+                Тип діаграми, що показує об’єкти, які беруть участь у
+                взаємодіях, і повідомлення, якими вони обмінюються між собою
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="sequence-diagram"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="software-engineer"
+              data-en="software engineer"
+              data-uk="Розробник програмного забезпечення"
+            >
+              <td>software engineer</td>
+              <td>Розробник програмного забезпечення</td>
+              <td>розробник</td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="software-engineer"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="solution" data-en="solution" data-uk="Рішення">
+              <td>solution</td>
+              <td>Рішення</td>
+              <td>
+                Конкретний спосіб задоволення однієї або кількох потреб у
+                певному контексті
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="solution"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="solution-component"
+              data-en="solution component"
+              data-uk="Компонент рішення"
+            >
+              <td>solution component</td>
+              <td>Компонент рішення</td>
+              <td>
+                Складова частина рішення, якою можуть бути люди, інфраструктура,
+                апаратне забезпечення, програмне забезпечення, обладнання,
+                виробничі потужності та активи процесу, або будь-яка комбінація
+                цих складових частин
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="solution-component"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="solution-life-cycle"
+              data-en="solution life cycle"
+              data-uk="Життєвий цикл рішення"
+            >
+              <td>solution life cycle</td>
+              <td>Життєвий цикл рішення</td>
+              <td>
+                Етапи, через які проходить рішення від його виникнення до
+                завершення використання
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="solution-life-cycle"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="solution-option"
+              data-en="solution option"
+              data-uk="Варіант рішення"
+            >
+              <td>solution option</td>
+              <td>Варіант рішення</td>
+              <td>
+                Один із можливих способів задоволення однієї чи кількох потреб у
+                певному контексті
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="solution-option"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="solution-requirement"
+              data-en="solution requirement"
+              data-uk="Вимога до рішення"
+            >
+              <td>solution requirement</td>
+              <td>Вимога до рішення</td>
+              <td>
+                Здатність або характеристика рішення, яка відповідає вимогам
+                зацікавлених сторін. Вимоги до рішення можна розділити на дві
+                підкатегорії: функціональні вимоги та нефункціональні вимоги або
+                вимоги до якості сервісу
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="solution-requirement"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="solution-scope"
+              data-en="solution scope"
+              data-uk="Обсяг рішення"
+            >
+              <td>solution scope</td>
+              <td>Обсяг рішення</td>
+              <td>
+                Набір здатностей, що їх має забезпечити рішення, аби
+                задовольнити потреби бізнесу
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="solution-scope"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="sponsor" data-en="sponsor" data-uk="Спонсор">
+              <td>sponsor</td>
+              <td>Спонсор</td>
+              <td>
+                Зацікавлена сторона, що відповідає за ініціацію дій з визначення
+                бізнес-потреби та розробки рішення, яке задовільнить цю потребу.
+                Вона дає дозвіл на виконання робіт і контролює бюджет і обсяг
+                ініціативи
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="sponsor"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="stakeholder"
+              data-en="stakeholder"
+              data-uk="Зацікавлена сторона"
+            >
+              <td>stakeholder</td>
+              <td>Зацікавлена сторона</td>
+              <td>
+                Група осіб або особа, що мають відношення до певної зміни,
+                потреби чи рішення
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="stakeholder"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="stakeholder-analysis"
+              data-en="stakeholder analysis"
+              data-uk="Аналіз зацікавлених сторін"
+            >
+              <td>stakeholder analysis</td>
+              <td>Аналіз зацікавлених сторін</td>
+              <td>
+                Ідентифікація та аналіз зацікавлених сторін, які можуть зазнати
+                впливу від зміни, та оцінка їхнього впливу, участі та потреб
+                протягом активностей бізнес-аналізу
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="stakeholder-analysis"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="stakeholder-list"
+              data-en="stakeholder list"
+              data-uk="Список зацікавлених сторін"
+            >
+              <td>stakeholder list</td>
+              <td>Список зацікавлених сторін</td>
+              <td>
+                Каталог зацікавлених сторін, на яких впливає зміна,
+                бізнес-потреба або запропоноване рішення, та опис їхніх
+                атрибутів і характеристик, пов'язаних з їхнім залученням до
+                ініціативи
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="stakeholder-list"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="stakeholder-proxy-ba"
+              data-en="stakeholder proxy (business analyst)"
+              data-uk="Представник зацікавленої сторони"
+            >
+              <td>stakeholder proxy (business analyst)</td>
+              <td>Представник зацікавленої сторони</td>
+              <td>
+                Роль, яку виконує бізнес-аналітик, коли представляє потреби
+                зацікавленої сторони або групи зацікавлених сторін
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="stakeholder-proxy-ba"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="stakeholder-requirement"
+              data-en="stakeholder requirement"
+              data-uk="Вимога зацікавленої сторони"
+            >
+              <td>stakeholder requirement</td>
+              <td>Вимога зацікавленої сторони</td>
+              <td>
+                Опис потреб певної зацікавленої сторони або класу зацікавлених
+                сторін, які повинні бути задоволені для досягнення бізнес вимог.
+                Вони можуть служити мостом між бізнес вимогами та різними
+                категоріями вимог до рішення
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="stakeholder-requirement"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="state-diagram"
+              data-en="state diagram"
+              data-uk="Діаграма станів"
+            >
+              <td>state diagram</td>
+              <td>Діаграма станів</td>
+              <td>
+                Модель аналізу, що показує життєвий цикл сутності даних або
+                класу
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="state-diagram"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="stated-requirement"
+              data-en="stated requirement"
+              data-uk="Заявлена вимога"
+            >
+              <td>stated requirement</td>
+              <td>Заявлена вимога</td>
+              <td>
+                Вимога, сформульована зацікавленою стороною, яка не була
+                проаналізована, верифікована чи провалідована. Заявлені вимоги
+                часто висвітлюють скоріш побажання зацікавленої сторони, радше
+                ніж фактичну потребу
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="stated-requirement"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="SOW"
+              data-en="statement of work (SOW)"
+              data-uk="Декларація робіт (SOW)"
+            >
+              <td>statement of work (SOW)</td>
+              <td>Декларація робіт (SOW)</td>
+              <td>Письмовий опис сервісів чи задач, які необхідно виконати</td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="SOW"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="strategy" data-en="strategy" data-uk="Стратегія">
+              <td>strategy</td>
+              <td>Стратегія</td>
+              <td>
+                Опис обраного підходу до застосування можливостей підприємства
+                для досягнення бажаного набору цілей чи мети
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="strategy"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="SWOT"
+              data-en="strengths, weaknesses, opportunities, and threats analysis (SWOT)"
+              data-uk="Аналіз сильних сторін, слабкостей, можливостей та загроз (SWOT)"
+            >
+              <td>
+                strengths, weaknesses, opportunities, and threats analysis
+                (SWOT)
+              </td>
+              <td>
+                Аналіз сильних сторін, слабкостей, можливостей та загроз (SWOT)
+              </td>
+              <td>
+                Опис обраного підходу до застосування можливостей підприємства
+                для досягнення бажаного набору цілей чи мети
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="SWOT"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="structural-rule"
+              data-en="structural rule"
+              data-uk="Структурне правило"
+            >
+              <td>structural rule</td>
+              <td>Структурне правило</td>
+              <td>Див. <a href="#definitional-business-rule">визначальне бізнес-правило</a></td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="structural-rule"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="SME"
+              data-en="subject matter expert (SME)"
+              data-uk="Профільний експерт (SME)"
+            >
+              <td>subject matter expert (SME)</td>
+              <td>Профільний експерт (SME)</td>
+              <td>
+                Див. <a href="#domain-subject-matter-expert">експерт з предметної галузі</a>, <a href="#implementation-subject-matter-expert">профільний експерт із
+                впровадження</a>
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="SME"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="supplier" data-en="supplier" data-uk="Постачальник">
+              <td>supplier</td>
+              <td>Постачальник</td>
+              <td>
+                Зацікавлена сторона поза межами даної організації або
+                підрозділу, яка постачає послуги чи продукти для організації та
+                може мати договірні або моральні права і зобов’язання, які
+                необхідно враховувати
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="supplier"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="SIPOC"
+              data-en="suppliers, inputs, process, outputs, and customers (SIPOC)"
+              data-uk="Постачальники, входи, процеси, результати та споживачі (SIPOC)"
+            >
+              <td>
+                suppliers, inputs, process, outputs, and customers (SIPOC)
+              </td>
+              <td>
+                Постачальники, входи, процеси, результати та споживачі (SIPOC)
+              </td>
+              <td>
+                Інструмент, який використовується для опису релевантних
+                високорівневих елементів процесу. Може використовуватись у
+                поєднанні з мапами процесу та інструментами, які визначають
+                обсяг робіт (в/поза межами), для надання додаткових деталей
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="SIPOC"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="survey" data-en="survey" data-uk="Опитування">
+              <td>survey</td>
+              <td>Опитування</td>
+              <td>
+                Збір і вимірювання думок або досвідів групи людей через серію
+                запитань
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="survey"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="swimlane" data-en="swimlane" data-uk="Доріжка">
+              <td>swimlane</td>
+              <td>Доріжка</td>
+              <td>
+                Горизонтальна або вертикальна секція діаграми процесу, яка
+                показує, які активності виконуються певним актором або роллю
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="swimlane"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="system" data-en="system" data-uk="Система">
+              <td>system</td>
+              <td>Система</td>
+              <td>
+                Сукупність взаємопов'язаних компонентів, які по-різному
+                взаємодіють між собою для отримання набору бажаних результатів
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="system"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+
+            <!--T-->
+            <tr
+              id="task-ba"
+              data-en="task (business analysis)"
+              data-uk="Задача (бізнес-аналіз)"
+            >
+              <td>task (business analysis)</td>
+              <td>Задача (бізнес-аналіз)</td>
+              <td>
+                Дискретна частина роботи, яка може бути виконана формально або
+                неформально як частина бізнес-аналізу
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="task-ba"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="technique" data-en="technique" data-uk="Техніка">
+              <td>technique</td>
+              <td>Техніка</td>
+              <td>
+                Спосіб, метод або стиль виконання задачі бізнес-аналізу або
+                формування її результату
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="technique"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="temporal-event"
+              data-en="temporal event"
+              data-uk="Темпоральна подія"
+            >
+              <td>temporal event</td>
+              <td>Темпоральна подія</td>
+              <td>
+                Подія, яка у визначений час може ініціювати процес, оцінку
+                бізнес-правил або якусь іншу відповідь
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="temporal-event"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="tester" data-en="tester" data-uk="Тестувальник">
+              <td>tester</td>
+              <td>Тестувальник</td>
+              <td>
+                Особа, відповідальна за визначення, як верифікувати, що рішення
+                відповідає вимогам, визначених бізнес-аналітиком, та проведення
+                процесу верифікації
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="tester"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="throw-away-prototype"
+              data-en="throw-away prototype"
+              data-uk="Одноразовий прототип"
+            >
+              <td>throw-away prototype</td>
+              <td>Одноразовий прототип</td>
+              <td>
+                Прототип, який використовується для швидкого виявлення та
+                уточнення вимог або дизайнів за допомогою простих інструментів,
+                іноді лише олівця та паперу. Він призначений бути відкинутим,
+                коли буде розроблено фінальну версію системи
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="throw-away prototype"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="time-box" data-en="time-box" data-uk="Часові рамки">
+              <td>time-box</td>
+              <td>Часові рамки</td>
+              <td>
+                Попередньо узгоджений проміжок часу, протягом якого виконується
+                якась діяльність або повинен бути створений певний доробок
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="time-box"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="transition-requirement"
+              data-en="transition requirement"
+              data-uk="Перехідна вимога"
+            >
+              <td>transition requirement</td>
+              <td>Перехідна вимога</td>
+              <td>
+                Вимога, яка описує можливості, які рішення повинно мати, та
+                умови, яким воно повинно відповідати, щоб сприяти переходу з
+                поточного в майбутній стан. Але така вимога стає непотрібною
+                одразу після того, як зміна завершена. Такі вимоги відрізняються
+                від інших типів вимог, бо вони мають тимчасовий характер
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="transition-requirement"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+
+            <!--U-->
+            <tr
+              id="UML"
+              data-en="unified modelling language (UML)"
+              data-uk="Уніфікована мова моделювання"
+            >
+              <td>unified modelling language (UML)</td>
+              <td>Уніфікована мова моделювання</td>
+              <td>
+                Нотація, визначена Object Management Group, для опису структури,
+                поведінки та архітектури програмного забезпечення. Її також
+                можна використовувати для опису бізнес-процесів та структур
+                даних. Найпоширенішими UML® діаграмами, які використовують
+                бізнес-аналітики, є діаграми варіантів використання, діаграми
+                активностей, діаграми машини станів (також відомі як діаграми
+                станів) та діаграми класів
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="UML"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="use-case" data-en="use case" data-uk="Варіант використання">
+              <td>use case</td>
+              <td>Варіант використання</td>
+              <td>
+                Опис спостережуваної взаємодії між актором (або акторами) та
+                рішенням, яка відбувається, коли актор використовує систему для
+                досягнення певної мети
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="use-case"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="use-case-diagram"
+              data-en="use case diagram"
+              data-uk="Діаграма варіантів використання"
+            >
+              <td>use case diagram</td>
+              <td>Діаграма варіантів використання</td>
+              <td>
+                Тип діаграми, визначеної UML, яка охоплює усіх акторів і
+                варіанти використання, пов'язаних із системою або продуктом
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="use-case-diagram"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="user" data-en="user" data-uk="Користувач">
+              <td>user</td>
+              <td>Користувач</td>
+              <td>Див. <a href="#end-user">кінцевий користувач</a></td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="user"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="UAT"
+              data-en="user acceptance test (UAT)"
+              data-uk="Користувацьке приймальне тестування (UAT)"
+            >
+              <td>user acceptance test (UAT)</td>
+              <td>Користувацьке приймальне тестування (UAT)</td>
+              <td>
+                Оцінка того, чи задовольняє надане рішення потреби групи
+                зацікавлених сторін, які будуть його використовувати. Оцінка
+                валідується відповідно до визначених критеріїв приймання
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="UAT"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="user-requirement"
+              data-en="user requirement"
+              data-uk="Вимога користувача"
+            >
+              <td>user requirement</td>
+              <td>Вимога користувача</td>
+              <td>Див. <a href="#stakeholder-requirement">вимога зацікавленої сторони</a></td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="user-requirement"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="user-story"
+              data-en="user story"
+              data-uk="Історія користувача"
+            >
+              <td>user story</td>
+              <td>Історія користувача</td>
+              <td>
+                Невеликий та стислий опис функціональності чи характеристики,
+                яка потрібна для надання цінності певній зацікавленій стороні
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="user-story"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+
+            <!--V-->
+            <tr
+              id="validated-requirement"
+              data-en="validated requirement"
+              data-uk="Провалідована вимога"
+            >
+              <td>validated requirement</td>
+              <td>Провалідована вимога</td>
+              <td>
+                Вимога, яку розглянули і визначили як таку, що підтримує
+                реалізацію очікуваних переваг, та знаходиться у межах рішення
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="validated requirement"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="validation-ba"
+              data-en="validation (business analysis)"
+              data-uk="Валідація (бізнес-аналіз)"
+            >
+              <td>validation (business analysis)</td>
+              <td>Валідація (бізнес-аналіз)</td>
+              <td>
+                Процес перевірки доробку на придатність до використання за
+                призначенням. Див. також <a href="#requirements-validation">валідація вимог</a>
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="validation-ba"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="value-ba"
+              data-en="value (business analysis)"
+              data-uk="Цінність (бізнес-аналіз)"
+            >
+              <td>value (business analysis)</td>
+              <td>Цінність (бізнес-аналіз)</td>
+              <td>
+                Значущість, важливість чи корисність чогось для зацікавленої
+                сторони в деякому контексті
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="value-ba"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="value-stream-mapping"
+              data-en="value stream mapping"
+              data-uk="Побудова мапи потоку цінності"
+            >
+              <td>value stream mapping</td>
+              <td>Побудова мапи потоку цінності</td>
+              <td>
+                Вичерпне, засноване на фактах, та послідовне в часі відображення
+                потоку активностей, необхідних для надання продукту або послуги
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="value-stream-mapping"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="verification-ba"
+              data-en="verification (business analysis)"
+              data-uk="Верифікація (бізнес-аналіз)"
+            >
+              <td>verification (business analysis)</td>
+              <td>Верифікація (бізнес-аналіз)</td>
+              <td>
+                Процес визначення, чи відповідає доробок або артефакт
+                прийнятному стандарту якості. Див. також <a href="#requirements-verification">верифікація вимог</a>
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="verification-ba"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="verified-requirement"
+              data-en="verified requirement"
+              data-uk="Верифікована вимога"
+            >
+              <td>verified requirement</td>
+              <td>Верифікована вимога</td>
+              <td>
+                Вимога, що була розглянута і визначена як коректна, яка
+                відповідає стандартам або інструкціям, та деталізована на
+                прийнятному рівні
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="verified-requirement"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="vertical-prototype"
+              data-en="vertical prototype"
+              data-uk="Вертикальний прототип"
+            >
+              <td>vertical prototype</td>
+              <td>Вертикальний прототип</td>
+              <td>
+                Прототип, який використовують для детального пропрацювання
+                запропонованого рішення, щоб виявити застереження щодо вимог та
+                дизайнів на різних рівнях рішення, які не є очевидними або які
+                не знаходяться на поверхні. Він може включати взаємодію між
+                кількома компонентами рішення
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="vertical-prototype"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="viewpoint" data-en="viewpoint" data-uk="Точка зору">
+              <td>viewpoint</td>
+              <td>Точка зору</td>
+              <td>
+                Набір домовленостей, які визначають, як вимоги будуть
+                представлені, як ці представлення будуть організовані та
+                пов'язані між собою
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="viewpoint"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="VSM" data-en="VSM" data-uk="VSM">
+              <td>VSM</td>
+              <td>VSM</td>
+              <td>Див. <a href="#value-stream-mapping">побудова мапи потоку цінності</a></td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="VSM"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+
+            <!--W-->
+            <tr id="walkthrough" data-en="walkthrough" data-uk="Проходження">
+              <td>walkthrough</td>
+              <td>Проходження</td>
+              <td>
+                Огляд, під час якого учасники послідовно переглядають артефакт
+                або набір артефактів для валідації вимог чи дизайнів, та
+                виявлення у вимогах та дизайнах помилок, невідповідностей,
+                упущень, неточностей та суперечностей
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="walkthrough"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="WBS"
+              data-en="work breakdown structure (WBS)"
+              data-uk="Ієрархічна структура робіт (WBS)"
+            >
+              <td>work breakdown structure (WBS)</td>
+              <td>Ієрархічна структура робіт (WBS)</td>
+              <td>
+                Орієнтована на доробок ієрархічна декомпозиція робіт, які
+                повинні бути виконані для досягнення цілей та створення
+                необхідних доробків. Вона організовує та визначає загальний
+                обсяг проєкту
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="WBS"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="work-product-ba"
+              data-en="work product (business analysis)"
+              data-uk="Напрацювання (бізнес-аналіз)"
+            >
+              <td>work product (business analysis)</td>
+              <td>Напрацювання (бізнес-аналіз)</td>
+              <td>
+                Документ або сукупність нотаток чи діаграм, які використовуються
+                бізнес-аналітиком в процесі розробки вимог
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="work-product-ba"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="workshop" data-en="workshop" data-uk="Робочий семінар">
+              <td>workshop</td>
+              <td>Робочий семінар</td>
+              <td>
+                Фасилітований та цілеспрямований захід, що відвідується
+                основними зацікавленими сторонами для досягнення наперед
+                визначеної мети
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="workshop"
                   title="Копіювати посилання"
                   aria-label="Копіювати посилання на термін"
                 >
@@ -1224,6 +5483,7 @@
     ></script>
     <script src="../src/js/theme.js"></script>
     <script src="../src/js/search.js"></script>
-    <script src="../src/js/glossaryCopyLink.js"></script>
+    <script src="../src/js/topbutton.js"></script>
+    <script src="../src/js/glossary.js"></script>
   </body>
 </html>
