@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="uk" data-bs-theme="dark">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-0W56NT0Y62"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-0W56NT0Y62");
+    </script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Бізнес-аналіз &mdash; babok4me</title>
+    <meta
+      name="description"
+      content="Матеріали з бізнес-аналізу: глосарій термінів, техніки, моделювання та нотації, артефакти й області знань для роботи аналітиків."
+    />
+    <link rel="icon" type="image/png" sizes="32х32" href="../favicon.png" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link href="../src/css/style.css" rel="stylesheet" />
+    <link href="../src/css/topbutton.css" rel="stylesheet" />
+  </head>
+
+  <body class="container">
+    <button
+      onclick="topFunction()"
+      id="myBtn"
+      title="Go to top"
+      aria-label="Перейти на початок сторінки"
+    >
+      Top
+    </button>
+    <a href="#main-content" class="visually-hidden-focusable">
+      Перейти до основного вмісту
+    </a>
+
+    <header class="row">
+      <!--Logo-->
+      <div class="col-6 col-md-4 col-xl-2 text-center fw-semibold">
+        <div class="mt-2 fs-3 lh-1 mb-0">BABOK4ME</div>
+        <div class="lh-1 mb-3">знати &middot; вміти &middot; діяти</div>
+      </div>
+
+      <!--Search for tablet+PC-->
+      <div
+        class="d-none d-md-flex col-md-6 col-xl-8 align-items-center justify-content-center"
+      >
+        <div class="d-flex align-items-center w-75">
+          <input
+            class="page-search-input form-control form-control-sm"
+            type="search"
+            placeholder="Пошук на сторінці..."
+            aria-label="Пошук на сторінці"
+            autocomplete="off"
+          />
+          <span
+            class="search-counter ms-2 text-body-secondary text-nowrap"
+            aria-live="polite"
+          ></span>
+        </div>
+      </div>
+
+      <!--Main menu-->
+      <div class="col-6 col-md-2 col-xl-2 d-flex justify-content-end">
+        <nav class="navbar">
+          <div class="container-fluid" aria-label="Головна навігація">
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasNavbar"
+              aria-controls="offcanvasNavbar"
+              aria-label="Відкрити головне меню"
+            >
+              <span class="navbar-toggler-icon" aria-hidden="true"></span>
+            </button>
+            <div
+              class="offcanvas offcanvas-end"
+              tabindex="1"
+              id="offcanvasNavbar"
+              aria-labelledby="offcanvasNavbarLabel"
+            >
+              <div class="ms-1 mb-0 offcanvas-header">
+                <h2 class="fs-4 offcanvas-title" id="offcanvasNavbarLabel">
+                  Від потреби до рішення
+                </h2>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Закрити меню"
+                ></button>
+              </div>
+              <hr class="mt-0 mb-0" />
+              <div class="ms-2 offcanvas-body">
+                <ul
+                  class="fs-5 navbar-nav justify-content-end flex-grow-1 pe-3"
+                >
+                  <li class="nav-item">
+                    <a class="nav-link active" href="../ba/main.html"
+                      ><b>Бізнес-аналіз</b></a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Тестування</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Технології</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Інструменти</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Корпоративні системи</a>
+                  </li>
+                </ul>
+
+                <div class="mt-2">
+                  <a href="../sitemap.html">Мапа сайту</a>&emsp;
+                  <a href="../support.html">Підтримка</a>
+                </div>
+
+                <!--Settings-->
+                <div class="mt-5 position-relative">
+                  <p class="fs-5 mb-2 fw-semibold">Налаштування</p>
+
+                  <!--https://gtranslate.io/website-translator-widget-->
+                  <div class="gtranslate_wrapper">
+                    <span class="text-body-secondary"
+                      >Змінити мову сайту:&emsp;</span
+                    >
+                  </div>
+                  <script>
+                    window.gtranslateSettings = {
+                      default_language: "uk",
+                      native_language_names: true,
+                      detect_browser_language: true,
+                      languages: ["uk", "en"],
+                      wrapper_selector: ".gtranslate_wrapper",
+                    };
+                  </script>
+                  <script
+                    src="https://cdn.gtranslate.net/widgets/latest/lc.js"
+                    defer
+                  ></script>
+
+                  <!--theme light/dark-->
+                  <div class="mt-1">
+                    <span class="text-body-secondary"
+                      >Змінити тему сайту: &emsp;</span
+                    >
+                    <button
+                      id="themeToggle"
+                      class="btn btn-outline-secondary"
+                      type="button"
+                      aria-label="Змінити тему"
+                    >
+                      🌙
+                    </button>
+                  </div>
+                </div>
+
+                <!--Statistics-->
+                <div class="mt-4">
+                  <p class="fs-5 mb-0 fw-semibold">Статистика сайту</p>
+
+                  <!-- I.UA counter --><a
+                    href="https://www.i.ua/"
+                    target="_blank"
+                    onclick="this.href = 'https://i.ua/r.php?240065'"
+                    title="Rated by I.UA"
+                  >
+                    <script type="text/javascript">
+                      iS =
+                        "http" +
+                        (window.location.protocol == "https:" ? "s" : "") +
+                        "://r.i.ua/s?u240065&p191&n" +
+                        Math.random();
+                      iD = document;
+                      if (!iD.cookie) iD.cookie = "b=b; path=/";
+                      if (iD.cookie) iS += "&c1";
+                      iS +=
+                        "&d" +
+                        (screen.colorDepth
+                          ? screen.colorDepth
+                          : screen.pixelDepth) +
+                        "&w" +
+                        screen.width +
+                        "&h" +
+                        screen.height;
+                      iT = iR = iD.referrer.replace((iP = /^[a-z]*:\/\//), "");
+                      iH = window.location.href.replace(iP, "");
+                      (iI = iT.indexOf("/")) != -1
+                        ? (iT = iT.substring(0, iI))
+                        : (iI = iT.length);
+                      if (iT != iH.substring(0, iI)) iS += "&f" + escape(iR);
+                      iS += "&r" + escape(iH);
+                      iD.write(
+                        '<img src="' +
+                          iS +
+                          '" border="0" width="160" height="19" />',
+                      );
+                    </script></a
+                  >
+                  <!-- End of I.UA counter -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <hr class="mt-0 mb-4" />
+
+      <!-- Search for mobile -->
+      <div class="col-12 mb-4 d-md-none">
+        <div class="d-flex align-items-center w-100">
+          <input
+            class="page-search-input form-control form-control-sm"
+            type="search"
+            placeholder="Пошук на сторінці..."
+            aria-label="Пошук на сторінці"
+            autocomplete="off"
+          />
+          <span
+            class="search-counter ms-2 text-body-secondary text-nowrap"
+            aria-live="polite"
+          ></span>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <div>
+        <span
+          ><a href="../index.html">Головна</a> &gt;
+          <a href="../ba/main.html">Довідник бізнес-аналітика</a> &gt; Базові
+          поняття
+        </span>
+      </div>
+      <h1 class="mt-4">Базові поняття</h1>
+      <p>
+        Джерело:
+        <a
+          href="https://www.iiba.org/career-resources/a-business-analysis-professionals-foundation-for-success/babok/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i>
+            A Guide to the Business Analysis Body of Knowledge® (BABOK® Guide),
+            Version 3, International Institute of Business Analysis
+          </i>
+        </a>
+      </p>
+
+      <ul>
+        <li>
+          <a href="#p1">Базова концептуальна модель бізнес-аналізу (ВАССМ)</a>
+        </li>
+        <li><a href="#p2">Класифікація вимог</a></li>
+        <li><a href="#p3">Зацікавлені сторони</a></li>
+        <li><a href="#p4">Області знань</a></li>
+        <li><a href="#p5">Вимоги та дизайни</a></li>
+      </ul>
+
+      <div id="p1" class="table-responsive">
+        <h2 class="mt-4 fs-4">
+          Базова концептуальна модель бізнес-аналізу (ВАССМ)
+        </h2>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Базові поняття</th>
+              <th scope="col" class="ps-5">Опис</th>
+              <th scope="col" class="ps-5">Відповідає на питання</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Зміни</td>
+              <td class="ps-5">
+                Мета змін - підвищити продуктивність підприємства. Ці
+                вдосконалення є цілеспрямованими та керуються за допомогою
+                бізнес-аналізу.
+                <br />Див. також
+                <a href="../ba/glossary.html#change">Глосарій</a>
+              </td>
+              <td class="ps-5">Якого роду зміни ми здійснюємо?</td>
+            </tr>
+            <tr>
+              <td>Потреба</td>
+              <td class="ps-5">
+                Потреби можуть спричиняти зміни, спонукаючи зацікавлені сторони
+                до дій. Зміни, своєю чергою, також можуть породжувати потреби,
+                знижуючи або підвищуючи цінність наявних рішень.
+                <br />Див. також
+                <a href="../ba/glossary.html#need">Глосарій</a>
+              </td>
+              <td class="ps-5">Які потреби ми намагаємося задовольнити?</td>
+            </tr>
+            <tr>
+              <td>Рішення</td>
+              <td class="ps-5">
+                Рішення задовольняє потребу шляхом розв’язання проблеми, з якою
+                стикаються зацікавлені сторони, або надаючи зацікавленим
+                сторонам можливість реалізувати певну можливість.
+                <br />Див. також
+                <a href="../ba/glossary.html#solution">Глосарій</a>
+              </td>
+              <td class="ps-5">Які рішення ми створюємо або змінюємо?</td>
+            </tr>
+            <tr>
+              <td>Зацікавлена сторона</td>
+              <td class="ps-5">
+                Зацікавлені сторони, як правило, можуть бути визначені з погляду
+                їхньої зацікавленості у зміні, впливу зміни на них та їхнього
+                впливу на зміну. Зацікавлені сторони групуються відповідно до
+                їхнього відношення до потреб, змін або рішень.
+                <br />Див. також
+                <a href="../ba/glossary.html#stakeholder">Глосарій</a>
+              </td>
+              <td class="ps-5">Які зацікавлені сторони залучені?</td>
+            </tr>
+            <tr>
+              <td>Цінність</td>
+              <td class="ps-5">
+                Під цінністю можуть розумітися потенційні або реалізовані
+                прибутки, вигоди та покращення. Також можливе зниження цінності
+                у вигляді втрат, ризиків і витрат.
+                <br />Цінність може бути матеріальною або нематеріальною.
+                Матеріальну цінність можна виміряти безпосередньо. Вона часто
+                має значну грошову складову. Нематеріальна цінність вимірюється
+                опосередковано. Вона часто має значну мотиваційну складову,
+                наприклад репутацію компанії або моральний дух працівників.
+                <br />У деяких випадках цінність можна виміряти в абсолютних
+                величинах, але в багатьох випадках її оцінюють у відносних
+                величинах: один варіант рішення є ціннішим за інший з погляду
+                певної сукупності зацікавлених сторін. <br />Див. також
+                <a href="../ba/glossary.html#value-ba">Глосарій</a>
+              </td>
+              <td class="ps-5">
+                Що становить цінність для зацікавлених сторін?
+              </td>
+            </tr>
+            <tr>
+              <td>Контекст</td>
+              <td class="ps-5">
+                Зміни відбуваються в певному контексті. Контекст — це все, що
+                стосується зміни в межах її середовища. Контекст може включати
+                настрої, види поведінки, переконання, конкурентів, культуру,
+                демографічні характеристики, цілі, органи державної влади,
+                інфраструктуру, мови, втрати, процеси, продукти, проєкти,
+                продажі, пори року, термінологію, технології, погоду та будь-які
+                інші елементи, що відповідають цьому визначенню.
+                <br />Див. також
+                <a href="../ba/glossary.html#context">Глосарій</a>
+              </td>
+              <td class="ps-5">У яких контекстах перебуваємо ми та рішення?</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Кожне базове поняття є рівноцінним і необхідним, визначається через
+          п’ять інших базових понять та не може бути повністю осмислене без
+          розуміння решти.
+          <br />Жодне з понять не має більшої важливості чи значущості порівняно
+          з іншими. Разом ці поняття формують основу для розуміння інформації,
+          яка виявляється, аналізується або якою управляють під час виконання
+          завдань бізнес-аналізу.
+        </p>
+      </div>
+
+      <div id="p2" class="table-responsive">
+        <h2 class="mt-5 fs-4">Класифікація вимог</h2>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Типи вимог</th>
+              <th scope="col" class="ps-5">Опис</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Бізнес-вимоги</td>
+              <td class="ps-5">
+                Формулюють цілі, завдання і результати, які описують, чому було
+                ініційовано зміну. Вони можуть стосуватися підприємства в
+                цілому, окремої сфери бізнесу або конкретної ініціативи.
+                <br />Див. також
+                <a href="../ba/glossary.html#business-requirement">Глосарій</a>
+              </td>
+            </tr>
+            <tr>
+              <td>Вимоги зацікавленої сторони</td>
+              <td class="ps-5">
+                Описують потреби зацікавлених сторін, які необхідно задовольнити
+                для виконання бізнес-вимог. Вони можуть слугувати сполучною
+                ланкою між бізнес-вимогами та вимогами до рішення.
+                <br />Див. також
+                <a href="../ba/glossary.html#stakeholder-requirement"
+                  >Глосарій</a
+                >
+              </td>
+            </tr>
+            <tr>
+              <td>Вимоги до рішення</td>
+              <td class="ps-5">
+                Описують можливості та якості рішення, яке відповідає вимогам
+                зацікавлених сторін. Вони забезпечують необхідний рівень
+                деталізації, що дає змогу розробити та впровадити рішення.
+                Вимоги до рішення поділяють на функціональні та нефункціональні
+                вимоги.
+                <br />Див. також
+                <a href="../ba/glossary.html#stakeholder-requirement"
+                  >Глосарій</a
+                >
+                <p class="mt-3 mb-0">Функціональні вимоги</p>
+                <p class="mt-0 ps-4">
+                  Описують можливості, якими повинно володіти рішення, з погляду
+                  його поведінки та інформації, з якою воно працюватиме.
+                  <br />Див. також
+                  <a href="../ba/glossary.html#functional-requirement"
+                    >Глосарій</a
+                  >
+                </p>
+                <p class="mt-3 mb-0">
+                  Нефункціональні вимоги (вимоги до якості)
+                </p>
+                <p class="mt-0 mb-0 ps-4">
+                  Описують умови, за яких рішення має залишатися ефективним, або
+                  якості, якими воно повинно володіти. Не стосуються
+                  безпосередньо поведінки або функціональності. рішення
+                  <br />Див. також
+                  <a href="../ba/glossary.html#non-functional-requirement"
+                    >Глосарій</a
+                  >
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>Перехідні вимоги (вимоги перехідного періоду)</td>
+              <td class="ps-5">
+                Описують можливості, якими повинно володіти рішення, або умови,
+                яким воно має відповідати, щоб забезпечити перехід із поточного
+                стану до майбутнього. Вони охоплюють такі питання, як
+                конвертація даних, навчання та забезпечення безперервності
+                бізнесу.
+                <br />Перехідні вимоги відрізняються від інших типів вимог тим,
+                що мають тимчасовий характер, потреба в таких вимогах зникає
+                після завершення зміни. <br />Див. також
+                <a href="../ba/glossary.html#transition-requirement"
+                  >Глосарій</a
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="p3">
+        <h2 class="mt-5 fs-4">Зацікавлені сторони</h2>
+        <p>
+          Кожне завдання містить перелік зацікавлених сторін, які, ймовірно,
+          братимуть участь у його виконанні або на яких вплине виконання цього
+          завдання. Зацікавлена сторона — це фізична особа або група осіб, з
+          якими бізнес-аналітик, імовірно, взаємодіятиме безпосередньо або
+          опосередковано.
+          <br />Див. також
+          <a href="../ba/glossary.html#stakeholder">Глосарій</a>
+        </p>
+        <div class="row">
+          <div class="col-6">
+            <ul>
+              <li>
+                <a href="../ba/glossary.html#business-analyst"
+                  >Бізнес-аналітик</a
+                >
+              </li>
+              <li>
+                <a href="../ba/glossary.html#project-manager"
+                  >Керівник проєкту</a
+                >
+              </li>
+              <li>
+                <a href="../ba/glossary.html#software-engineer">Розробник</a>
+              </li>
+              <li><a href="../ba/glossary.html#tester">Тестувальник</a></li>
+              <li>
+                <a
+                  href="../ba/glossary.html#implementation-subject-matter-expert"
+                  >Фахівець з впровадження</a
+                >
+              </li>
+              <li>
+                <a href="../ba/glossary.html#operational-support"
+                  >Фахівець з підтримки</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-6">
+            <ul>
+              <li><a href="../ba/glossary.html#enterprise">Бізнес</a></li>
+              <li><a href="../ba/glossary.html#sponsor">Спонсор</a></li>
+              <li>
+                <a href="../ba/glossary.html#end-user">Кінцевий користувач</a>
+              </li>
+              <li><a href="../ba/glossary.html#regulator">Регулятор</a></li>
+              <li><a href="../ba/glossary.html#supplier">Постачальник</a></li>
+              <li><a href="../ba/glossary.html#consultant">Консультант</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div id="p4">
+        <h2 class="mt-5 fs-4">Області знань</h2>
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+          <div class="col">
+            <p class="mb-0 fs-5">
+              <a href="">Планування та моніторинг бізнес-аналізу</a>
+            </p>
+            <ul class="ps-3 list-unstyled">
+              <li>
+                <a href="">##</a>&emsp;Планування підходу до бізнес-аналізу
+              </li>
+              <li>
+                <a href="">##</a>&emsp;Планування підходу до залучення
+                зацікавлених сторін
+              </li>
+              <li>
+                <a href="">##</a>&emsp;Планування керівництва бізнес-аналізом
+              </li>
+              <li>
+                <a href="">##</a>&emsp;Планування управління інформацією
+                бізнес-аналізу
+              </li>
+              <li>
+                <a href="">##</a>&emsp;Визначення можливостей покращення
+                ефективності бізнес-аналізу
+              </li>
+            </ul>
+          </div>
+          <div class="col">
+            <p class="mb-0 fs-5">
+              <a href="">Виявлення та співпраця</a>
+            </p>
+            <ul class="ps-3 list-unstyled">
+              <li><a href="">##</a>&emsp;Підготовка до виявлення вимог</li>
+              <li><a href="">##</a>&emsp;Проведення виявлення вимог</li>
+              <li>
+                <a href="">##</a>&emsp;Підтвердження результатів виявлення вимог
+              </li>
+              <li><a href="">##</a>&emsp;Надання інформації бізнес-аналізу</li>
+              <li>
+                <a href="">##</a>&emsp;Управління співпрацею зацікавлених сторін
+              </li>
+            </ul>
+          </div>
+          <div class="col">
+            <p class="mb-0 fs-5">
+              <a href="">Управління життєвим циклом вимог</a>
+            </p>
+            <ul class="ps-3 list-unstyled">
+              <li><a href="">##</a>&emsp;Трасування вимог</li>
+              <li><a href="">##</a>&emsp;Підтримка вимог</li>
+              <li><a href="">##</a>&emsp;Пріоритизація вимог</li>
+              <li><a href="">##</a>&emsp;Оцінка змін вимог</li>
+              <li><a href="">##</a>&emsp;Затвердження вимог</li>
+            </ul>
+          </div>
+          <div class="col">
+            <p class="mb-0 fs-5">
+              <a href="">Аналіз стратегії</a>
+            </p>
+            <ul class="ps-3 list-unstyled">
+              <li><a href="">##</a>&emsp;Аналіз поточного стану</li>
+              <li><a href="">##</a>&emsp;Визначення майбутнього стану</li>
+              <li><a href="">##</a>&emsp;Оцінка ризиків</li>
+              <li><a href="">##</a>&emsp;Визначення стратегії змін</li>
+            </ul>
+          </div>
+                    <div class="col">
+            <p class="mb-0 fs-5">
+              <a href="">Аналіз вимог та визначення дизайну</a>
+            </p>
+            <ul class="ps-3 list-unstyled">
+              <li><a href="">##</a>&emsp;Специфікація та моделювання вимог</li>
+              <li><a href="">##</a>&emsp;Верифікація вимог</li>
+              <li><a href="">##</a>&emsp;Валідація вимог</li>
+              <li><a href="">##</a>&emsp;Визначення архітектури вимог</li>
+              <li><a href="">##</a>&emsp;Визначення варіантів дизайну</li>
+              <li><a href="">##</a>&emsp;Аналіз потенційної цінності та рекомендація рішення</li>
+            </ul>
+          </div>
+                    <div class="col">
+            <p class="mb-0 fs-5">
+              <a href="">Оцінка рішення</a>
+            </p>
+            <ul class="ps-3 list-unstyled">
+              <li><a href="">##</a>&emsp;Вимірювання ефективності рішення</li>
+              <li><a href="">##</a>&emsp;Аналіз показників ефективності</li>
+              <li><a href="">##</a>&emsp;Оцінка обмежень рішення</li>
+              <li><a href="">##</a>&emsp;Оцінка обмежень бізнесу</li>
+              <li><a href="">##</a>&emsp;Рекомендація дій для підвищення цінності рішення</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div id="p5" class="table-responsive">
+        <h2 class="mt-5 fs-4">Вимоги та дизайни</h2>
+        <p>
+          Зацікавлені сторони можуть надавати інформацію про потребу або
+          пропонувати рішення для задоволення потреби, що розглядається.
+          Бізнес-аналітик використовує дії, описані в розділах «Виявлення та
+          співпраця», «Аналіз стратегії», «Аналіз вимог і визначення дизайну» та
+          «Оцінка рішення», щоб перетворити цей запит на вимогу або дизайн.
+          <br />Вимоги зосереджуються на потребі, а дизайни - на рішенні. Вимога
+          приводить до розроблення дизайну, який, своєю чергою, може стимулювати
+          виявлення та аналіз додаткових вимог, наприклад:
+        </p>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Вимога</th>
+              <th scope="col" class="ps-5">Дизайн</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                Переглянути дані про продажі за шість місяців за кількома
+                підрозділами в одному представленні
+              </td>
+              <td class="ps-5">Рисунок інформаційної панелі</td>
+            </tr>
+            <tr>
+              <td>
+                Скоротити час комплектування та пакування замовлення клієнта
+              </td>
+              <td class="ps-5">Модель процесу</td>
+            </tr>
+            <tr>
+              <td>
+                Записати медичну історію пацієнта та забезпечити доступ до неї
+              </td>
+              <td class="ps-5">
+                Макет екрана, що відображає конкретні поля даних
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Розробити бізнес-стратегію, цілі та завдання для нового бізнесу
+              </td>
+              <td class="ps-5">Модель бізнес-спроможностей</td>
+            </tr>
+            <tr>
+              <td>Надавати інформацію англійською та французькою мовами</td>
+              <td class="ps-5">
+                Прототип із текстом, що відображається англійською та
+                французькою мовами
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <footer class="mb-3">
+      <div class="text-center">
+        <hr class="mt-4 mb-1" />
+        &copy; babok4me, 2026<br />
+        Весь контент доступний за ліцензією
+        <a
+          href="https://creativecommons.org/licenses/by/4.0/deed.uk"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Creative Commons Attribution 4.0 International license</a
+        >, якщо не зазначено інше
+      </div>
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../src/js/theme.js"></script>
+    <script src="../src/js/search.js"></script>
+    <script src="../src/js/topbutton.js"></script>
+  </body>
+</html>
