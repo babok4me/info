@@ -1,0 +1,1497 @@
+<!doctype html>
+<html lang="uk" data-bs-theme="dark">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-0W56NT0Y62"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-0W56NT0Y62");
+    </script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Бізнес-аналіз &mdash; babok4me</title>
+    <meta
+      name="description"
+      content="Матеріали з бізнес-аналізу: глосарій термінів, техніки, моделювання та нотації, артефакти й області знань для роботи аналітиків."
+    />
+    <link rel="icon" type="image/png" sizes="32х32" href="../favicon.png" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link href="../src/css/style.css" rel="stylesheet" />
+    <link href="../src/css/topbutton.css" rel="stylesheet" />
+  </head>
+
+  <body class="container">
+    <button
+      onclick="topFunction()"
+      id="myBtn"
+      title="Go to top"
+      aria-label="Перейти на початок сторінки"
+    >
+      Top
+    </button>
+    <a href="#main-content" class="visually-hidden-focusable">
+      Перейти до основного вмісту
+    </a>
+
+    <header class="row">
+      <!--Logo-->
+      <div class="col-6 col-md-4 col-xl-2 text-center fw-semibold">
+        <div class="mt-2 fs-3 lh-1 mb-0">BABOK4ME</div>
+        <div class="lh-1 mb-3">знати &middot; вміти &middot; діяти</div>
+      </div>
+
+      <!--Search for tablet+PC-->
+      <div
+        class="d-none d-md-flex col-md-6 col-xl-8 align-items-center justify-content-center"
+      >
+        <div class="d-flex align-items-center w-75">
+          <input
+            class="page-search-input form-control form-control-sm"
+            type="search"
+            placeholder="Пошук на сторінці..."
+            aria-label="Пошук на сторінці"
+            autocomplete="off"
+          />
+          <span
+            class="search-counter ms-2 text-body-secondary text-nowrap"
+            aria-live="polite"
+          ></span>
+        </div>
+      </div>
+
+      <!--Main menu-->
+      <div class="col-6 col-md-2 col-xl-2 d-flex justify-content-end">
+        <nav class="navbar">
+          <div class="container-fluid" aria-label="Головна навігація">
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasNavbar"
+              aria-controls="offcanvasNavbar"
+              aria-label="Відкрити головне меню"
+            >
+              <span class="navbar-toggler-icon" aria-hidden="true"></span>
+            </button>
+            <div
+              class="offcanvas offcanvas-end"
+              tabindex="1"
+              id="offcanvasNavbar"
+              aria-labelledby="offcanvasNavbarLabel"
+            >
+              <div class="ms-1 mb-0 offcanvas-header">
+                <h2 class="fs-4 offcanvas-title" id="offcanvasNavbarLabel">
+                  Від потреби до рішення
+                </h2>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Закрити меню"
+                ></button>
+              </div>
+              <hr class="mt-0 mb-0" />
+              <div class="ms-2 offcanvas-body">
+                <ul
+                  class="fs-5 navbar-nav justify-content-end flex-grow-1 pe-3"
+                >
+                  <li class="nav-item">
+                    <a class="nav-link active" href="../ba/main.html"
+                      ><b>Бізнес-аналіз</b></a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Тестування</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Технології</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Інструменти</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Корпоративні системи</a>
+                  </li>
+                </ul>
+
+                <div class="mt-2">
+                  <a href="../sitemap.html">Мапа сайту</a>&emsp;
+                  <a href="../support.html">Підтримка</a>
+                </div>
+
+                <!--Settings-->
+                <div class="mt-5 position-relative">
+                  <p class="fs-5 mb-2 fw-semibold">Налаштування</p>
+
+                  <!--https://gtranslate.io/website-translator-widget-->
+                  <div class="gtranslate_wrapper">
+                    <span class="text-body-secondary"
+                      >Змінити мову сайту:&emsp;</span
+                    >
+                  </div>
+                  <script>
+                    window.gtranslateSettings = {
+                      default_language: "uk",
+                      native_language_names: true,
+                      detect_browser_language: true,
+                      languages: ["uk", "en"],
+                      wrapper_selector: ".gtranslate_wrapper",
+                    };
+                  </script>
+                  <script
+                    src="https://cdn.gtranslate.net/widgets/latest/lc.js"
+                    defer
+                  ></script>
+
+                  <!--theme light/dark-->
+                  <div class="mt-1">
+                    <span class="text-body-secondary"
+                      >Змінити тему сайту: &emsp;</span
+                    >
+                    <button
+                      id="themeToggle"
+                      class="btn btn-outline-secondary"
+                      type="button"
+                      aria-label="Змінити тему"
+                    >
+                      🌙
+                    </button>
+                  </div>
+                </div>
+
+                <!--Statistics-->
+                <div class="mt-4">
+                  <p class="fs-5 mb-0 fw-semibold">Статистика сайту</p>
+
+                  <!-- I.UA counter --><a
+                    href="https://www.i.ua/"
+                    target="_blank"
+                    onclick="this.href = 'https://i.ua/r.php?240065'"
+                    title="Rated by I.UA"
+                  >
+                    <script type="text/javascript">
+                      iS =
+                        "http" +
+                        (window.location.protocol == "https:" ? "s" : "") +
+                        "://r.i.ua/s?u240065&p191&n" +
+                        Math.random();
+                      iD = document;
+                      if (!iD.cookie) iD.cookie = "b=b; path=/";
+                      if (iD.cookie) iS += "&c1";
+                      iS +=
+                        "&d" +
+                        (screen.colorDepth
+                          ? screen.colorDepth
+                          : screen.pixelDepth) +
+                        "&w" +
+                        screen.width +
+                        "&h" +
+                        screen.height;
+                      iT = iR = iD.referrer.replace((iP = /^[a-z]*:\/\//), "");
+                      iH = window.location.href.replace(iP, "");
+                      (iI = iT.indexOf("/")) != -1
+                        ? (iT = iT.substring(0, iI))
+                        : (iI = iT.length);
+                      if (iT != iH.substring(0, iI)) iS += "&f" + escape(iR);
+                      iS += "&r" + escape(iH);
+                      iD.write(
+                        '<img src="' +
+                          iS +
+                          '" border="0" width="160" height="19" />',
+                      );
+                    </script></a
+                  >
+                  <!-- End of I.UA counter -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <hr class="mt-0 mb-4" />
+
+      <!-- Search for mobile -->
+      <div class="col-12 mb-4 d-md-none">
+        <div class="d-flex align-items-center w-100">
+          <input
+            class="page-search-input form-control form-control-sm"
+            type="search"
+            placeholder="Пошук на сторінці..."
+            aria-label="Пошук на сторінці"
+            autocomplete="off"
+          />
+          <span
+            class="search-counter ms-2 text-body-secondary text-nowrap"
+            aria-live="polite"
+          ></span>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <div>
+        <span
+          ><a href="../index.html">Головна</a> &gt;
+          <a href="../ba/main.html">Довідник бізнес-аналітика</a> &gt; Техніки
+        </span>
+      </div>
+      <h1 class="mt-4">Техніки бізнес-аналізу</h1>
+      <p>
+        Джерело:
+        <a
+          href="https://www.iiba.org/career-resources/a-business-analysis-professionals-foundation-for-success/babok/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i>
+            A Guide to the Business Analysis Body of Knowledge® (BABOK® Guide),
+            Version 3, International Institute of Business Analysis
+          </i>
+        </a>
+      </p>
+
+      <!--Filter-->
+      <div class="mt-5 d-flex align-items-center">
+        <input
+          type="search"
+          id="glossary-search"
+          class="form-control"
+          placeholder="Пошук техніки..."
+          aria-label="Пошук техніки"
+        />
+        <span
+          id="glossary-count"
+          class="ms-2 text-body-secondary text-nowrap"
+          aria-live="polite"
+        ></span>
+      </div>
+      <div id="alphabet-uk" class="mt-4 alphabet"></div>
+      <div id="alphabet-en" class="mt-3 alphabet"></div>
+
+      <div class="mt-4 table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">
+                <button
+                  type="button"
+                  class="sort-header"
+                  data-sort="en"
+                  title="Сортувати A-Z"
+                >
+                  Техніка EN
+                </button>
+              </th>
+              <th scope="col">
+                <button
+                  type="button"
+                  class="sort-header"
+                  data-sort="uk"
+                  title="Сортувати А-Я"
+                >
+                  Техніка UK
+                </button>
+              </th>
+              <th scope="col">Призначення</th>
+              <th scope="col">Посилання</th>
+            </tr>
+          </thead>
+          <tbody id="glossary-body">
+            <tr
+              id="1001"
+              data-en="Acceptance and Evaluation Criteria"
+              data-uk="Критерії приймання та оцінки"
+            >
+              <td>Acceptance and Evaluation Criteria</td>
+              <td>Критерії приймання та оцінки</td>
+              <td>
+                Критерії приймання використовуються для визначення вимог,
+                результатів або умов, які мають бути виконані, щоб рішення
+                вважалося прийнятним для ключових зацікавлених сторін.
+                <br />Критерії оцінки — це метрики, що використовуються для
+                оцінювання набору вимог з метою вибору між кількома рішеннями.
+                <br />Техніка 10.01 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1001"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="1002"
+              data-en="Backlog Management"
+              data-uk="Управління беклогом"
+            >
+              <td>Backlog Management</td>
+              <td>Управління беклогом</td>
+              <td>
+                Для фіксації, відстеження та пріоритезації завдань, що
+                залишилися невиконаними.
+                <br />Техніка 10.02 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1002"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="1003"
+              data-en="Balanced Scorecard"
+              data-uk="Збалансована система показників"
+            >
+              <td>Balanced Scorecard</td>
+              <td>Збалансована система показників</td>
+              <td>
+                Для управління ефективністю в будь-якій бізнес-моделі,
+                організаційній структурі або бізнес-процесі
+                <br />Техніка 10.03 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1003"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="1004"
+              data-en="Benchmarking and Market Analysis"
+              data-uk="Бенчмаркінг та аналіз ринку"
+            >
+              <td>Benchmarking and Market Analysis</td>
+              <td>Бенчмаркінг та аналіз ринку</td>
+              <td>
+                Для покращення діяльності організації, підвищення задоволеності
+                клієнтів і збільшення цінності для зацікавлених сторін.
+                <br />Техніка 10.04 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1004"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="1005" data-en="Brainstorming" data-uk="Мозковий штурм">
+              <td>Brainstorming</td>
+              <td>Мозковий штурм</td>
+              <td>
+                Для генерації великої кількості нових ідей та визначення на їх
+                основі напрямів для подальшого аналізу. Спосіб застосування
+                творчого підходу до розв’язання проблеми.
+                <br />Техніка 10.05 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1005"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="1006"
+              data-en="Business Capability Analysis"
+              data-uk="Аналіз спроможностей бізнесу"
+            >
+              <td>Business Capability Analysis</td>
+              <td>Аналіз спроможностей бізнесу</td>
+              <td>
+                Для визначення обсягу та планування шляхом формування спільного
+                розуміння результатів діяльності, визначення відповідності
+                стратегії та забезпечення фільтрації змісту й пріоритетів.
+                <br />Техніка 10.06 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1006"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="1007" data-en="Business Cases" data-uk="Бізнес-кейс">
+              <td>Business Cases</td>
+              <td>Бізнес-кейс</td>
+              <td>
+                Для обґрунтування плану дій на основі порівняння вигод, що
+                забезпечує запропоноване рішення, з витратами, трудовими
+                затратами та іншими чинниками, пов’язаними з придбанням і
+                використанням цього рішення.
+                <br />Техніка 10.07 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1007"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="1008"
+              data-en="Business Model Canvas"
+              data-uk="Канва бізнес-моделі"
+            >
+              <td>Business Model Canvas</td>
+              <td>Канва бізнес-моделі</td>
+              <td>
+                Для опису того, як підприємство створює, надає та отримує
+                цінність для своїх клієнтів і від них.
+                <br />Техніка 10.08 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1008"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="1009"
+              data-en="Business Rules Analysis"
+              data-uk="Аналіз бізнес-правил"
+            >
+              <td>Business Rules Analysis</td>
+              <td>Аналіз бізнес-правил</td>
+              <td>
+                Для виявлення, формулювання, валідації, уточнення та організації
+                правил, що визначають повсякденну діяльність бізнесу та
+                спрямовують процес прийняття операційних бізнес-рішень.
+                <br />Техніка 10.09 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1009"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="1010" data-en="Collaborative Games" data-uk="Групові ігри">
+              <td>Collaborative Games</td>
+              <td>Групові ігри</td>
+              <td>
+                Для заохочення учасників до співпраці задля формування спільного
+                розуміння проблеми або рішення.
+                <br />Техніка 10.10 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1010"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="1011" data-en="Concept Modelling" data-uk="Модель понять">
+              <td>Concept Modelling</td>
+              <td>Модель понять</td>
+              <td>
+                Для систематизації бізнес-лексикону, необхідного для узгодженого
+                та ґрунтовного передавання знань про предметну область.
+                <br />Техніка 10.11 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1011"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="1012" data-en="Data Dictionary" data-uk="Словник даних">
+              <td>Data Dictionary</td>
+              <td>Словник даних</td>
+              <td>
+                Для стандартизації визначень елементів даних та забезпечення
+                єдиного розуміння цих елементів.
+                <br />Техніка 10.12 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1012"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="1013"
+              data-en="Data Flow Diagrams"
+              data-uk="Діаграми потоків даних"
+            >
+              <td>Data Flow Diagrams</td>
+              <td>Діаграми потоків даних</td>
+              <td>
+                Для відображення звідки надходять дані, які види діяльності їх
+                обробляють, а також чи зберігаються результати обробки або
+                використовуються іншими видами діяльності чи зовнішніми
+                сутностями.
+                <br />Техніка 10.13 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1013"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="1014" data-en="Data Mining" data-uk="Добування даних">
+              <td>Data Mining</td>
+              <td>Добування даних</td>
+              <td>
+                Для покращення процесу прийняття рішень шляхом виявлення
+                корисних закономірностей та ідей у даних.
+                <br />Техніка 10.14 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1014"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="1015" data-en="Data Modelling" data-uk="Модель даних">
+              <td>Data Modelling</td>
+              <td>Модель даних</td>
+              <td>
+                Для покращення процесу прийняття рішень шляхом виявлення
+                корисних закономірностей та ідей у даних.
+                <br />Техніка 10.15 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1015"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="1016" data-en="Decision Analysis" data-uk="Аналіз рішень">
+              <td>Decision Analysis</td>
+              <td>Аналіз рішень</td>
+              <td>
+                Для оцінки проблеми та можливих рішень з метою визначення
+                цінності альтернативних результатів в умовах невизначеності.
+                <br />Техніка 10.16 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1016"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="1017"
+              data-en="Decision Modelling"
+              data-uk="Модель рішень"
+            >
+              <td>Decision Modelling</td>
+              <td>Модель рішень</td>
+              <td>
+                Показує, як приймаються повторювані бізнес-рішення.
+                <br />Техніка 10.17 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1017"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="1018"
+              data-en="Document Analysis"
+              data-uk="Аналіз документів"
+            >
+              <td>Document Analysis</td>
+              <td>Аналіз документів</td>
+              <td>
+                Для виявлення інформації бізнес-аналізу, зокрема для розуміння
+                контексту та вимог, шляхом вивчення доступних матеріалів, що
+                описують бізнес-середовище або наявні активи організації.
+                <br />Техніка 10.18 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1018"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="1019" data-en="Estimation" data-uk="Оцінювання">
+              <td>Estimation</td>
+              <td>Оцінювання</td>
+              <td>
+                Для прогнозування витрат і трудовитрат, пов’язаних із
+                реалізацією певного напряму дій.
+                <br />Техніка 10.19 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1019"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="1020"
+              data-en="Financial Analysis"
+              data-uk="Фінансовий аналіз"
+            >
+              <td>Financial Analysis</td>
+              <td>Фінансовий аналіз</td>
+              <td>
+                Для розуміння фінансових аспектів інвестиції, рішення або
+                підходу до реалізації рішення.
+                <br />Техніка 10.20 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1020"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="1021" data-en="Focus Groups" data-uk="Фокус-група">
+              <td>Focus Groups</td>
+              <td>Фокус-група</td>
+              <td>
+                Для виявлення ідей і думок щодо конкретного продукту, послуги
+                або можливості в інтерактивному груповому середовищі. Учасники
+                під керівництвом модератора діляться своїми враженнями,
+                уподобаннями та потребами.
+                <br />Техніка 10.21 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1021"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="1022"
+              data-en="Functional Decomposition"
+              data-uk="Функціональна декомпозиція"
+            >
+              <td>Functional Decomposition</td>
+              <td>Функціональна декомпозиція</td>
+              <td>
+                Допомагає керувати складністю та зменшувати невизначеність
+                шляхом розкладання процесів, систем, функціональних областей або
+                результатів на простіші складові, що дає змогу аналізувати кожну
+                з них окремо.
+                <br />Техніка 10.22 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1022"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="1023" data-en="Glossary" data-uk="Глосарій">
+              <td>Glossary</td>
+              <td>Глосарій</td>
+              <td>
+                Визначає ключові терміни, що стосуються предметної області
+                бізнесу.
+                <br />Техніка 10.23 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1023"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="1024"
+              data-en="Interface Analysis"
+              data-uk="Аналіз інтерфейсів"
+            >
+              <td>Interface Analysis</td>
+              <td>Аналіз інтерфейсів</td>
+              <td>
+                Для визначення того, де, що, чому, коли, як і для кого
+                здійснюється обмін інформацією між компонентами рішення або
+                через межі рішення.
+                <br />Техніка 10.24 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1024"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="1025" data-en="Interviews" data-uk="Інтерв’ю">
+              <td>Interviews</td>
+              <td>Інтерв’ю</td>
+              <td>
+                Для виявлення інформації бізнес-аналізу шляхом спілкування з
+                однією особою або групою осіб, постановки відповідних запитань і
+                документування відповідей.
+                <br />Також може використовуватися для налагодження
+                взаємовідносин і формування довіри між бізнес-аналітиками та
+                зацікавленими сторонами з метою підвищення їх залученості або
+                підтримки запропонованого рішення. <br />Техніка 10.25 (<a
+                  href=""
+                  >детально</a
+                >)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1025"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="1026" data-en="Item Tracking" data-uk="Відстеження питань">
+              <td>Item Tracking</td>
+              <td>Відстеження питань</td>
+              <td>
+                Для фіксації проблем і занепокоєнь зацікавлених сторін, що
+                впливають на рішення, а також призначення відповідальних за їх
+                опрацювання.
+                <br />Техніка 10.26 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1026"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="1027"
+              data-en="Lessons Learned"
+              data-uk="Аналіз отриманого досвіду"
+            >
+              <td>Lessons Learned</td>
+              <td>Аналіз отриманого досвіду</td>
+              <td>
+                Для узагальнення та документування успіхів, можливостей для
+                вдосконалення, невдач і рекомендацій щодо підвищення
+                ефективності майбутніх проєктів або їх етапів.
+                <br />Техніка 10.27 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1027"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="1028"
+              data-en="Metrics and Key Performance Indicators (KPIs)"
+              data-uk="Метрики та ключові показники ефективності (КРІ)"
+            >
+              <td>Metrics and Key Performance Indicators (KPIs)</td>
+              <td>Метрики та ключові показники ефективності (КРІ)</td>
+              <td>
+                Для вимірювання ефективності рішень, компонентів рішень та інших
+                аспектів, що становлять інтерес для зацікавлених сторін.
+                <br />Техніка 10.28 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1028"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="1029" data-en="Mind Mapping" data-uk="Ментальні карти">
+              <td>Mind Mapping</td>
+              <td>Ментальні карти</td>
+              <td>
+                Для формулювання та фіксації думок, ідей та інформації.
+                <br />Техніка 10.29 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1029"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="1030"
+              data-en="Non-Functional Requirements Analysis"
+              data-uk="Аналіз нефункціональних вимог"
+            >
+              <td>Non-Functional Requirements Analysis</td>
+              <td>Аналіз нефункціональних вимог</td>
+              <td>
+                Досліджує вимоги до рішення, які визначають, наскільки добре
+                мають виконуватися функціональні вимоги. Він встановлює
+                критерії, за якими можна оцінити роботу системи, а не конкретну
+                поведінку системи, що визначається функціональними вимогами.
+                <br />Техніка 10.30 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1030"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="1031" data-en="Observation" data-uk="Спостереження">
+              <td>Observation</td>
+              <td>Спостереження</td>
+              <td>
+                Для виявлення інформації шляхом спостереження за діяльністю та
+                розуміння її контексту. Слугує основою для визначення потреб і
+                можливостей, розуміння бізнес-процесу, встановлення стандартів
+                ефективності, оцінювання ефективності рішення або підтримки
+                навчання та розвитку.
+                <br />Техніка 10.31 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1031"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="1032"
+              data-en="Organizational Modelling"
+              data-uk="Модель організаційної структури"
+            >
+              <td>Organizational Modelling</td>
+              <td>Модель організаційної структури</td>
+              <td>
+                Для опису ролей, обов’язків і структур підпорядкування, що
+                існують в організації, та узгодження цих структур із цілями
+                організації.
+                <br />Техніка 10.32 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1032"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="1033" data-en="Prioritization" data-uk="Пріоритезація">
+              <td>Prioritization</td>
+              <td>Пріоритезація</td>
+              <td>
+                Для сприяння прийняттю рішень зацікавленими сторонами та
+                розуміння відносної важливості інформації бізнес-аналізу.
+                <br />Техніка 10.33 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1033"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="1034" data-en="Process Analysis" data-uk="Аналіз процесів">
+              <td>Process Analysis</td>
+              <td>Аналіз процесів</td>
+              <td>
+                Для оцінки процесу з погляду його ефективності та
+                результативності, а також здатності виявляти можливості для
+                змін.
+                <br />Техніка 10.34 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1034"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="1035"
+              data-en="Process Modelling"
+              data-uk="Модель процесів"
+            >
+              <td>Process Modelling</td>
+              <td>Модель процесів</td>
+              <td>
+                Для відображення того, як виконується робота, та є основою для
+                аналізу процесів.
+                <br />Техніка 10.35 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1035"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="1036" data-en="Prototyping" data-uk="Прототипування">
+              <td>Prototyping</td>
+              <td>Прототипування</td>
+              <td>
+                Для виявлення та валідації потреб зацікавлених сторін за
+                допомогою ітеративного процесу створення моделі або дизайну
+                вимог.
+                <br />Також використовується для оптимізації користувацького
+                досвіду, оцінювання варіантів дизайну та як основа для
+                розроблення остаточного бізнес-рішення. <br />Техніка 10.36 (<a
+                  href=""
+                  >детально</a
+                >)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1036"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="1037" data-en="Reviews" data-uk="Рецензування">
+              <td>Reviews</td>
+              <td>Рецензування (Рев’ю, Перевірка)</td>
+              <td>
+                Для оцінювання змісту результату роботи.
+                <br />Техніка 10.37 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1037"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="1038"
+              data-en="Risk Analysis and Management"
+              data-uk="Аналіз та управління ризиками"
+            >
+              <td>Risk Analysis and Management</td>
+              <td>Аналіз та управління ризиками</td>
+              <td>
+                Для виявлення областей невизначеності, які можуть негативно
+                вплинути на цінність, аналізу й оцінювання цієї невизначеності,
+                а також визначення способів реагування на ризики та управління
+                ними.
+                <br />Техніка 10.38 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1038"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="1039"
+              data-en="Roles and Permissions Matrix"
+              data-uk="Матриця ролей і дозволів"
+            >
+              <td>Roles and Permissions Matrix</td>
+              <td>Матриця ролей і дозволів</td>
+              <td>
+                Для забезпечення охоплення видів діяльності шляхом визначення
+                відповідальності, ідентифікації ролей, виявлення відсутніх ролей
+                та інформування про результати запланованої зміни.
+                <br />Техніка 10.39 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1039"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="1040"
+              data-en="Root Cause Analysis"
+              data-uk="Аналіз першопричин"
+            >
+              <td>Root Cause Analysis</td>
+              <td>Аналіз першопричин</td>
+              <td>
+                Для виявлення та оцінювання основних причин проблеми.
+                <br />Техніка 10.40 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1040"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="1041" data-en="Scope Modelling" data-uk="Модель меж">
+              <td>Scope Modelling</td>
+              <td>Модель меж</td>
+              <td>
+                Для визначення характеру однієї або кількох меж та віднесення
+                елементів до тих, що перебувають усередині або поза цими межами.
+                <br />Техніка 10.41 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1041"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="1042"
+              data-en="Sequence Diagrams"
+              data-uk="Діаграми послідовності"
+            >
+              <td>Sequence Diagrams</td>
+              <td>Діаграми послідовності</td>
+              <td>
+                Для моделювання логіки сценаріїв використання шляхом
+                відображення обміну інформацією між об’єктами системи під час
+                виконання сценарію.
+                <br />Техніка 10.42 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1042"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="1043"
+              data-en="Stakeholder List, Map, or Personas"
+              data-uk="Список, карта або персони зацікавлених сторін"
+            >
+              <td>Stakeholder List, Map, or Personas</td>
+              <td>Список, карта або персони зацікавлених сторін</td>
+              <td>
+                Для аналізу зацікавлених сторін та їхніх характеристик з метою
+                виявлення всіх можливих джерел вимог і визначення оптимальних
+                способів їх залучення, взаємодії та комунікації.
+                <br />Техніка 10.43 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1043"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="1044" data-en="State Modelling" data-uk="Модель станів">
+              <td>State Modelling</td>
+              <td>Модель станів</td>
+              <td>
+                Для опису й аналізу різних можливих станів сутності в системі,
+                переходів між цими станами та того, що може відбуватися із
+                сутністю в кожному з них.
+                <br />Техніка 10.44 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1044"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="1045"
+              data-en="Survey or Questionnaire"
+              data-uk="Опитування або анкетування"
+            >
+              <td>Survey or Questionnaire</td>
+              <td>Опитування або анкетування</td>
+              <td>
+                Для структурованого виявлення інформації бізнес-аналізу, зокрема
+                про клієнтів, продукти, робочі практики та ставлення, від групи
+                людей за відносно короткий проміжок часу.
+                <br />Техніка 10.45 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1045"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="1046" data-en="SWOT Analysis" data-uk="SWOT аналіз">
+              <td>SWOT Analysis</td>
+              <td>SWOT аналіз</td>
+              <td>
+                Для оцінювання сильних і слабких сторін організації, а також
+                можливостей і загроз, зумовлених внутрішніми та зовнішніми
+                умовами.
+                <br />Техніка 10.46 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1046"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="1047"
+              data-en="Use Cases and Scenarios"
+              data-uk="Варіанти використання та сценарії"
+            >
+              <td>Use Cases and Scenarios</td>
+              <td>Варіанти використання та сценарії</td>
+              <td>
+                Для опису того, як особа або система взаємодіє з модельованим
+                рішенням для досягнення певної мети.
+                <br />Техніка 10.47 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1047"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="1048"
+              data-en="User Stories"
+              data-uk="Користувацькі історії"
+            >
+              <td>User Stories</td>
+              <td>Користувацькі історії</td>
+              <td>
+                Для стислого опису функціональності або якості, необхідної для
+                забезпечення цінності конкретній зацікавленій стороні.
+                <br />Техніка 10.48 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1048"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr
+              id="1049"
+              data-en="Vendor Assessment"
+              data-uk="Оцінювання постачальника"
+            >
+              <td>Vendor Assessment</td>
+              <td>Оцінювання постачальника</td>
+              <td>
+                Для оцінювання здатності постачальника виконувати зобов’язання
+                щодо постачання та стабільного надання продукту або послуги.
+                <br />Техніка 10.49 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1049"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="1050" data-en="Workshops" data-uk="Робочі сесії">
+              <td>Workshops</td>
+              <td>Робочі сесії</td>
+              <td>
+                Для об’єднання зацікавлених сторін з метою спільної роботи над
+                досягненням заздалегідь визначеної мети.
+                <br />Техніка 10.50 (<a href="">детально</a>)
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-link p-0 copy-link"
+                  data-anchor="1050"
+                  title="Копіювати посилання"
+                  aria-label="Копіювати посилання на термін"
+                >
+                  <i class="bi bi-link-45deg"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <footer class="mb-3">
+      <div class="text-center">
+        <hr class="mt-4 mb-1" />
+        &copy; babok4me, 2026<br />
+        Весь контент доступний за ліцензією
+        <a
+          href="https://creativecommons.org/licenses/by/4.0/deed.uk"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Creative Commons Attribution 4.0 International license</a
+        >, якщо не зазначено інше
+      </div>
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../src/js/theme.js"></script>
+    <script src="../src/js/search.js"></script>
+    <script src="../src/js/topbutton.js"></script>
+    <script src="../src/js/glossary.js"></script>
+  </body>
+</html>
