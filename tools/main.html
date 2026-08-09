@@ -18,20 +18,20 @@
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Головна &mdash; babok4me</title>
+    <title>Інструменти &mdash; babok4me</title>
     <meta
       name="description"
-      content="Довідкова інформація для бізнес-аналітиків: BABOK, BPMN, UML, ERD, техніки бізнес-аналізу, моделювання, артефакти та інструменти."
+      content="Базові поняття з бізнес-аналізу: модель BACCM, класифікація вимог, зацікавлені сторони, області знань, вимоги та дизайни."
     />
-    <link rel="icon" type="image/png" sizes="32х32" href="./favicon.png" />
+    <link rel="icon" type="image/png" sizes="32х32" href="../favicon.png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
       crossorigin="anonymous"
     />
-    <link href="./src/css/style.css" rel="stylesheet" />
-    <link href="./src/css/topbutton.css" rel="stylesheet" />
+    <link href="../src/css/style.css" rel="stylesheet" />
+    <link href="../src/css/topbutton.css" rel="stylesheet" />
   </head>
 
   <body class="container">
@@ -110,7 +110,9 @@
                   class="fs-5 navbar-nav justify-content-end flex-grow-1 pe-3"
                 >
                   <li class="nav-item">
-                    <a class="nav-link" href="./ba/main.html">Бізнес-аналіз</a>
+                    <a class="nav-link" href="../ba/main.html"
+                      >Бізнес-аналіз</a
+                    >
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#">Тестування</a>
@@ -119,7 +121,7 @@
                     <a class="nav-link" href="#">Технології</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="./tools/main.html">Інструменти</a>
+                    <a class="nav-link active" href="../tools/main.html"><b>Інструменти</b></a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#">Корпоративні системи</a>
@@ -127,8 +129,8 @@
                 </ul>
 
                 <div class="mt-2">
-                  <a href="./sitemap.html">Мапа сайту</a>&emsp;
-                  <a href="./support.html">Підтримка</a>
+                  <a href="../sitemap.html">Мапа сайту</a>&emsp;
+                  <a href="../support.html">Підтримка</a>
                 </div>
 
                 <!--Settings-->
@@ -181,18 +183,15 @@
                     onclick="this.href = 'https://i.ua/r.php?240065'"
                     title="Rated by I.UA"
                   >
-                    <script>
+                    <script type="text/javascript">
                       iS =
                         "http" +
-                        (window.location.protocol === "https:" ? "s" : "") +
+                        (window.location.protocol == "https:" ? "s" : "") +
                         "://r.i.ua/s?u240065&p191&n" +
                         Math.random();
-
                       iD = document;
-
                       if (!iD.cookie) iD.cookie = "b=b; path=/";
                       if (iD.cookie) iS += "&c1";
-
                       iS +=
                         "&d" +
                         (screen.colorDepth
@@ -202,27 +201,20 @@
                         screen.width +
                         "&h" +
                         screen.height;
-
                       iT = iR = iD.referrer.replace((iP = /^[a-z]*:\/\//), "");
                       iH = window.location.href.replace(iP, "");
-
-                      (iI = iT.indexOf("/")) !== -1
+                      (iI = iT.indexOf("/")) != -1
                         ? (iT = iT.substring(0, iI))
                         : (iI = iT.length);
-
-                      if (iT !== iH.substring(0, iI)) {
-                        iS += "&f" + escape(iR);
-                      }
-
+                      if (iT != iH.substring(0, iI)) iS += "&f" + escape(iR);
                       iS += "&r" + escape(iH);
-
                       iD.write(
                         '<img src="' +
                           iS +
                           '" border="0" width="160" height="19" />',
                       );
-                    </script>
-                  </a>
+                    </script></a
+                  >
                   <!-- End of I.UA counter -->
                 </div>
               </div>
@@ -251,22 +243,18 @@
     </header>
 
     <main id="main-content">
-      <h1 class="mt-4">Довідкова інформація для бізнес-аналізу</h1>
-
-      <h2 class="mt-5 fs-4">Напрямки</h2>
       <div>
-        Бізнес-аналіз<br />
-        Тестування<br />
-        Технології<br />
-        Інструменти<br />
-        Корпоративні системи
+        <span
+          ><a href="../index.html">Головна</a> &gt; Інструменти
+        </span>
       </div>
+      <h1 class="mt-4">Інструменти бізнес-аналізу</h1>
 
-      <h2 class="mt-5 fs-4">Популярне</h2>
-      <div>BPMN &middot; UML &middot; ERD</div>
+      <ul>
+        <li><a href="../tools/mockup.html" target="_blank">Редактор мокапів</a></li>
+      </ul>
 
-      <h2 class="mt-5 fs-4">Швидкий доступ</h2>
-      <div>Області знань бізнес-аналізу</div>
+
     </main>
 
     <footer class="mb-3">
@@ -288,8 +276,8 @@
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"
     ></script>
-    <script src="./src/js/theme.js"></script>
-    <script src="./src/js/search.js"></script>
-    <script src="./src/js/topbutton.js"></script>
+    <script src="../src/js/theme.js"></script>
+    <script src="../src/js/search.js"></script>
+    <script src="../src/js/topbutton.js"></script>
   </body>
 </html>

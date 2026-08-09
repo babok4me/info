@@ -1,0 +1,3050 @@
+<!doctype html>
+
+<html lang="uk">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Редактор мокапів</title>
+    <style>
+      :root {
+        --bg: #f3f4f6;
+        --panel: #ffffff;
+        --line: #d1d5db;
+        --text: #111827;
+        --muted: #6b7280;
+        --accent: #f97316;
+        --accent-soft: #fff7ed;
+        --canvas: #ffffff;
+        --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+        --radius: 14px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        font-family:
+          Inter,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        color: var(--text);
+        background: var(--bg);
+      }
+
+      *,
+      *::before,
+      *::after {
+        font-family: inherit;
+      }
+
+      input,
+      textarea,
+      select,
+      button,
+      option {
+        font-family: inherit;
+      }
+
+      ::placeholder {
+        font-family: inherit;
+      }
+
+      .app {
+        display: grid;
+        grid-template-columns: 290px 1fr 320px;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .panel {
+        background: var(--panel);
+        border-right: 1px solid var(--line);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+
+      .panel.right {
+        border-right: none;
+        border-left: 1px solid var(--line);
+      }
+
+      .panel-header {
+        padding: 16px 16px 10px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .panel-title {
+        font-size: 22px;
+        font-weight: 700;
+        margin: 0 0 10px;
+      }
+
+
+
+      .panel.left,
+      .panel.right {
+        position: relative;
+        z-index: 10;
+        transition: width 0.18s ease, box-shadow 0.18s ease;
+      }
+
+      .panel.left {
+        width: 290px;
+      }
+
+      .panel.right {
+        width: 320px;
+      }
+
+      .panel-header-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .panel-header-row .panel-title {
+        margin: 0;
+      }
+
+      .pin-toggle {
+        width: 34px;
+        height: 34px;
+        flex: 0 0 34px;
+        padding: 0;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #ffffff;
+        color: #6b7280;
+        font-size: 17px;
+        line-height: 1;
+        box-shadow: none;
+        filter: grayscale(100%);
+      }
+
+      .pin-toggle:hover {
+        filter: none;
+        border-color: var(--accent);
+        background: var(--accent-soft);
+        color: var(--accent);
+      }
+
+      .pin-toggle.active {
+        border-color: var(--accent);
+        background: var(--accent-soft);
+        color: var(--accent);
+        filter: none;
+      }
+
+      .app.left-unpinned {
+        grid-template-columns: 44px 1fr 320px;
+      }
+
+      .app.right-unpinned {
+        grid-template-columns: 290px 1fr 44px;
+      }
+
+      .app.left-unpinned.right-unpinned {
+        grid-template-columns: 44px 1fr 44px;
+      }
+
+      .app.left-unpinned .panel.left,
+      .app.right-unpinned .panel.right {
+        width: 44px;
+        overflow: hidden;
+        cursor: default;
+      }
+
+      .app.left-unpinned .panel.left:hover,
+      .app.left-unpinned .panel.left:focus-within {
+        width: 290px;
+        box-shadow: var(--shadow);
+      }
+
+      .app.right-unpinned .panel.right:hover,
+      .app.right-unpinned .panel.right:focus-within {
+        width: 320px;
+        box-shadow: var(--shadow);
+      }
+
+      .app.left-unpinned .panel.left .component-list,
+      .app.left-unpinned .panel.left #deleteSelectedBtn,
+      .app.left-unpinned .panel.left .footer-note,
+      .app.right-unpinned .panel.right .settings-body,
+      .app.right-unpinned .panel.right .footer-note {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.12s ease;
+      }
+
+      .app.left-unpinned .panel.left:hover .component-list,
+      .app.left-unpinned .panel.left:focus-within .component-list,
+      .app.left-unpinned .panel.left:hover #deleteSelectedBtn,
+      .app.left-unpinned .panel.left:focus-within #deleteSelectedBtn,
+      .app.left-unpinned .panel.left:hover .footer-note,
+      .app.left-unpinned .panel.left:focus-within .footer-note,
+      .app.right-unpinned .panel.right:hover .settings-body,
+      .app.right-unpinned .panel.right:focus-within .settings-body,
+      .app.right-unpinned .panel.right:hover .footer-note,
+      .app.right-unpinned .panel.right:focus-within .footer-note {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .app.left-unpinned .panel.left .panel-header,
+      .app.right-unpinned .panel.right .panel-header {
+        height: 100vh;
+        padding: 12px 4px;
+        border-bottom: none;
+      }
+
+      .app.left-unpinned .panel.left:hover .panel-header,
+      .app.left-unpinned .panel.left:focus-within .panel-header,
+      .app.right-unpinned .panel.right:hover .panel-header,
+      .app.right-unpinned .panel.right:focus-within .panel-header {
+        height: auto;
+        padding: 16px 16px 10px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .app.left-unpinned .panel.left .panel-header-row,
+      .app.right-unpinned .panel.right .panel-header-row {
+        height: 100%;
+        flex-direction: column;
+        justify-content: flex-start;
+      }
+
+      .app.left-unpinned .panel.left:hover .panel-header-row,
+      .app.left-unpinned .panel.left:focus-within .panel-header-row,
+      .app.right-unpinned .panel.right:hover .panel-header-row,
+      .app.right-unpinned .panel.right:focus-within .panel-header-row {
+        height: auto;
+        flex-direction: row;
+      }
+
+      .app.left-unpinned .panel.left .panel-title,
+      .app.right-unpinned .panel.right .panel-title {
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        font-size: 16px;
+        white-space: nowrap;
+        margin-top: 8px;
+      }
+
+      .app.left-unpinned .panel.left:hover .panel-title,
+      .app.left-unpinned .panel.left:focus-within .panel-title,
+      .app.right-unpinned .panel.right:hover .panel-title,
+      .app.right-unpinned .panel.right:focus-within .panel-title {
+        writing-mode: horizontal-tb;
+        transform: none;
+        font-size: 22px;
+        margin-top: 0;
+      }
+
+      .app.left-unpinned .panel.left .pin-toggle,
+      .app.right-unpinned .panel.right .pin-toggle {
+        width: 34px;
+        height: 34px;
+      }
+
+      .component-list,
+      .settings-body {
+        padding: 14px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        flex: 1;
+        min-height: 0;
+      }
+
+      .group-title {
+        font-size: 13px;
+        font-weight: 700;
+        color: #374151;
+        margin: 14px 0 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+      }
+
+      .components-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .component-card {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 6px 8px;
+        min-height: 38px;
+        cursor: grab;
+        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+        transition: 0.15s ease;
+        user-select: none;
+      }
+
+      .component-card:hover {
+        border-color: var(--accent);
+        transform: translateY(-1px);
+        background: var(--accent-soft);
+      }
+
+      .component-icon {
+        width: 32px;
+        height: 24px;
+        border: 2px solid #374151;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        position: relative;
+      }
+
+      .component-icon.textarea,
+      .component-icon.number-input,
+      .component-icon.date-input {
+        height: 28px;
+      }
+
+      .component-icon.button {
+        border-radius: 999px;
+        width: 36px;
+        height: 24px;
+        background: #e5e7eb;
+      }
+
+      .component-icon.heading::before,
+      .component-icon.paragraph::before,
+      .component-icon.image::before,
+      .component-icon.card::before,
+      .component-icon.section::before,
+      .component-icon.checkbox::before,
+      .component-icon.select::before,
+      .component-icon.form::before,
+      .component-icon.text-input::before,
+      .component-icon.number-input::before,
+      .component-icon.date-input::before,
+      .component-icon.radio-buttons::before {
+        content: "";
+        position: absolute;
+        inset: 4px;
+        border: 1px dashed #6b7280;
+        border-radius: 4px;
+      }
+
+      .component-name {
+        font-size: 13px;
+        line-height: 1.2;
+        font-weight: 400;
+        color: #111827;
+      }
+
+      .workspace-wrap {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 16px;
+        height: 67px;
+        background: var(--panel);
+        border-bottom: 1px solid var(--line);
+        flex-wrap: nowrap;
+      }
+
+      .topbar .title {
+        display: flex;
+        align-items: center;
+        height: 40px;
+        font-weight: 700;
+        margin-right: auto;
+      }
+
+      .grid-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        height: 40px;
+        padding: 0 4px;
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--text);
+        white-space: nowrap;
+        user-select: none;
+      }
+
+      .grid-toggle input {
+        width: 16px;
+        height: 16px;
+        margin: 0;
+        accent-color: #2563eb;
+        cursor: pointer;
+      }
+
+      button,
+      .file-label {
+        font-size: 14px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        border: none;
+        color: var(--text);
+        padding: 0 16px;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1;
+        color: #ffffff;
+        cursor: pointer;
+        transition: 0.15s ease;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+
+      button:hover,
+      .file-label:hover {
+        filter: brightness(0.96);
+      }
+
+      button:disabled,
+      .file-label:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        filter: none;
+      }
+
+      .btn-red {
+        background: #ef4444;
+        color: #ffffff;
+      }
+
+      .btn-yellow {
+        background: #f59e0b;
+        color: #ffffff;
+      }
+
+      .btn-green {
+        background: #15803d;
+        color: #ffffff;
+      }
+
+      #fileInput {
+        display: none;
+      }
+
+      .workspace {
+        position: relative;
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 16px;
+        background:
+          linear-gradient(
+            to right,
+            rgba(107, 114, 128, 0.03) 1px,
+            transparent 1px
+          ),
+          linear-gradient(
+            to bottom,
+            rgba(107, 114, 128, 0.03) 1px,
+            transparent 1px
+          ),
+          var(--bg);
+        background-size: 20px 20px;
+        min-height: 0;
+      }
+
+      .canvas-shell {
+        position: relative;
+        display: grid;
+        grid-template-columns: 40px auto;
+        grid-template-rows: 28px auto;
+        width: max-content;
+        min-width: 0;
+      }
+
+      .grid-corner {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .grid-cols-labels {
+        grid-column: 2;
+        grid-row: 1;
+        position: relative;
+        height: 28px;
+        pointer-events: none;
+      }
+
+      .grid-col-label {
+        position: absolute;
+        top: 4px;
+        transform: translateX(-50%);
+        font-size: 14px;
+        color: #9ca3af;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 1px 4px;
+        border-radius: 4px;
+        line-height: 1.2;
+        white-space: nowrap;
+      }
+
+      .grid-rows-labels {
+        grid-column: 1;
+        grid-row: 2;
+        position: relative;
+        width: 40px;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .grid-row-label {
+        position: absolute;
+        right: 6px;
+        transform: translateY(-50%);
+        font-size: 14px;
+        color: #9ca3af;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 1px 4px;
+        border-radius: 4px;
+        line-height: 1.2;
+        white-space: nowrap;
+      }
+
+      .canvas {
+        max-width: 100%;
+        position: relative;
+        min-height: 100%;
+        background: #ffffff;
+        border: 2px dashed #d1d5db;
+        border-radius: 18px;
+        box-shadow: var(--shadow);
+        overflow: visible;
+      }
+
+      .canvas.empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .empty-state {
+        text-align: center;
+        color: #374151;
+        max-width: 420px;
+        padding: 32px;
+      }
+
+      .empty-state .marker {
+        width: 54px;
+        height: 54px;
+        margin: 0 auto 18px;
+        border: 4px dashed var(--accent);
+        border-radius: 10px;
+      }
+
+      .drop-hint {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        border: 3px dashed transparent;
+        border-radius: 18px;
+        z-index: 1;
+      }
+
+      .canvas.drag-over .drop-hint {
+        border-color: var(--accent);
+        background: rgba(249, 115, 22, 0.05);
+      }
+
+      .grid-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 20px;
+        padding: 0 20px;
+      }
+
+      .grid-overlay .grid-column {
+        height: 100%;
+        background: rgba(107, 114, 128, 0.04);
+        border-left: 1px solid rgba(107, 114, 128, 0.08);
+        border-right: 1px solid rgba(107, 114, 128, 0.08);
+      }
+
+      .grid-row {
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: rgba(55, 65, 81, 0.08);
+      }
+
+      .canvas-element {
+        position: absolute;
+        min-width: 70px;
+        min-height: 30px;
+        border: 1px solid transparent;
+        padding: 0;
+        border-radius: 10px;
+        cursor: move;
+        z-index: 2;
+        overflow: visible;
+      }
+
+      .canvas-element.selected {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
+        background: rgba(255, 255, 255, 0.8);
+      }
+
+      .canvas-element .resize {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        right: -6px;
+        bottom: -6px;
+        background: var(--accent);
+        border-radius: 50%;
+        cursor: ew-resize;
+        display: none;
+      }
+
+      .canvas-element.selected .resize {
+        display: block;
+      }
+
+      .canvas-element input,
+      .canvas-element textarea,
+      .canvas-element select,
+      .canvas-element button {
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .canvas-element input::placeholder,
+      .canvas-element textarea::placeholder {
+        color: var(--placeholder-color, #9ca3af);
+        opacity: 1;
+        font-size: 13px;
+      }
+
+      input[type="number"] {
+        appearance: auto;
+        -moz-appearance: auto;
+      }
+
+      input[type="number"]::-webkit-outer-spin-button,
+      input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: auto;
+        margin: 0;
+        opacity: 1;
+      }
+
+      .canvas-element input[type="number"] {
+        appearance: textfield;
+        -moz-appearance: textfield;
+      }
+
+      .canvas-element input[type="number"]::-webkit-outer-spin-button,
+      .canvas-element input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        opacity: 0;
+      }
+
+      .proto-field {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+
+      .proto-field-label {
+        position: absolute;
+        top: -18px; /* більша відстань */
+        left: 10px;
+        font-size: 14px; /* більший текст */
+        line-height: 1;
+        color: #000000;
+        background: #ffffff;
+        padding: 0 4px;
+        margin: 0;
+        pointer-events: none;
+        z-index: 3;
+        white-space: nowrap;
+      }
+
+      .proto-field-input {
+        width: 100%;
+        height: 100%;
+        display: block;
+        box-sizing: border-box;
+        font-family: inherit;
+      }
+
+      .proto-field-textarea .proto-field-input {
+        resize: none;
+      }
+
+      .textarea-corner-mark {
+        position: absolute;
+        right: 6px;
+        bottom: 4px;
+        width: 12px;
+        height: 12px;
+        pointer-events: none;
+        opacity: 0.75;
+        background:
+          linear-gradient(
+            -45deg,
+            transparent 0 52%,
+            currentColor 52% 60%,
+            transparent 60% 100%
+          ),
+          linear-gradient(
+            -45deg,
+            transparent 0 22%,
+            currentColor 22% 30%,
+            transparent 30% 100%
+          );
+      }
+
+      .canvas-element .card-ui,
+      .canvas-element .section-ui,
+      .canvas-element .form-ui {
+        width: 100%;
+        height: 100%;
+        background: white;
+        border: 1px solid #d1d5db;
+        border-radius: 14px;
+        padding: 14px;
+      }
+
+      .radio-group-ui {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        justify-content: flex-start;
+      }
+
+      .radio-group-ui.vertical {
+        flex-direction: column;
+      }
+
+      .radio-group-ui.horizontal {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      .radio-option-ui {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 24px;
+        color: inherit;
+        font-size: 14px;
+        white-space: nowrap;
+      }
+
+      .radio-option-ui input[type="radio"] {
+        width: 16px;
+        height: 16px;
+        margin: 0;
+        accent-color: #f97316;
+        pointer-events: none;
+      }
+
+      .canvas-element .section-ui {
+        background: #f9fafb;
+        border-style: dashed;
+      }
+
+      .canvas-element .image-ui {
+        width: 100%;
+        height: 100%;
+        border-radius: 12px;
+        border: 1px dashed #9ca3af;
+        background: linear-gradient(135deg, #e5e7eb, #f9fafb);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #6b7280;
+        font-size: 14px;
+        text-align: center;
+        padding: 12px;
+      }
+
+      .settings-body label {
+        display: block;
+        font-size: 14px;
+        color: #374151;
+        font-weight: 700;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+      }
+
+      .field {
+        margin-bottom: 14px;
+      }
+
+      .field input,
+      .field select,
+      .field textarea {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        font-size: 13px;
+        outline: none;
+        background: white;
+      }
+
+      .field textarea {
+        min-height: 84px;
+        resize: vertical;
+      }
+
+      .muted {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.45;
+      }
+
+      .settings-placeholder {
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.6;
+        padding: 12px;
+        border: 1px dashed var(--line);
+        border-radius: 12px;
+        background: #f9fafb;
+      }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .footer-note {
+        padding: 10px 14px 16px;
+        color: var(--muted);
+        font-size: 12px;
+        border-top: 1px solid var(--line);
+      }
+
+      .color-palette {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .color-swatch {
+        width: 100%;
+        height: 28px;
+        border-radius: 6px;
+        cursor: pointer;
+        border: 1px solid rgba(17, 24, 39, 0.18);
+        transition:
+          transform 0.12s ease,
+          box-shadow 0.12s ease;
+        padding: 0;
+      }
+
+      .color-swatch:hover {
+        transform: scale(1.04);
+      }
+
+      .color-swatch.active {
+        outline: 3px solid #111827;
+        outline-offset: 1px;
+      }
+
+      @media (max-width: 1200px) {
+        .app {
+          grid-template-columns: 250px 1fr 290px;
+        }
+      }
+
+      @media (max-width: 980px) {
+        .app {
+          grid-template-columns: 1fr;
+        }
+
+        .panel.left,
+        .panel.right {
+          display: none;
+        }
+
+        .app.left-unpinned,
+        .app.right-unpinned,
+        .app.left-unpinned.right-unpinned {
+          grid-template-columns: 1fr;
+        }
+
+        .workspace-wrap {
+          min-width: 0;
+        }
+
+        body {
+          overflow: hidden;
+        }
+
+        .topbar {
+          height: auto;
+          flex-wrap: wrap;
+        }
+      }
+
+      .canvas-element select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+      }
+
+      .canvas-element select::-ms-expand {
+        display: none;
+      }
+    
+
+      /* Pin layout fix: pinned panels occupy their grid columns; unpinned panels use a 44px rail and expand as overlays on hover without shifting the mockup. */
+      .panel.left,
+      .panel.right {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .app.left-unpinned .panel.left,
+      .app.right-unpinned .panel.right {
+        width: 44px;
+      }
+
+      .app.left-unpinned .panel.left:hover,
+      .app.left-unpinned .panel.left:focus-within {
+        width: 290px;
+      }
+
+      .app.right-unpinned .panel.right {
+        justify-self: end;
+      }
+
+      .app.right-unpinned .panel.right:hover,
+      .app.right-unpinned .panel.right:focus-within {
+        width: 320px;
+      }
+
+      @media (max-width: 1200px) {
+        .app.left-unpinned .panel.left:hover,
+        .app.left-unpinned .panel.left:focus-within {
+          width: 250px;
+        }
+
+        .app.right-unpinned .panel.right:hover,
+        .app.right-unpinned .panel.right:focus-within {
+          width: 290px;
+        }
+      }
+
+
+      /* Panel overlap fix: when an unpinned side panel is opened by hover/focus,
+         expand the grid column as well, so the workspace is pushed aside and
+         the panel does not cover canvas text. */
+      .app.left-unpinned:has(.panel.left:hover),
+      .app.left-unpinned:has(.panel.left:focus-within) {
+        grid-template-columns: 290px 1fr 320px;
+      }
+
+      .app.right-unpinned:has(.panel.right:hover),
+      .app.right-unpinned:has(.panel.right:focus-within) {
+        grid-template-columns: 290px 1fr 320px;
+      }
+
+      .app.left-unpinned.right-unpinned:has(.panel.left:hover),
+      .app.left-unpinned.right-unpinned:has(.panel.left:focus-within) {
+        grid-template-columns: 290px 1fr 44px;
+      }
+
+      .app.left-unpinned.right-unpinned:has(.panel.right:hover),
+      .app.left-unpinned.right-unpinned:has(.panel.right:focus-within) {
+        grid-template-columns: 44px 1fr 320px;
+      }
+
+      .app.left-unpinned.right-unpinned:has(.panel.left:hover):has(.panel.right:hover),
+      .app.left-unpinned.right-unpinned:has(.panel.left:focus-within):has(.panel.right:hover),
+      .app.left-unpinned.right-unpinned:has(.panel.left:hover):has(.panel.right:focus-within),
+      .app.left-unpinned.right-unpinned:has(.panel.left:focus-within):has(.panel.right:focus-within) {
+        grid-template-columns: 290px 1fr 320px;
+      }
+
+      @media (max-width: 1200px) {
+        .app.left-unpinned:has(.panel.left:hover),
+        .app.left-unpinned:has(.panel.left:focus-within) {
+          grid-template-columns: 250px 1fr 290px;
+        }
+
+        .app.right-unpinned:has(.panel.right:hover),
+        .app.right-unpinned:has(.panel.right:focus-within) {
+          grid-template-columns: 250px 1fr 290px;
+        }
+
+        .app.left-unpinned.right-unpinned:has(.panel.left:hover),
+        .app.left-unpinned.right-unpinned:has(.panel.left:focus-within) {
+          grid-template-columns: 250px 1fr 44px;
+        }
+
+        .app.left-unpinned.right-unpinned:has(.panel.right:hover),
+        .app.left-unpinned.right-unpinned:has(.panel.right:focus-within) {
+          grid-template-columns: 44px 1fr 290px;
+        }
+
+        .app.left-unpinned.right-unpinned:has(.panel.left:hover):has(.panel.right:hover),
+        .app.left-unpinned.right-unpinned:has(.panel.left:focus-within):has(.panel.right:hover),
+        .app.left-unpinned.right-unpinned:has(.panel.left:hover):has(.panel.right:focus-within),
+        .app.left-unpinned.right-unpinned:has(.panel.left:focus-within):has(.panel.right:focus-within) {
+          grid-template-columns: 250px 1fr 290px;
+        }
+      }
+
+</style>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="panel left">
+        <div class="panel-header">
+          <div class="panel-header-row">
+            <h2 class="panel-title">Компоненти</h2>
+            <button
+              aria-label="Закріпити панель Компоненти"
+              aria-pressed="true"
+              class="pin-toggle active"
+              data-pin-panel="left"
+              title="Закріпити панель"
+              type="button"
+            >📌</button>
+          </div>
+        </div>
+        <div class="component-list" id="componentList"></div>
+        <div style="padding: 0 14px 12px">
+          <button
+            class="btn-red"
+            id="deleteSelectedBtn"
+            type="button"
+            disabled
+            style="width: 100%"
+          >
+            Видалити компонент
+          </button>
+        </div>
+
+      </aside>
+      <main class="workspace-wrap">
+        <div class="topbar">
+          <div class="title">
+           
+          </div>
+          <label class="grid-toggle" for="gridToggle">
+            <input id="gridToggle" type="checkbox" />
+            <span>Сітка</span>
+          </label>
+          <button class="btn-red" id="clearBtn">Очистити</button>
+          <label class="file-label btn-yellow" for="fileInput">Відкрити</label>
+          <button class="btn-green" id="saveBtn" type="button">Зберегти</button>
+          <button
+            class="btn-green"
+            id="screenshotBtn"
+            type="button"
+            style="
+              background: #ffffff;
+              color: #000000;
+              border: 1px solid #d1d5db;
+            "
+          >
+            file.png
+          </button>
+          <button
+            class="btn-green"
+            id="screenBtn"
+            type="button"
+            style="
+              background: #ffffff;
+              color: #000000;
+              border: 1px solid #d1d5db;
+            "
+          >
+            screen
+          </button>
+          <input
+            accept=".json,.json,application/json"
+            id="fileInput"
+            type="file"
+          />
+        </div>
+        <div class="workspace">
+          <div class="canvas-shell">
+            <div aria-hidden="true" class="grid-corner" id="gridCorner"></div>
+            <div class="grid-cols-labels" id="gridCols"></div>
+            <div class="grid-rows-labels" id="gridRows"></div>
+            <div class="canvas empty" id="canvas">
+              <div class="drop-hint"></div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <aside class="panel right">
+        <div class="panel-header">
+          <div class="panel-header-row">
+            <h2 class="panel-title">Налаштування</h2>
+            <button
+              aria-label="Закріпити панель Налаштування"
+              aria-pressed="true"
+              class="pin-toggle active"
+              data-pin-panel="right"
+              title="Закріпити панель"
+              type="button"
+            >📌</button>
+          </div>
+        </div>
+        <div class="settings-body" id="settingsBody"></div>
+      </aside>
+    </div>
+    <script>
+      const DEFAULT_BORDER_WIDTH = 1;
+      const DEFAULT_RADIUS = 6;
+
+      const componentCatalog = [
+        {
+          type: "header",
+          name: "Header",
+          group: "Текст",
+          icon: "heading",
+          defaults: {
+            text: "Заголовок",
+            fontSize: 24,
+            fontWeight: 700,
+            color: "#111827",
+            textAlign: "left",
+            bgColor: "transparent",
+            radius: DEFAULT_RADIUS,
+            borderШирина: DEFAULT_BORDER_WIDTH,
+            borderColor: "#d1d5db",
+          },
+          size: { w: 260, h: 54 },
+        },
+        {
+          type: "paragraph",
+          name: "Paragraph",
+          group: "Текст",
+          icon: "paragraph",
+          defaults: {
+            text: "Текстовий блок для опису або контенту.",
+            fontSize: 13,
+            fontWeight: 400,
+            color: "#374151",
+            textAlign: "left",
+            bgColor: "transparent",
+            radius: DEFAULT_RADIUS,
+            borderШирина: DEFAULT_BORDER_WIDTH,
+            borderColor: "#000000",
+          },
+          size: { w: 320, h: 90 },
+        },
+        {
+          type: "category-input",
+          name: "Category input",
+          group: "Форма",
+          icon: "text-input",
+          defaults: {
+            label: "Категорія",
+            placeholder: "Оберіть",
+            value: "",
+            inputType: "text",
+            bgColor: "#ffffff",
+            borderColor: "#000000",
+            borderШирина: DEFAULT_BORDER_WIDTH,
+            radius: DEFAULT_RADIUS,
+            color: "#6b7280",
+          },
+          size: { w: 260, h: 44 },
+        },
+        {
+          type: "number-input",
+          name: "Number input",
+          group: "Форма",
+          icon: "number-input",
+          defaults: {
+            label: "Числове поле",
+            placeholder: "123",
+            value: "",
+            inputType: "number",
+            bgColor: "#ffffff",
+            borderColor: "#000000",
+            borderШирина: DEFAULT_BORDER_WIDTH,
+            radius: DEFAULT_RADIUS,
+            color: "#6b7280",
+          },
+          size: { w: 220, h: 44 },
+        },
+        {
+          type: "text-input",
+          name: "Text input",
+          group: "Форма",
+          icon: "text-input",
+          defaults: {
+            label: "Поле вводу",
+            placeholder: "Введіть текст",
+            value: "",
+            inputType: "text",
+            bgColor: "#ffffff",
+            borderColor: "#000000",
+            borderШирина: DEFAULT_BORDER_WIDTH,
+            radius: DEFAULT_RADIUS,
+            color: "#6b7280",
+          },
+          size: { w: 260, h: 44 },
+        },
+        {
+          type: "date-input",
+          name: "Date input",
+          group: "Форма",
+          icon: "date-input",
+          defaults: {
+            label: "Поле дати",
+            placeholder: "dd.MM.yyyy",
+            value: "",
+            inputType: "date",
+            bgColor: "#ffffff",
+            borderColor: "#000000",
+            borderШирина: DEFAULT_BORDER_WIDTH,
+            radius: DEFAULT_RADIUS,
+            color: "#6b7280",
+          },
+          size: { w: 220, h: 44 },
+        },
+        {
+          type: "textarea",
+          name: "Textarea",
+          group: "Форма",
+          icon: "textarea",
+          defaults: {
+            label: "Текстова область",
+            placeholder: "Введіть опис",
+            value: "",
+            bgColor: "#ffffff",
+            borderColor: "#000000",
+            borderШирина: DEFAULT_BORDER_WIDTH,
+            radius: DEFAULT_RADIUS,
+            color: "#6b7280",
+          },
+          size: { w: 320, h: 100 },
+        },
+        {
+          type: "file-input",
+          name: "File input",
+          group: "Форма",
+          icon: "text-input",
+          defaults: {
+            label: "Документ",
+            placeholder: "Оберіть файл(и)",
+            value: "",
+            bgColor: "#ffffff",
+            borderColor: "#000000",
+            borderШирина: DEFAULT_BORDER_WIDTH,
+            radius: DEFAULT_RADIUS,
+            color: "#6b7280",
+          },
+          size: { w: 260, h: 44 },
+        },
+        {
+          type: "checkbox",
+          name: "Checkbox",
+          group: "Форма",
+          icon: "checkbox",
+          defaults: {
+            text: "Погоджуюсь з умовами",
+            checked: false,
+            fontSize: 14,
+            color: "#111827",
+            bgColor: "transparent",
+            borderШирина: DEFAULT_BORDER_WIDTH,
+            borderColor: "#d1d5db",
+            radius: DEFAULT_RADIUS,
+          },
+          size: { w: 240, h: 30 },
+        },
+        {
+          type: "select",
+          name: "Select",
+          group: "Форма",
+          icon: "select",
+          defaults: {
+            label: "Список",
+            placeholder: "Оберіть",
+            options: "Опція 1\nОпція 2",
+            bgColor: "#ffffff",
+            borderColor: "#000000",
+            borderШирина: DEFAULT_BORDER_WIDTH,
+            radius: DEFAULT_RADIUS,
+            color: "#6b7280",
+          },
+          size: { w: 220, h: 44 },
+        },
+        {
+          type: "radio-buttons",
+          name: "Radio Buttons",
+          group: "Форма",
+          icon: "radio-buttons",
+          defaults: {
+            options: "Опція 1\\nОпція 2",
+            selectedIndex: 0,
+            orientation: "horizontal",
+            color: "#111827",
+            bgColor: "transparent",
+            borderColor: "#d1d5db",
+            borderШирина: DEFAULT_BORDER_WIDTH,
+            radius: DEFAULT_RADIUS,
+          },
+          size: { w: 260, h: 44 },
+        },
+        {
+          type: "button",
+          name: "Button",
+          group: "Форма",
+          icon: "button",
+          defaults: {
+            text: "Кнопка",
+            fontSize: 15,
+            fontWeight: 600,
+            color: "#ffffff",
+            bgColor: "#ef4444",
+            radius: DEFAULT_RADIUS,
+            borderШирина: DEFAULT_BORDER_WIDTH,
+            borderColor: "#000000",
+            textAlign: "center",
+          },
+          size: { w: 140, h: 42 },
+        },
+        {
+          type: "line-horizontal",
+          name: "Line gorizont",
+          group: "Контейнери",
+          icon: "section",
+          defaults: {
+            bgColor: "#000000",
+            borderColor: "#000000",
+            borderШирина: 2,
+            radius: 0,
+            color: "#000000",
+            textAlign: "left",
+          },
+          size: { w: 220, h: 4 },
+        },
+        {
+          type: "line-vertical",
+          name: "Line vertical",
+          group: "Контейнери",
+          icon: "section",
+          defaults: {
+            bgColor: "#000000",
+            borderColor: "#000000",
+            borderШирина: 2,
+            radius: 0,
+            color: "#000000",
+            textAlign: "left",
+          },
+          size: { w: 140, h: 120 },
+        },
+        {
+          type: "tabs",
+          name: "Tabs",
+          group: "Контейнери",
+          icon: "section",
+          defaults: {
+            tabs: "Вкладка 1\\nВкладка 2\\nВкладка 3",
+            activeIndex: 0,
+            bgColor: "#ffffff",
+            borderColor: "#d1d5db",
+            borderШирина: DEFAULT_BORDER_WIDTH,
+            radius: DEFAULT_RADIUS,
+            color: "#111827",
+          },
+          size: { w: 360, h: 40 },
+        },
+        {
+          type: "table",
+          name: "Table",
+          group: "Контейнери",
+          icon: "section",
+          defaults: {
+            headers: "Колонка 1\\nКолонка 2\\nКолонка 3",
+            rows: 7,
+            cols: 5,
+            bgColor: "#ffffff",
+            borderColor: "#000000",
+            borderШирина: 1,
+            radius: 6,
+            color: "#111827",
+          },
+          size: { w: 320, h: 120 },
+        },
+        {
+          type: "directory-tree",
+          name: "Catalog",
+          group: "Контейнери",
+          icon: "section",
+          defaults: {
+            title: "",
+            items:
+              "src\\n  components\\n    Header.html\\n    Sidebar.html\\n  pages\\n    index.html\\npublic\\n  assets\\nREADME.md",
+            bgColor: "#ffffff",
+            borderColor: "#000000",
+            borderШирина: DEFAULT_BORDER_WIDTH,
+            radius: DEFAULT_RADIUS,
+            color: "#111827",
+          },
+          size: { w: 160, h: 270 },
+        },
+        {
+          type: "list",
+          name: "List",
+          group: "Контейнери",
+          icon: "section",
+          defaults: {
+            title: "",
+            items: "Елемент 1\nЕлемент 2",
+            bgColor: "#ffffff",
+            borderColor: "#000000",
+            borderШирина: DEFAULT_BORDER_WIDTH,
+            radius: DEFAULT_RADIUS,
+            color: "#111827",
+          },
+          size: { w: 220, h: 200 },
+        },
+        {
+          type: "image",
+          name: "Image",
+          group: "Медіа",
+          icon: "image",
+          defaults: {
+            text: "Зображення",
+            bgColor: "#d3d3d3",
+            borderColor: "#000000",
+            borderШирина: DEFAULT_BORDER_WIDTH,
+            radius: DEFAULT_RADIUS,
+            color: "#000000",
+            textAlign: "center",
+          },
+          size: { w: 160, h: 140 },
+        },
+      ];
+
+      const GRID_COLUMNS = 12;
+      const GRID_GAP = 20;
+      const GRID_PADDING = 20;
+      const GRID_ROW_HEIGHT = 27;
+      const MIN_GRID_SPAN = 1;
+      const MIN_ROW_SPAN = 1;
+
+      const COLOR_SWATCHES = [
+        { name: "Червоний", value: "#ef4444" },
+        { name: "Жовтий", value: "#facc15" },
+        { name: "Синій", value: "#5f7fa6" },
+        { name: "Чорний", value: "#000000" },
+        { name: "Білий", value: "#ffffff" },
+        { name: "Світло сірий", value: "#d3d3d3" },
+      ];
+
+      const DEFAULT_PROJECT = {
+        version: "1.0",
+        type: "ui-prototype",
+        canvas: {
+          width: 1220,
+          minHeight: 760,
+          background: "#ffffff",
+          name: "mockup",
+          showGrid: false,
+        },
+        elements: [],
+      };
+
+      const STORAGE_KEY = "ui-modeler-autosave";
+      const PANEL_PIN_STORAGE_KEY = "ui-modeler-panel-pins";
+
+      const state = {
+        project: structuredClone(DEFAULT_PROJECT),
+        selectedId: null,
+        search: "",
+      };
+
+      const componentList = document.getElementById("componentList");
+      const deleteSelectedBtn = document.getElementById("deleteSelectedBtn");
+      const canvas = document.getElementById("canvas");
+      const gridCols = document.getElementById("gridCols");
+      const gridRows = document.getElementById("gridRows");
+      const settingsBody = document.getElementById("settingsBody");
+      const fileInput = document.getElementById("fileInput");
+      const gridToggle = document.getElementById("gridToggle");
+
+      let dragCatalogType = null;
+      let dragElementState = null;
+      let dragStarted = false;
+      let resizeState = null;
+      let zCounter = 1;
+
+      function getGridMetrics() {
+        const totalGap = GRID_GAP * (GRID_COLUMNS - 1);
+        const innerШирина = state.project.canvas.width - GRID_PADDING * 2;
+        const columnШирина = (innerШирина - totalGap) / GRID_COLUMNS;
+        return {
+          columns: GRID_COLUMNS,
+          gap: GRID_GAP,
+          padding: GRID_PADDING,
+          innerШирина,
+          columnШирина,
+          trackШирина: columnШирина + GRID_GAP,
+        };
+      }
+
+      function clampGridCol(col, span) {
+        return Math.max(1, Math.min(GRID_COLUMNS - span + 1, col));
+      }
+
+      function clampGridSpan(span) {
+        return Math.max(MIN_GRID_SPAN, Math.min(GRID_COLUMNS, span));
+      }
+
+      function clampGridRow(row) {
+        return Math.max(1, row);
+      }
+
+      function clampRowSpan(span) {
+        return Math.max(MIN_ROW_SPAN, span);
+      }
+
+      function pixelШиринаToGridSpan(pxШирина) {
+        const grid = getGridMetrics();
+        const raw = (pxШирина + grid.gap) / grid.trackШирина;
+        return clampGridSpan(Math.round(raw));
+      }
+
+      function pixelXToGridCol(x, span) {
+        const grid = getGridMetrics();
+        const raw = (x - grid.padding) / grid.trackШирина;
+        return clampGridCol(Math.round(raw) + 1, span);
+      }
+
+      function gridColToPixelX(col) {
+        const grid = getGridMetrics();
+        return Math.round(grid.padding + (col - 1) * grid.trackШирина);
+      }
+
+      function gridSpanToPixelШирина(span) {
+        const grid = getGridMetrics();
+        return Math.round(span * grid.columnШирина + (span - 1) * grid.gap);
+      }
+
+      function pixelYToGridRow(y) {
+        return clampGridRow(Math.round(y / GRID_ROW_HEIGHT) + 1);
+      }
+
+      function gridRowToPixelY(row) {
+        return Math.round((row - 1) * GRID_ROW_HEIGHT);
+      }
+
+      function pixelHeightToRowSpan(pxHeight) {
+        return clampRowSpan(Math.round(pxHeight / GRID_ROW_HEIGHT));
+      }
+
+      function rowSpanToPixelHeight(span) {
+        return Math.round(span * GRID_ROW_HEIGHT);
+      }
+
+      function normalizeElementToGrid(el) {
+        if (!el.gridSpan) {
+          el.gridSpan = pixelШиринаToGridSpan(el.w || 240);
+        }
+        el.gridSpan = clampGridSpan(el.gridSpan);
+
+        if (!el.gridCol) {
+          el.gridCol = pixelXToGridCol(el.x || GRID_PADDING, el.gridSpan);
+        }
+        el.gridCol = clampGridCol(el.gridCol, el.gridSpan);
+
+        if (!el.gridRow) {
+          el.gridRow = pixelYToGridRow(typeof el.y === "number" ? el.y : 40);
+        }
+        el.gridRow = clampGridRow(el.gridRow);
+
+        if (!el.rowSpan) {
+          el.rowSpan = pixelHeightToRowSpan(
+            typeof el.h === "number" ? el.h : 120,
+          );
+        }
+        el.rowSpan = clampRowSpan(el.rowSpan);
+
+        delete el.x;
+        delete el.w;
+        delete el.y;
+        delete el.h;
+      }
+
+      function createEmptyStateMarkup() {
+        return `
+          <div class="empty-state">
+            <div class="marker"></div>
+            <h2 style="margin:0 0 12px; font-size:36px;">Редактор мокапів</h2>
+            <p style="margin:0; font-size:18px; line-height:1.5; color:#4b5563;">
+              Перетягніть компоненти зліва, створіть макет сторінки або форми,
+              а потім збережіть результат у файл <strong>.json</strong>
+            </p>
+          </div>
+        `;
+      }
+
+      function createGridMarkup() {
+        if (!state.project.canvas.showGrid) return "";
+        const rowCount =
+          Math.ceil(state.project.canvas.minHeight / GRID_ROW_HEIGHT) + 2;
+        return `
+          <div class="grid-overlay">
+            ${Array.from({ length: GRID_COLUMNS }, () => '<div class="grid-column"></div>').join("")}
+            ${Array.from({ length: rowCount }, (_, i) => `<div class="grid-row" style="top:${i * GRID_ROW_HEIGHT}px"></div>`).join("")}
+          </div>
+        `;
+      }
+
+      function createGridColumnLabelsMarkup() {
+        if (!state.project.canvas.showGrid) return "";
+        const grid = getGridMetrics();
+        return Array.from({ length: GRID_COLUMNS }, (_, i) => {
+          const center =
+            grid.padding + i * grid.trackШирина + grid.columnШирина / 2;
+          return `<span class="grid-col-label" style="left:${center}px;">${i + 1}</span>`;
+        }).join("");
+      }
+
+      function createGridRowLabelsMarkup() {
+        if (!state.project.canvas.showGrid) return "";
+        const rowCount = Math.floor(
+          state.project.canvas.minHeight / GRID_ROW_HEIGHT,
+        );
+        return Array.from({ length: rowCount }, (_, i) => {
+          const center = i * GRID_ROW_HEIGHT + GRID_ROW_HEIGHT / 2;
+          return `<span class="grid-row-label" style="top:${center}px;">${i + 1}</span>`;
+        }).join("");
+      }
+
+      function decodeNewLines(str) {
+        return String(str ?? "").replace(/\\n/g, "\n");
+      }
+
+      function saveStateToLocalStorage() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state.project));
+        } catch (err) {
+          console.warn("Не вдалося зберегти макет у localStorage", err);
+        }
+      }
+
+      function restoreStateFromLocalStorage() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return;
+          const parsed = JSON.parse(raw);
+          if (
+            !parsed ||
+            parsed.type !== "ui-prototype" ||
+            !Array.isArray(parsed.elements)
+          ) {
+            return;
+          }
+
+          if (!parsed.canvas) parsed.canvas = {};
+          parsed.canvas.width =
+            parsed.canvas.width || DEFAULT_PROJECT.canvas.width;
+          parsed.canvas.minHeight =
+            parsed.canvas.minHeight || DEFAULT_PROJECT.canvas.minHeight;
+          parsed.canvas.background = "#ffffff";
+          parsed.canvas.name =
+            parsed.canvas.name || DEFAULT_PROJECT.canvas.name;
+          parsed.canvas.showGrid = !!parsed.canvas.showGrid;
+
+          parsed.elements.forEach((el) => {
+            normalizeElementToGrid(el);
+            if (!el.props) el.props = {};
+            if (!("borderШирина" in el.props))
+              el.props.borderШирина = DEFAULT_BORDER_WIDTH;
+            if (!("radius" in el.props)) el.props.radius = DEFAULT_RADIUS;
+            if (
+              el.type === "date-input" &&
+              (!Object.prototype.hasOwnProperty.call(el.props, "placeholder") ||
+                String(el.props.placeholder ?? "").trim() === "")
+            ) {
+              el.props.placeholder = "дд.мм.рррр";
+            }
+            if (
+              el.type === "select" &&
+              !Object.prototype.hasOwnProperty.call(el.props, "placeholder")
+            ) {
+              el.props.placeholder = "Оберіть";
+            }
+            if (
+              el.type === "select" &&
+              (!Object.prototype.hasOwnProperty.call(el.props, "options") ||
+                String(el.props.options ?? "").trim() === "")
+            ) {
+              el.props.options = "Опція 1\nОпція 2";
+            }
+          });
+
+          state.project = parsed;
+          state.selectedId = null;
+          zCounter = Math.max(
+            1,
+            ...state.project.elements.map((el) => el.z || 1),
+          );
+          normalizeZ();
+        } catch (err) {
+          console.warn("Не вдалося відновити макет із localStorage", err);
+        }
+      }
+
+      function deleteSelectedElement() {
+        if (!state.selectedId) return;
+        state.project.elements = state.project.elements.filter(
+          (el) => el.id !== state.selectedId,
+        );
+        state.selectedId = null;
+        saveStateToLocalStorage();
+        renderCanvas();
+        renderSettings();
+        updateComponentStats();
+      }
+
+      function updateDeleteButtonState() {
+        if (!deleteSelectedBtn) return;
+        deleteSelectedBtn.disabled = !state.selectedId;
+      }
+
+      function renderCatalog() {
+        const grouped = {};
+        for (const item of componentCatalog) {
+          const matches =
+            item.name.toLowerCase().includes(state.search) ||
+            item.group.toLowerCase().includes(state.search) ||
+            item.type.toLowerCase().includes(state.search);
+          if (!matches) continue;
+          if (!grouped[item.group]) grouped[item.group] = [];
+          grouped[item.group].push(item);
+        }
+
+        componentList.innerHTML =
+          Object.entries(grouped)
+            .map(
+              ([group, items]) => `
+                <div>
+                  <div class="group-title">${group}</div>
+                  <div class="components-grid">
+                    ${items
+                      .map(
+                        (item) => `
+                          <div class="component-card" draggable="true" data-type="${item.type}">
+                            
+                            <div class="component-name">${item.name}</div>
+                          </div>
+                        `,
+                      )
+                      .join("")}
+                  </div>
+                </div>
+              `,
+            )
+            .join("") || '<div class="muted">Нічого не знайдено.</div>';
+
+        componentList.querySelectorAll(".component-card").forEach((card) => {
+          card.addEventListener("dragstart", (e) => {
+            dragCatalogType = e.currentTarget.dataset.type;
+            e.dataTransfer.setData("text/plain", dragCatalogType);
+          });
+        });
+      }
+
+      function selectedElement() {
+        return (
+          state.project.elements.find((el) => el.id === state.selectedId) ||
+          null
+        );
+      }
+
+      function addElement(type, x = 40, y = 40) {
+        const schema = componentCatalog.find((c) => c.type === type);
+        if (!schema) return;
+
+        const gridSpan =
+          type === "list"
+            ? 2
+            : type === "table"
+              ? 7
+              : type === "directory-tree"
+                ? 2
+                : type === "number-input" ||
+                    type === "date-input" ||
+                    type === "select" ||
+                    type === "file-input"
+                  ? 3
+                  : pixelШиринаToGridSpan(schema.size.w);
+        const gridCol = pixelXToGridCol(x, gridSpan);
+        const gridRow = pixelYToGridRow(y);
+        const rowSpan =
+          type === "list"
+            ? 7
+            : type === "table"
+              ? 7
+              : type === "directory-tree"
+                ? 10
+                : type === "radio-buttons"
+                  ? 1
+                  : type === "image"
+                    ? 5
+                    : type === "textarea"
+                      ? 2
+                      : type === "line-vertical"
+                        ? 10
+                        : type === "header"
+                          ? 2
+                          : type === "paragraph"
+                            ? 3
+                            : type === "button"
+                              ? 2
+                              : 1;
+
+        const el = {
+          id: crypto.randomUUID(),
+          type,
+          gridCol,
+          gridSpan,
+          gridRow,
+          rowSpan,
+          z: ++zCounter,
+          props: structuredClone(schema.defaults),
+        };
+
+        state.project.elements.push(el);
+        state.selectedId = el.id;
+        saveStateToLocalStorage();
+        renderCanvas();
+        renderSettings();
+        updateComponentStats();
+      }
+
+      function renderPalette(propName, currentColor) {
+        return `
+          <div class="color-palette" data-color-target="${propName}">
+            ${COLOR_SWATCHES.map((swatch) => {
+              const active =
+                normalizeColor(currentColor).toLowerCase() ===
+                swatch.value.toLowerCase();
+              const whiteClass =
+                swatch.value === "#ffffff" ? "border:1px solid #9ca3af;" : "";
+              return `<button type="button" class="color-swatch ${active ? "active" : ""}" data-color="${swatch.value}" title="${swatch.name}" aria-label="${swatch.name}" style="background:${swatch.value};${whiteClass}"></button>`;
+            }).join("")}
+          </div>
+        `;
+      }
+
+      function formatLabel(label) {
+        if (!label) return "";
+        return label.replace(
+          /\*/g,
+          '<span style="color:red;font-weight:700;">*</span>',
+        );
+      }
+
+      function renderElementContent(el) {
+        const p = el.props;
+        switch (el.type) {
+          case "table": {
+            const rows = Math.max(1, Number(p.rows) || 3);
+            const cols = Math.max(1, Number(p.cols) || 3);
+            const headers = String(p.headers || "")
+              .replace(/\\n/g, "\n")
+              .split("\n");
+            const totalRows = rows + 1;
+            const cellHeight = (100 / totalRows).toFixed(4) + "%";
+            let tableHtml =
+              '<table style="width:100%;height:100%;border-collapse:collapse;table-layout:fixed;">';
+
+            tableHtml += "<tr>";
+            for (let c = 0; c < cols; c++) {
+              tableHtml += `<th style="height:${cellHeight};border:${getBorderCss(p.borderColor, p.borderШирина, "solid")};padding:4px;background:#f3f4f6;font-weight:600;font-size:12px;text-align:left;vertical-align:middle;">${escapeHtml(headers[c] || "")}</th>`;
+            }
+            tableHtml += "</tr>";
+
+            for (let r = 0; r < rows; r++) {
+              tableHtml += "<tr>";
+              for (let c = 0; c < cols; c++) {
+                tableHtml += `<td style="height:${cellHeight};border:${getBorderCss(p.borderColor, p.borderШирина, "solid")};padding:4px;vertical-align:middle;"></td>`;
+              }
+              tableHtml += "</tr>";
+            }
+
+            tableHtml += "</table>";
+            return `<div style="width:100%;height:100%;background:${p.bgColor};border-radius:${p.radius}px;color:${p.color};overflow:hidden;">${tableHtml}</div>`;
+          }
+
+          case "header": {
+            const isDarkBg = ["#000000", "#5f7fa6"].includes(
+              (p.bgColor || "").toLowerCase(),
+            );
+            const textColor = isDarkBg ? "#ffffff" : p.color;
+            return `<div style="width:100%;height:100%;display:flex;align-items:flex-start;justify-content:${justifyFromAlign(p.textAlign)};font-size:${p.fontSize}px;font-weight:${p.fontWeight};color:${textColor};text-align:${p.textAlign};background:${p.bgColor};border:${getBorderCss(p.borderColor, p.borderШирина, "solid")};border-radius:${p.radius}px;padding:4px 8px;overflow:hidden;white-space:pre-wrap;">${escapeHtml(String(p.text || "").replace(/\\n/g, "\n"))}</div>`;
+          }
+
+          case "paragraph":
+            return `<div style="width:100%;height:100%;display:flex;align-items:flex-start;justify-content:${justifyFromAlign(p.textAlign)};font-size:${p.fontSize}px;font-weight:${p.fontWeight};color:${p.color};text-align:${p.textAlign};background:${p.bgColor};border:${getBorderCss(p.borderColor, p.borderШирина, "solid")};border-radius:${p.radius}px;padding:4px 8px;overflow:hidden;white-space:pre-wrap;">${escapeHtml(String(p.text || "").replace(/\\n/g, "\n"))}</div>`;
+
+          case "button":
+            return `<button style="font-size:${p.fontSize}px;font-weight:${p.fontWeight};color:${p.color};background:${p.bgColor};border:${getBorderCss(p.borderColor, p.borderШирина, "solid")};border-radius:${p.radius}px;">${escapeHtml(decodeNewLines(p.text))}</button>`;
+
+          case "number-input":
+            return `<div class="proto-field">
+              <div class="proto-field-label">${formatLabel(escapeHtml(decodeNewLines(p.label || "")))}</div>
+              <div style="display:flex;width:100%;height:100%;">
+                <input
+                  class="proto-field-input"
+                  type="number"
+                  style="flex:1;min-width:0;color:${p.color};--placeholder-color:${p.color};font-size:13px;background:${p.bgColor};border:${getBorderCss(p.borderColor, p.borderШирина, "solid")};border-right:none;border-radius:${p.radius}px 0 0 ${p.radius}px;padding:0 12px;font-family:inherit;"
+                  placeholder="${escapeAttr(decodeNewLines(p.placeholder || ""))}"
+                />
+                <div style="flex:0 0 36px;height:100%;display:flex;align-items:center;justify-content:center;background:#f3f4f6;border:${getBorderCss(p.borderColor, p.borderШирина, "solid")};border-radius:0 ${p.radius}px ${p.radius}px 0;">
+                  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M8 10l4-4 4 4"></path>
+                    <path d="M8 14l4 4 4-4"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>`;
+
+          case "file-input":
+            return `<div class="proto-field">
+              <div class="proto-field-label">${formatLabel(escapeHtml(decodeNewLines(p.label || "")))}</div>
+              <div style="display:flex;width:100%;height:100%;align-items:center;overflow:hidden;background:${p.bgColor};border:${getBorderCss(p.borderColor, p.borderШирина, "solid")};border-radius:${p.radius}px;">
+                <div style="flex:1;min-width:0;padding:0 12px;color:${p.color};font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:inherit;">${escapeHtml(decodeNewLines(p.placeholder || "Оберіть файл(и)"))}</div>
+                <div style="flex:0 0 36px;height:100%;display:flex;align-items:center;justify-content:center;padding:0;${getBorderSideCss("border-left", p.borderColor, p.borderШирина, "solid")};background:#f3f4f6;color:#374151;">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 3v12"></path>
+                    <path d="M7 10l5 5 5-5"></path>
+                    <path d="M5 21h14"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>`;
+
+          case "text-input":
+            return `<div class="proto-field">
+              <div class="proto-field-label">${formatLabel(escapeHtml(decodeNewLines(p.label || "")))}</div>
+              <input
+                class="proto-field-input"
+                type="text"
+                style="color:${p.color};--placeholder-color:${p.color};font-size:13px;background:${p.bgColor};border:${getBorderCss(p.borderColor, p.borderШирина, "solid")};border-radius:${p.radius}px;padding:0 12px;font-family:inherit;"
+                placeholder="${escapeAttr(decodeNewLines(p.placeholder || ""))}"
+              />
+            </div>`;
+
+          case "date-input":
+            return `<div class="proto-field">
+              <div class="proto-field-label">${formatLabel(escapeHtml(decodeNewLines(p.label || "")))}</div>
+              <div style="display:flex;width:100%;height:100%;">
+                <input
+                  class="proto-field-input"
+                  type="text"
+                  inputmode="numeric"
+                  placeholder="${escapeAttr(decodeNewLines(p.placeholder || "dd.MM.yyyy"))}"
+                  style="flex:1;min-width:0;color:${p.color};--placeholder-color:${p.color};font-size:13px;background:${p.bgColor};border:${getBorderCss(p.borderColor, p.borderШирина, "solid")};border-right:none;border-radius:${p.radius}px 0 0 ${p.radius}px;padding:0 12px;"
+                />
+                <div style="flex:0 0 36px;height:100%;display:flex;align-items:center;justify-content:center;background:#f3f4f6;border:${getBorderCss(p.borderColor, p.borderШирина, "solid")};border-radius:0 ${p.radius}px ${p.radius}px 0;">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                  </svg>
+                </div>
+              </div>
+            </div>`;
+
+          case "category-input":
+            return `<div class="proto-field">
+              <div class="proto-field-label">${formatLabel(escapeHtml(decodeNewLines(p.label || "")))}</div>
+              <div style="display:flex;width:100%;height:100%;">
+                <input
+                  class="proto-field-input"
+                  type="text"
+                  style="flex:1;min-width:0;color:${p.color};--placeholder-color:${p.color};font-size:13px;background:${p.bgColor};border:${getBorderCss(p.borderColor, p.borderШирина, "solid")};border-right:none;border-radius:${p.radius}px 0 0 ${p.radius}px;padding:0 12px;"
+                  placeholder="${escapeAttr(decodeNewLines(p.placeholder || ""))}"
+                />
+                <div
+                  style="width:36px;height:100%;display:flex;align-items:center;justify-content:center;background:#f3f4f6;border:${getBorderCss(p.borderColor, p.borderШирина, "solid")};border-radius:0 ${p.radius}px ${p.radius}px 0;flex:0 0 36px;font-weight:700;color:#374151;"
+                >...</div>
+              </div>
+            </div>`;
+
+          case "textarea":
+            return `<div class="proto-field proto-field-textarea" style="color:${p.color};">
+              <div class="proto-field-label">${formatLabel(escapeHtml(decodeNewLines(p.label || "")))}</div>
+              <textarea class="proto-field-input" style="color:${p.color};--placeholder-color:${p.color};font-size:12px;background:${p.bgColor};border:${getBorderCss(p.borderColor, p.borderШирина, "solid")};border-radius:${p.radius}px;padding:10px 12px 18px 12px;" placeholder="${escapeAttr(decodeNewLines(p.placeholder || ""))}"></textarea>
+              <span class="textarea-corner-mark" aria-hidden="true"></span>
+            </div>`;
+
+          case "checkbox": {
+            const boxBorderColor = p.checked ? "#f97316" : "#a3a3a3";
+            const boxBgColor = p.checked ? "#f97316" : "#ffffff";
+            return `<div style="width:100%;height:100%;display:flex;align-items:center;gap:10px;color:${p.color};font-size:${p.fontSize}px;background:${p.bgColor};">
+              <span aria-hidden="true" style="width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 18px;border:1px solid ${boxBorderColor};border-radius:4px;background:${boxBgColor};box-shadow:none;">
+                ${p.checked ? '<svg viewBox="0 0 16 16" width="12" height="12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8.5L6.2 11.5L13 4.5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' : ""}
+              </span>
+              <span style="font-size:${p.fontSize}px;line-height:1.2;">${escapeHtml(decodeNewLines(p.text))}</span>
+            </div>`;
+          }
+
+          case "radio-buttons": {
+            const options = String((p.options || "").replace(/\\n/g, "\n"))
+              .split("\n")
+              .map((opt) => opt.trim())
+              .filter(Boolean);
+            const selectedIndex = Math.max(
+              0,
+              Math.min(
+                Number(p.selectedIndex) || 0,
+                Math.max(options.length - 1, 0),
+              ),
+            );
+            const orientation =
+              p.orientation === "vertical" ? "vertical" : "horizontal";
+
+            return `<div class="radio-group-ui ${orientation}" style="color:${p.color};background:${p.bgColor};">
+              ${options
+                .map(
+                  (opt, i) => `<label class="radio-option-ui">
+                    <input type="radio" name="radio-${el.id}" ${i === selectedIndex ? "checked" : ""} />
+                    <span>${escapeHtml(opt)}</span>
+                  </label>`,
+                )
+                .join("")}
+            </div>`;
+          }
+
+          case "select":
+            return `<div class="proto-field">
+              <div class="proto-field-label">${formatLabel(escapeHtml(decodeNewLines(p.label || "")))}</div>
+              <div style="display:flex;width:100%;height:100%;">
+                <select class="proto-field-input" style="flex:1;min-width:0;color:${p.color};background:${p.bgColor};border:${getBorderCss(p.borderColor, p.borderШирина, "solid")};border-right:none;border-radius:${p.radius}px 0 0 ${p.radius}px;padding:0 12px;font-size:13px;">
+                  <option value="" disabled selected>${escapeHtml(decodeNewLines(p.placeholder || "Оберіть"))}</option>
+                  ${(p.options || "")
+                    .split("\n")
+                    .filter(Boolean)
+                    .map((opt) => `<option>${escapeHtml(opt)}</option>`)
+                    .join("")}
+                </select>
+                <div style="flex:0 0 36px;height:100%;display:flex;align-items:center;justify-content:center;background:#f3f4f6;border:${getBorderCss(p.borderColor, p.borderШирина, "solid")};border-radius:0 ${p.radius}px ${p.radius}px 0;">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </div>
+              </div>
+            </div>`;
+
+          case "line-vertical":
+            return `<div style="width:100%;height:100%;display:flex;justify-content:center;">
+              <div style="width:0;height:100%;${getBorderSideCss("border-left", p.borderColor, p.borderШирина, "solid")};"></div>
+            </div>`;
+
+          case "line-horizontal":
+            return `<div style="width:100%;height:100%;display:flex;align-items:center;">
+              <div style="width:100%;height:0;${getBorderSideCss("border-top", p.borderColor, p.borderШирина, "solid")};"></div>
+            </div>`;
+
+          case "tabs":
+            return `<div style="width:100%;height:100%;display:flex;gap:6px;align-items:flex-end;${getBorderSideCss("border-bottom", p.borderColor, p.borderШирина, "solid")};">
+              ${(p.tabs || "")
+                .replace(/\\n/g, "\n")
+                .split("\n")
+                .filter(Boolean)
+                .map((t, i) => {
+                  const active = i === (p.activeIndex || 0);
+                  const isDarkBg = ["#000000", "#5f7fa6"].includes(
+                    String(p.bgColor || "").toLowerCase(),
+                  );
+                  const textColor = active && isDarkBg ? "#ffffff" : p.color;
+                  return `<div style="
+                  padding:6px 10px;
+                  border:${getBorderCss(p.borderColor, p.borderШирина, "solid")};
+                  border-bottom:${active ? "0" : getBorderCss(p.borderColor, p.borderШирина, "solid")};
+                  border-radius:${p.radius}px ${p.radius}px 0 0;
+                  background:${active ? p.bgColor : "#f3f4f6"};
+                  color:${textColor};
+                  font-size:14px;
+                  font-weight:${active ? "700" : "400"};
+                ">${escapeHtml(t)}</div>`;
+                })
+                .join("")}
+            </div>`;
+          case "list": {
+            const lines = String((p.items || "").replace(/\\n/g, "\n"))
+              .split("\n")
+              .filter((line) => line.trim().length);
+            const titleHtml = p.title
+              ? `<div style="font-size:13px;font-weight:700;color:${p.color};margin-bottom:8px;">${escapeHtml(p.title)}</div>`
+              : "";
+            const titleOffset = p.title ? 24 : 0;
+            const listHtml = lines
+              .map((line) => {
+                const indentMatch = line.match(/^\s*/);
+                const indent = indentMatch ? indentMatch[0].length : 0;
+                const level = Math.floor(indent / 2);
+                return `<div style="display:flex;align-items:flex-start;gap:6px;padding:2px 0 2px ${level * 16}px;font-size:13px;line-height:1.4;color:${p.color};">
+                  <span style="flex:0 0 auto;">•</span>
+                  <span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(line.trim())}</span>
+                </div>`;
+              })
+              .join("");
+            return `<div style="width:100%;height:100%;background:${p.bgColor};border:${getBorderCss(p.borderColor, p.borderШирина, "solid")};border-radius:${p.radius}px;padding:12px;overflow:hidden;">
+              ${titleHtml}
+              <div style="height:calc(100% - ${titleOffset}px);overflow:hidden;">${listHtml}</div>
+            </div>`;
+          }
+
+          case "directory-tree": {
+            const lines = String((p.items || "").replace(/\\n/g, "\n"))
+              .split("\n")
+              .filter((line) => line.trim().length);
+            const treeHtml = lines
+              .map((line) => {
+                const indentMatch = line.match(/^\s*/);
+                const indent = indentMatch ? indentMatch[0].length : 0;
+                const level = Math.floor(indent / 2);
+                const name = line.trim();
+                const isFile = /\.[a-z0-9]+$/i.test(name);
+                return `<div style="display:flex;align-items:center;gap:8px;padding:2px 0 2px ${level * 18}px;font-size:13px;line-height:1.4;color:${p.color};">
+                  <span style="width:16px;text-align:center;flex:0 0 16px;">${isFile ? "📄" : "📁"}</span>
+                  <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(name)}</span>
+                </div>`;
+              })
+              .join("");
+            return `<div style="width:100%;height:100%;background:${p.bgColor};border:${getBorderCss(p.borderColor, p.borderШирина, "solid")};border-radius:${p.radius}px;padding:12px;overflow:hidden;">
+              <div style="font-size:14px;font-weight:700;color:${p.color};margin-bottom:8px;">${escapeHtml(decodeNewLines(p.title || ""))}</div>
+              <div style="height:calc(100% - 24px);overflow:hidden;">${treeHtml}</div>
+            </div>`;
+          }
+
+          case "image":
+            return `<div class="image-ui" style="background:${p.bgColor};border:${getBorderCss(p.borderColor, p.borderШирина, "dashed")};border-radius:${p.radius}px;color:${p.color};text-align:${p.textAlign};">${escapeHtml(decodeNewLines(p.text))}</div>`;
+
+          case "card":
+            return `<div class="card-ui" style="background:${p.bgColor};border:${getBorderCss(p.borderColor, p.borderШирина, "solid")};border-radius:${p.radius}px;color:${p.color};text-align:${p.textAlign};"><div style="font-size:${p.fontSize}px;font-weight:${p.fontWeight};margin-bottom:10px;">${escapeHtml(decodeNewLines(p.text))}</div><div style="font-size:14px;color:#6b7280;">Місце для контенту, опису, кнопок і медіа.</div></div>`;
+
+          case "section":
+            return `<div class="section-ui" style="background:${p.bgColor};border:${getBorderCss(p.borderColor, p.borderШирина, "dashed")};border-radius:${p.radius}px;color:${p.color};text-align:${p.textAlign};"><div style="font-size:${p.fontSize}px;font-weight:${p.fontWeight};margin-bottom:10px;">${escapeHtml(decodeNewLines(p.text))}</div><div style="font-size:14px;color:#6b7280;">Контейнер для групування блоків сторінки.</div></div>`;
+
+          case "form":
+            return `<div class="form-ui" style="background:${p.bgColor};border:${getBorderCss(p.borderColor, p.borderШирина, "solid")};border-radius:${p.radius}px;color:${p.color};text-align:${p.textAlign};"><div style="font-size:${p.fontSize}px;font-weight:${p.fontWeight};margin-bottom:14px;">${escapeHtml(decodeNewLines(p.text))}</div><div style="display:grid;gap:10px;"><input placeholder="Ім'я" style="padding:10px 12px;border:1px solid #000000;border-radius:10px;color:#6b7280;--placeholder-color:#6b7280;background:#ffffff;pointer-events:none;"><input placeholder="Email" style="padding:10px 12px;border:1px solid #000000;border-radius:10px;color:#6b7280;--placeholder-color:#6b7280;background:#ffffff;pointer-events:none;"><button style="padding:10px 12px;background:#ef4444;color:#fff;border:none;border-radius:10px;pointer-events:none;">Надіслати</button></div></div>`;
+
+          default:
+            return `<div>Unknown element</div>`;
+        }
+      }
+
+      function renderCanvas() {
+        canvas.style.width = state.project.canvas.width + "px";
+        canvas.style.minHeight = state.project.canvas.minHeight + "px";
+        canvas.style.background = "#ffffff";
+        canvas.classList.toggle("empty", state.project.elements.length === 0);
+
+        gridCols.style.width = state.project.canvas.width + "px";
+        gridRows.style.height = state.project.canvas.minHeight + "px";
+        gridCols.innerHTML = createGridColumnLabelsMarkup();
+        gridRows.innerHTML = createGridRowLabelsMarkup();
+
+        const children = state.project.elements
+          .slice()
+          .sort((a, b) => a.z - b.z)
+          .map((el) => {
+            normalizeElementToGrid(el);
+
+            const left = gridColToPixelX(el.gridCol);
+            const top = gridRowToPixelY(el.gridRow);
+            const width = gridSpanToPixelШирина(el.gridSpan);
+            const height = rowSpanToPixelHeight(el.rowSpan);
+            return `
+              <div class="canvas-element ${state.selectedId === el.id ? "selected" : ""}" data-id="${el.id}"
+                style="left:${left}px;top:${top}px;width:${width}px;height:${height}px;z-index:${el.z};">
+                ${renderElementContent(el)}
+                <div class="resize"></div>
+              </div>
+            `;
+          })
+          .join("");
+
+        canvas.innerHTML =
+          createGridMarkup() +
+          '<div class="drop-hint"></div>' +
+          (state.project.elements.length ? children : createEmptyStateMarkup());
+
+        gridToggle.checked = !!state.project.canvas.showGrid;
+        updateDeleteButtonState();
+
+        canvas.querySelectorAll(".canvas-element").forEach((node) => {
+          node.addEventListener("mousedown", startElementDrag);
+          node.addEventListener("click", (evt) => {
+            evt.stopPropagation();
+            state.selectedId = node.dataset.id;
+            saveStateToLocalStorage();
+            renderCanvas();
+            renderSettings();
+            updateComponentStats();
+          });
+          const resizeHandle = node.querySelector(".resize");
+          if (resizeHandle) {
+            resizeHandle.addEventListener("mousedown", startResize);
+          }
+        });
+      }
+
+      function renderSettings() {
+        const el = selectedElement();
+        if (!el) {
+          settingsBody.innerHTML = `
+            ${renderCanvasSettings()}
+            <div class="field">
+              <label>Компоненти</label>
+              ${renderComponentStatsGrouped()}
+            </div>
+          `;
+          attachSettingsListeners();
+          attachPaletteListeners();
+          return;
+        }
+
+        normalizeElementToGrid(el);
+        const p = el.props;
+
+        settingsBody.innerHTML = `
+          <div class="field">
+            <label>Тип</label>
+            <input value="${escapeAttr(el.type)}" disabled />
+          </div>
+          <div class="two-col" style="grid-template-columns: repeat(4, 1fr);">
+            <div class="field"><label>Рядок</label><input data-bind="gridRow" type="number" value="${el.gridRow}" min="1" /></div>
+            <div class="field"><label>Колонка</label><input data-bind="gridCol" type="number" value="${el.gridCol}" min="1" max="${GRID_COLUMNS}" /></div>
+            <div class="field"><label>Ширина</label><input data-bind="gridSpan" type="number" value="${el.gridSpan}" min="${MIN_GRID_SPAN}" max="${GRID_COLUMNS}" /></div>
+            <div class="field"><label>Висота</label><input data-bind="rowSpan" type="number" value="${el.rowSpan}" min="${MIN_ROW_SPAN}" /></div>
+          </div>
+          ${typeof p.text !== "undefined" && el.type !== "tabs" ? `<div class="field"><label>Text</label><textarea data-prop="text">${escapeHtml(decodeNewLines(p.text))}</textarea></div>` : ""}
+          ${typeof p.title !== "undefined" ? `<div class="field"><label>Title</label><input data-prop="title" value="${escapeAttr(decodeNewLines(p.title))}" /></div>` : ""}
+          ${typeof p.items !== "undefined" ? `<div class="field"><label>Items</label><textarea data-prop="items" ${el.type === "directory-tree" || el.type === "list" ? 'rows="13"' : ""}>${escapeHtml((p.items || "").replace(/\\n/g, "\n"))}</textarea></div>` : ""}
+          ${typeof p.label !== "undefined" ? `<div class="field"><label>Label</label><input data-prop="label" value="${escapeAttr(decodeNewLines(p.label))}" /></div>` : ""}
+          ${typeof p.placeholder !== "undefined" || el.type === "select" ? `<div class="field"><label>Placeholder</label><input data-prop="placeholder" value="${escapeAttr(decodeNewLines(el.type === "date-input" && !String(p.placeholder || "").trim() ? "дд.мм.рррр" : el.type === "select" ? p.placeholder || "Оберіть" : p.placeholder))}" /></div>` : ""}
+          ${typeof p.options !== "undefined" && el.type !== "select" ? `<div class="field"><label>Options (one per line)</label><textarea data-prop="options">${escapeHtml((p.options || "").replace(/\\n/g, "\n"))}</textarea></div>` : ""}
+          ${typeof p.tabs !== "undefined" && el.type !== "table" ? `<div class="field"><label>Tabs (one per line)</label><textarea data-prop="tabs" rows="10">${escapeHtml((p.tabs || "").replace(/\\n/g, "\n"))}</textarea></div>` : ""}
+          ${typeof p.activeIndex !== "undefined" ? `<div class="field"><label>Active tab</label><input data-prop="activeIndex" type="number" min="0" value="${p.activeIndex}" /></div>` : ""}
+          ${typeof p.checked !== "undefined" ? `<div class="field"><label>Checked</label><select data-prop="checked"><option value="false" ${!p.checked ? "selected" : ""}>false</option><option value="true" ${p.checked ? "selected" : ""}>true</option></select></div>` : ""}
+          ${typeof p.selectedIndex !== "undefined" ? `<div class="field"><label>Selected index</label><input data-prop="selectedIndex" type="number" min="0" value="${p.selectedIndex}" /></div>` : ""}
+          ${typeof p.orientation !== "undefined" ? `<div class="field"><label>Orientation</label><select data-prop="orientation"><option value="horizontal" ${p.orientation === "horizontal" ? "selected" : ""}>horizontal</option><option value="vertical" ${p.orientation === "vertical" ? "selected" : ""}>vertical</option></select></div>` : ""}
+          ${typeof p.fontSize !== "undefined" ? `<div class="two-col"><div class="field"><label>Font size</label><input data-prop="fontSize" type="number" value="${p.fontSize}" /></div><div class="field"><label>Font weight</label><input data-prop="fontWeight" type="number" value="${p.fontWeight}" /></div></div>` : ""}
+          ${typeof p.textAlign !== "undefined" ? `<div class="field"><label>Text align</label><select data-prop="textAlign"><option ${p.textAlign === "left" ? "selected" : ""} value="left">left</option><option ${p.textAlign === "center" ? "selected" : ""} value="center">center</option><option ${p.textAlign === "right" ? "selected" : ""} value="right">right</option></select></div>` : ""}
+          ${
+            el.type === "table"
+              ? `
+            <div class="two-col">
+              <div class="field"><label>Rows</label><input data-prop="rows" type="number" min="1" value="${p.rows || 3}" /></div>
+              <div class="field"><label>Columns</label><input data-prop="cols" type="number" min="1" value="${p.cols || 3}" /></div>
+            </div>
+            <div class="field">
+              <label>Headers (one per line)</label>
+              <textarea data-prop="headers" rows="13">${escapeHtml((p.headers || "").replace(/\\n/g, "\n"))}</textarea>
+            </div>
+            ${typeof p.bgColor !== "undefined" ? `<div class="field"><label>Бекграунд</label>${renderPalette("bgColor", p.bgColor)}</div>` : ""}
+            ${typeof p.borderColor !== "undefined" ? `<div class="field"><label>Колір рамки</label>${renderPalette("borderColor", p.borderColor)}</div>` : ""}
+            ${typeof p.color !== "undefined" ? `<div class="field"><label>Колір тексту</label>${renderPalette("color", p.color)}</div>` : ""}
+          `
+              : `
+            ${typeof p.bgColor !== "undefined" ? `<div class="field"><label>Бекграунд</label>${renderPalette("bgColor", p.bgColor)}</div>` : ""}
+            ${typeof p.borderColor !== "undefined" ? `<div class="field"><label>Колір рамки</label>${renderPalette("borderColor", p.borderColor)}</div>` : ""}
+            ${typeof p.color !== "undefined" ? `<div class="field"><label>Колір тексту</label>${renderPalette("color", p.color)}</div>` : ""}
+          `
+          }
+          
+        `;
+        attachSettingsListeners();
+        attachPaletteListeners();
+      }
+
+      function renderComponentStatsGrouped() {
+        const groupOrder = ["Текст", "Форма", "Контейнери", "Медіа"];
+        const grouped = {};
+        for (const group of groupOrder) grouped[group] = {};
+
+        for (const el of state.project.elements) {
+          const schema = componentCatalog.find((c) => c.type === el.type);
+          if (!schema) continue;
+          if (!grouped[schema.group]) grouped[schema.group] = {};
+          grouped[schema.group][schema.name] =
+            (grouped[schema.group][schema.name] || 0) + 1;
+        }
+
+        const total = state.project.elements.length;
+        const groupsMarkup = groupOrder
+          .map((group) => {
+            const items = grouped[group] || {};
+            const names = Object.keys(items).sort((a, b) =>
+              a.localeCompare(b, "uk"),
+            );
+
+            const listMarkup = names.length
+              ? `<div style="margin-top:4px;padding-left:14px;">${names
+                  .map(
+                    (name) =>
+                      `<div style="margin:2px 0;">• ${name}: ${items[name]}</div>`,
+                  )
+                  .join("")}</div>`
+              : `<div style="margin-top:4px;padding-left:14px;color:#6b7280;">—</div>`;
+
+            return `<div style="margin-bottom:10px;">
+              <strong>${group}</strong>
+              ${listMarkup}
+            </div>`;
+          })
+          .join("");
+
+        return `
+          <div style="font-size:13px;color:#374151;">
+            <div style="margin-bottom:8px;"><strong>Усього:</strong> ${total}</div>
+            ${groupsMarkup}
+          </div>
+        `;
+      }
+
+      function renderCanvasSettings() {
+        const c = state.project.canvas;
+        return `
+          <div class="group-title" style="margin-top:0;">Полотно</div>
+          
+          <div class="two-col">
+            <div class="field"><label>Ширина</label><input data-canvas="width" type="number" value="${c.width}" min="320" /></div>
+            <div class="field"><label>Висота</label><input data-canvas="minHeight" type="number" value="${c.minHeight}" min="320" /></div>
+          </div>
+        `;
+      }
+
+      function attachPaletteListeners() {
+        settingsBody
+          .querySelectorAll("[data-color-target]")
+          .forEach((palette) => {
+            palette.querySelectorAll(".color-swatch").forEach((swatch) => {
+              swatch.addEventListener("click", () => {
+                const color = swatch.dataset.color;
+                const target = palette.dataset.colorTarget;
+                const el = selectedElement();
+                if (!el) return;
+                el.props[target] = color;
+                saveStateToLocalStorage();
+                renderCanvas();
+                renderSettings();
+                updateComponentStats();
+              });
+            });
+          });
+      }
+
+      function attachSettingsListeners() {
+        const boundElementId = state.selectedId;
+
+        settingsBody.querySelectorAll("[data-bind]").forEach((input) => {
+          input.addEventListener("input", () => {
+            const el = state.project.elements.find((item) => item.id === boundElementId);
+            if (!el) return;
+            const key = input.dataset.bind;
+            let value = Number(input.value) || 0;
+
+            if (key === "gridSpan") {
+              el.gridSpan = clampGridSpan(value);
+              el.gridCol = clampGridCol(el.gridCol || 1, el.gridSpan);
+            } else if (key === "gridCol") {
+              el.gridCol = clampGridCol(value, el.gridSpan || MIN_GRID_SPAN);
+            } else if (key === "gridRow") {
+              el.gridRow = clampGridRow(value);
+            } else if (key === "rowSpan") {
+              el.rowSpan = clampRowSpan(value);
+            } else {
+              el[key] = value;
+            }
+
+            saveStateToLocalStorage();
+            renderCanvas();
+            if (state.selectedId === boundElementId) {
+              renderSettings();
+            }
+            updateComponentStats();
+          });
+        });
+
+        settingsBody.querySelectorAll("[data-prop]").forEach((input) => {
+          const applyPropValue = () => {
+            const el = state.project.elements.find((item) => item.id === boundElementId);
+            if (!el) return;
+
+            const propName = input.dataset.prop;
+            let value = input.value;
+
+            if (propName === "checked") value = value === "true";
+            if (
+              [
+                "fontSize",
+                "fontWeight",
+                "borderШирина",
+                "radius",
+                "activeIndex",
+                "selectedIndex",
+                "rows",
+                "cols",
+              ].includes(propName)
+            ) {
+              value = Number(value) || 0;
+            }
+
+            if (!el.props) el.props = {};
+            if (typeof value === "string") {
+              value = value.replace(/\n/g, "\\n");
+            }
+            el.props[propName] = value;
+
+            if (el.type === "directory-tree" && propName === "title") {
+              el.props.title = String(value);
+            }
+
+            saveStateToLocalStorage();
+            renderCanvas();
+            updateComponentStats();
+          };
+
+          input.addEventListener("input", applyPropValue);
+          input.addEventListener("change", applyPropValue);
+          input.addEventListener("blur", applyPropValue);
+        });
+
+        settingsBody.querySelectorAll("[data-canvas]").forEach((input) => {
+          input.addEventListener("input", () => {
+            let value = input.value;
+            if (["width", "minHeight"].includes(input.dataset.canvas)) {
+              value = Number(value) || 0;
+            }
+            state.project.canvas[input.dataset.canvas] = value;
+            state.project.elements.forEach(normalizeElementToGrid);
+            saveStateToLocalStorage();
+            renderCanvas();
+          });
+        });
+      }
+
+      function startElementDrag(e) {
+        if (e.button !== 0) return;
+        if (e.target.classList.contains("resize")) return;
+        const node = e.currentTarget;
+        const id = node.dataset.id;
+        const el = state.project.elements.find((item) => item.id === id);
+        if (!el) return;
+        normalizeElementToGrid(el);
+
+        const rect = canvas.getBoundingClientRect();
+        const startLeft = gridColToPixelX(el.gridCol);
+        const startTop = gridRowToPixelY(el.gridRow);
+
+        dragElementState = {
+          id: el.id,
+          startX: e.clientX,
+          startY: e.clientY,
+          startGridCol: el.gridCol,
+          startGridRow: el.gridRow,
+          startLeft,
+          startTop,
+          pointerOffsetX: e.clientX - rect.left - startLeft,
+          pointerOffsetY: e.clientY - rect.top - startTop,
+        };
+        dragStarted = false;
+
+        state.selectedId = id;
+        renderSettings();
+        updateComponentStats();
+        renderCanvas();
+
+        document.addEventListener("mousemove", onElementDrag);
+        document.addEventListener("mouseup", stopElementDrag);
+        e.preventDefault();
+      }
+
+      function onElementDrag(e) {
+        if (!dragElementState) return;
+        const el = state.project.elements.find(
+          (item) => item.id === dragElementState.id,
+        );
+        if (!el) return;
+        normalizeElementToGrid(el);
+
+        const rect = canvas.getBoundingClientRect();
+        const deltaX = e.clientX - dragElementState.startX;
+        const deltaY = e.clientY - dragElementState.startY;
+        dragStarted =
+          dragStarted || Math.abs(deltaX) > 2 || Math.abs(deltaY) > 2;
+
+        const rawLeft = e.clientX - rect.left - dragElementState.pointerOffsetX;
+        const rawTop = e.clientY - rect.top - dragElementState.pointerOffsetY;
+        const nextCol = pixelXToGridCol(rawLeft, el.gridSpan);
+
+        const maxRow = Math.max(
+          1,
+          Math.floor(state.project.canvas.minHeight / GRID_ROW_HEIGHT) -
+            el.rowSpan +
+            1,
+        );
+        const nextRow = Math.max(1, Math.min(maxRow, pixelYToGridRow(rawTop)));
+
+        if (el.gridCol !== nextCol || el.gridRow !== nextRow) {
+          el.gridCol = nextCol;
+          el.gridRow = nextRow;
+          renderCanvas();
+          renderSettings();
+          updateComponentStats();
+        }
+
+        e.preventDefault();
+      }
+
+      function stopElementDrag() {
+        if (!dragElementState) return;
+        document.removeEventListener("mousemove", onElementDrag);
+        document.removeEventListener("mouseup", stopElementDrag);
+        if (dragStarted) {
+          saveStateToLocalStorage();
+        }
+        dragElementState = null;
+        dragStarted = false;
+      }
+
+      function startResize(e) {
+        e.stopPropagation();
+        const node = e.currentTarget.parentElement;
+        const el = state.project.elements.find(
+          (item) => item.id === node.dataset.id,
+        );
+        if (!el) return;
+        normalizeElementToGrid(el);
+
+        resizeState = {
+          id: el.id,
+          startX: e.clientX,
+          startSpan: el.gridSpan,
+        };
+        document.addEventListener("mousemove", onResize);
+        document.addEventListener("mouseup", stopResize);
+      }
+
+      function onResize(e) {
+        if (!resizeState) return;
+        const el = selectedElement();
+        if (!el || el.id !== resizeState.id) return;
+
+        const grid = getGridMetrics();
+        const deltaX = e.clientX - resizeState.startX;
+        const spanDelta = Math.round(deltaX / grid.trackШирина);
+        el.gridSpan = clampGridSpan(resizeState.startSpan + spanDelta);
+        el.gridCol = clampGridCol(el.gridCol, el.gridSpan);
+
+        renderCanvas();
+        renderSettings();
+        updateComponentStats();
+      }
+
+      function stopResize() {
+        resizeState = null;
+        document.removeEventListener("mousemove", onResize);
+        document.removeEventListener("mouseup", stopResize);
+      }
+
+      canvas.addEventListener("click", (e) => {
+        if (e.target === canvas || e.target.classList.contains("drop-hint")) {
+          state.selectedId = null;
+          renderCanvas();
+          renderSettings();
+          updateComponentStats();
+        }
+      });
+
+      canvas.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        canvas.classList.add("drag-over");
+      });
+
+      canvas.addEventListener("dragleave", () => {
+        canvas.classList.remove("drag-over");
+      });
+
+      canvas.addEventListener("drop", (e) => {
+        e.preventDefault();
+        canvas.classList.remove("drag-over");
+        const type = e.dataTransfer.getData("text/plain") || dragCatalogType;
+        if (!type) return;
+        const rect = canvas.getBoundingClientRect();
+        const x = Math.round(e.clientX - rect.left + canvas.scrollLeft);
+        const y = Math.round(e.clientY - rect.top + canvas.scrollTop - 20);
+        addElement(type, Math.max(0, x), Math.max(0, y));
+        dragCatalogType = null;
+      });
+
+      gridToggle.addEventListener("change", () => {
+        state.project.canvas.showGrid = gridToggle.checked;
+        renderCanvas();
+      });
+
+      document.getElementById("clearBtn").addEventListener("click", () => {
+        if (!confirm("Очистити полотно? Незбережені зміни буде втрачено.")) {
+          return;
+        }
+        state.project = structuredClone(DEFAULT_PROJECT);
+        state.selectedId = null;
+        zCounter = 1;
+        try {
+          localStorage.removeItem(STORAGE_KEY);
+        } catch (err) {}
+        renderCanvas();
+        renderSettings();
+        updateComponentStats();
+      });
+
+      deleteSelectedBtn.addEventListener("click", () => {
+        deleteSelectedElement();
+      });
+
+      document.getElementById("saveBtn").addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        saveProject();
+        return false;
+      });
+      fileInput.addEventListener("change", loadProject);
+
+      function saveProject() {
+        saveStateToLocalStorage();
+        const snapshot = JSON.stringify(state.project, null, 2);
+        const blob = new Blob([snapshot], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const safeName = (state.project.canvas.name || "prototype").replace(
+          /[^a-z0-9_-]+/gi,
+          "_",
+        );
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = safeName + ".json";
+        a.rel = "noopener";
+        a.style.display = "none";
+        document.body.appendChild(a);
+
+        a.click();
+
+        setTimeout(() => {
+          if (a.parentNode) a.parentNode.removeChild(a);
+          URL.revokeObjectURL(url);
+        }, 300);
+      }
+
+      function loadProject(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+          try {
+            const parsed = JSON.parse(evt.target.result);
+            if (
+              !parsed ||
+              parsed.type !== "ui-prototype" ||
+              !Array.isArray(parsed.elements)
+            ) {
+              throw new Error("Невірний формат файлу");
+            }
+
+            if (!parsed.canvas) parsed.canvas = {};
+            parsed.canvas.width =
+              parsed.canvas.width || DEFAULT_PROJECT.canvas.width;
+            parsed.canvas.minHeight =
+              parsed.canvas.minHeight || DEFAULT_PROJECT.canvas.minHeight;
+            parsed.canvas.background = "#ffffff";
+            parsed.canvas.name =
+              parsed.canvas.name || DEFAULT_PROJECT.canvas.name;
+            parsed.canvas.showGrid = !!parsed.canvas.showGrid;
+
+            parsed.elements.forEach((el) => {
+              normalizeElementToGrid(el);
+
+              if (!el.props) el.props = {};
+              if (!("borderШирина" in el.props))
+                el.props.borderШирина = DEFAULT_BORDER_WIDTH;
+              if (!("radius" in el.props)) el.props.radius = DEFAULT_RADIUS;
+              if (
+                [
+                  "text-input",
+                  "category-input",
+                  "number-input",
+                  "date-input",
+                  "textarea",
+                ].includes(el.type)
+              ) {
+                el.props = el.props || {};
+                if (!("bgColor" in el.props)) el.props.bgColor = "#ffffff";
+                if (!("borderColor" in el.props))
+                  el.props.borderColor = "#000000";
+                if (!("color" in el.props)) el.props.color = "#6b7280";
+                if (!("borderШирина" in el.props))
+                  el.props.borderШирина = DEFAULT_BORDER_WIDTH;
+                if (!("radius" in el.props)) el.props.radius = DEFAULT_RADIUS;
+                if (el.type === "number-input" && !("inputType" in el.props))
+                  el.props.inputType = "number";
+                if (el.type === "date-input" && !("inputType" in el.props))
+                  el.props.inputType = "date";
+                if (
+                  el.type === "date-input" &&
+                  (!Object.prototype.hasOwnProperty.call(
+                    el.props,
+                    "placeholder",
+                  ) ||
+                    String(el.props.placeholder ?? "").trim() === "")
+                )
+                  el.props.placeholder = "дд.мм.рррр";
+                if (
+                  el.type === "select" &&
+                  !Object.prototype.hasOwnProperty.call(el.props, "placeholder")
+                )
+                  el.props.placeholder = "Оберіть";
+                if (
+                  el.type === "select" &&
+                  (!Object.prototype.hasOwnProperty.call(el.props, "options") ||
+                    String(el.props.options ?? "").trim() === "")
+                )
+                  el.props.options = "Опція 1\nОпція 2";
+                if (el.type === "text-input" && !("inputType" in el.props))
+                  el.props.inputType = "text";
+              }
+            });
+
+            state.project = parsed;
+            state.selectedId = null;
+            zCounter = Math.max(
+              1,
+              ...state.project.elements.map((el) => el.z || 1),
+            );
+            normalizeZ();
+            saveStateToLocalStorage();
+            renderCanvas();
+            renderSettings();
+            updateComponentStats();
+          } catch (err) {
+            alert("Не вдалося відкрити файл .json: " + err.message);
+          }
+        };
+        reader.readAsText(file);
+        e.target.value = "";
+      }
+
+      function normalizeZ() {
+        state.project.elements
+          .sort((a, b) => a.z - b.z)
+          .forEach((el, idx) => {
+            el.z = idx + 1;
+          });
+        zCounter = state.project.elements.length;
+      }
+
+      function justifyFromAlign(align) {
+        if (align === "center") return "center";
+        if (align === "right") return "flex-end";
+        return "flex-start";
+      }
+
+      function normalizeColor(color) {
+        if (!color || color === "transparent") return "#ffffff";
+        return color;
+      }
+
+      function isBorderHidden(color, width) {
+        return (
+          Number(width) <= 0 ||
+          normalizeColor(color).toLowerCase() === "#ffffff"
+        );
+      }
+
+      function getBorderCss(color, width, style = "solid") {
+        return isBorderHidden(color, width)
+          ? "none"
+          : `${width}px ${style} ${color}`;
+      }
+
+      function getBorderSideCss(side, color, width, style = "solid") {
+        return isBorderHidden(color, width)
+          ? `${side}:none`
+          : `${side}:${width}px ${style} ${color}`;
+      }
+
+      function escapeHtml(str = "") {
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      function escapeAttr(str = "") {
+        return escapeHtml(str).replace(/\n/g, "&#10;");
+      }
+
+      document.addEventListener("keydown", (e) => {
+        const el = selectedElement();
+        if (!el) return;
+        if (
+          ["INPUT", "TEXTAREA", "SELECT"].includes(
+            document.activeElement.tagName,
+          )
+        )
+          return;
+
+        let moved = false;
+
+        if (e.key === "ArrowUp") {
+          el.gridRow = clampGridRow(el.gridRow - 1);
+          el.gridRow = Math.max(1, el.gridRow);
+          moved = true;
+        } else if (e.key === "ArrowDown") {
+          el.gridRow = clampGridRow(el.gridRow + 1);
+          const maxRow = Math.floor(
+            state.project.canvas.minHeight / GRID_ROW_HEIGHT,
+          );
+          el.gridRow = Math.min(maxRow - el.rowSpan + 1, el.gridRow);
+          moved = true;
+        } else if (e.key === "ArrowLeft") {
+          el.gridCol = clampGridCol(el.gridCol - 1, el.gridSpan);
+          el.gridCol = Math.max(1, el.gridCol);
+          moved = true;
+        } else if (e.key === "ArrowRight") {
+          el.gridCol = clampGridCol(el.gridCol + 1, el.gridSpan);
+          el.gridCol = Math.min(GRID_COLUMNS - el.gridSpan + 1, el.gridCol);
+          moved = true;
+        }
+
+        if (moved) {
+          e.preventDefault();
+          saveStateToLocalStorage();
+          renderCanvas();
+          renderSettings();
+          updateComponentStats();
+        }
+      });
+
+
+
+      function getStoredPanelPins() {
+        try {
+          const raw = localStorage.getItem(PANEL_PIN_STORAGE_KEY);
+          if (!raw) return { left: true, right: true };
+          const parsed = JSON.parse(raw);
+          return {
+            left: typeof parsed.left === "boolean" ? parsed.left : true,
+            right: typeof parsed.right === "boolean" ? parsed.right : true,
+          };
+        } catch (err) {
+          console.warn("Не вдалося відновити стан Pin для панелей", err);
+          return { left: true, right: true };
+        }
+      }
+
+      function savePanelPins(pins) {
+        try {
+          localStorage.setItem(PANEL_PIN_STORAGE_KEY, JSON.stringify(pins));
+        } catch (err) {
+          console.warn("Не вдалося зберегти стан Pin для панелей", err);
+        }
+      }
+
+      function applyPanelPins(pins) {
+        const app = document.querySelector(".app");
+        if (!app) return;
+
+        app.classList.toggle("left-unpinned", !pins.left);
+        app.classList.toggle("right-unpinned", !pins.right);
+
+        document.querySelectorAll(".pin-toggle[data-pin-panel]").forEach((btn) => {
+          const side = btn.dataset.pinPanel;
+          const active = !!pins[side];
+          btn.classList.toggle("active", active);
+          btn.setAttribute("aria-pressed", String(active));
+          btn.title = active ? "Відкріпити панель" : "Закріпити панель";
+        });
+      }
+
+      function initPanelPins() {
+        const pins = getStoredPanelPins();
+        applyPanelPins(pins);
+
+        document.querySelectorAll(".pin-toggle[data-pin-panel]").forEach((btn) => {
+          btn.addEventListener("click", (evt) => {
+            evt.preventDefault();
+            evt.stopPropagation();
+
+            const side = btn.dataset.pinPanel;
+            const nextPins = getStoredPanelPins();
+            nextPins[side] = !nextPins[side];
+            savePanelPins(nextPins);
+            applyPanelPins(nextPins);
+          });
+        });
+      }
+
+      restoreStateFromLocalStorage();
+      initPanelPins();
+      renderCatalog();
+      renderCanvas();
+      renderSettings();
+      updateComponentStats();
+
+      function updateComponentStats() {
+        const statsNode = document.getElementById("componentStats");
+        if (!statsNode) return;
+        statsNode.innerHTML = renderComponentStatsGrouped();
+      }
+
+      function switchApp(value) {
+        if (value === "requirements") {
+          window.location.href = "./editor-rtmatrix.html";
+        } else if (value === "processes") {
+          window.location.href = "./editor-hlprocess.html";
+        }
+      }
+
+      window.addEventListener("beforeunload", () => {
+        saveStateToLocalStorage();
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script>
+      async function createCanvasScreenshotBlob() {
+        const projectBackup = structuredClone(state.project);
+        const selectedBackup = state.selectedId;
+        const zBackup = zCounter;
+        const canvasEl = document.getElementById("canvas");
+        const screenshot = await html2canvas(canvasEl, {
+          backgroundColor: "#ffffff",
+          scale: 2,
+          onclone: (clonedDoc) => {
+            const clonedCanvas = clonedDoc.getElementById("canvas");
+            if (clonedCanvas) {
+              clonedCanvas.style.border = "2px solid #000000";
+              clonedCanvas.style.borderRadius = "0";
+            }
+          },
+        });
+
+        const blob = await new Promise((resolve, reject) => {
+          screenshot.toBlob((result) => {
+            if (result) {
+              resolve(result);
+            } else {
+              reject(new Error("Не вдалося створити PNG-файл."));
+            }
+          }, "image/png");
+        });
+
+        setTimeout(() => {
+          const needsRestore =
+            !Array.isArray(state.project.elements) ||
+            state.project.elements.length !== projectBackup.elements.length;
+
+          if (needsRestore) {
+            state.project = structuredClone(projectBackup);
+            state.selectedId = selectedBackup;
+            zCounter = zBackup;
+            renderCanvas();
+            renderSettings();
+            updateComponentStats();
+          }
+        }, 0);
+
+        return blob;
+      }
+
+      document
+        .getElementById("screenshotBtn")
+        .addEventListener("click", async (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+
+          try {
+            const blob = await createCanvasScreenshotBlob();
+            const link = document.createElement("a");
+            link.download = "mockup.png";
+            link.href = URL.createObjectURL(blob);
+            link.click();
+            setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+          } catch (error) {
+            console.error(error);
+            alert("Не вдалося створити скріншот полотна.");
+          }
+
+          return false;
+        });
+
+      document.getElementById("screenBtn").addEventListener("click", async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (!navigator.clipboard || typeof window.ClipboardItem === "undefined") {
+          alert("Буфер обміну зображень не підтримується у цьому браузері.");
+          return false;
+        }
+
+        try {
+          const blob = await createCanvasScreenshotBlob();
+          await navigator.clipboard.write([
+            new ClipboardItem({
+              "image/png": blob,
+            }),
+          ]);
+          alert("Скріншот полотна скопійовано. Тепер можна вставити його через Ctrl+V.");
+        } catch (error) {
+          console.error(error);
+          alert("Не вдалося скопіювати скріншот у буфер обміну.");
+        }
+
+        return false;
+      });
+    </script>
+  </body>
+</html>
