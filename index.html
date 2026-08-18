@@ -76,16 +76,16 @@
       <!--Main menu-->
       <div class="col-6 col-md-2 col-xl-2 d-flex justify-content-end">
         <nav class="navbar">
-          <div class="container-fluid" aria-label="Головна навігація">
+          <div class="container-fluid" aria-label="Меню">
             <button
               class="navbar-toggler"
               type="button"
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasNavbar"
               aria-controls="offcanvasNavbar"
-              aria-label="Відкрити головне меню"
+              aria-label="Відкрити меню"
             >
-              <span class="navbar-toggler-icon" aria-hidden="true"></span>
+              <span class="navbar-toggler-icon"></span>
             </button>
             <div
               class="offcanvas offcanvas-end"
@@ -110,29 +110,18 @@
                   class="fs-5 navbar-nav justify-content-end flex-grow-1 pe-3"
                 >
                   <li class="nav-item">
-                    <a class="nav-link" href="./ba/main.html">Бізнес-аналіз</a>
+                    <a class="nav-link" href="./index.html">Головна</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Тестування</a>
+                    <a class="nav-link" href="./about.html">Про сайт</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Технології</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="./tools/main.html">Інструменти</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Корпоративні системи</a>
+                    <a class="nav-link" href="./sitemap.html">Мапа сайту</a>
                   </li>
                 </ul>
 
-                <div class="mt-2">
-                  <a href="./sitemap.html">Мапа сайту</a>&emsp;
-                  <a href="./support.html">Підтримка</a>
-                </div>
-
                 <!--Settings-->
-                <div class="mt-5 position-relative">
+                <div class="mt-4 position-relative">
                   <p class="fs-5 mb-2 fw-semibold">Налаштування</p>
 
                   <!--https://gtranslate.io/website-translator-widget-->
@@ -225,6 +214,12 @@
                   </a>
                   <!-- End of I.UA counter -->
                 </div>
+
+                <!--Mistake-->
+                <div class="mt-4">
+                  <p class="fs-5 mb-0 fw-semibold">Повідомити про помилку</p>
+                  <a href="mailto:babok4me@gmail.com">babok4me@gmail.com</a>
+                </div>
               </div>
             </div>
           </div>
@@ -251,22 +246,182 @@
     </header>
 
     <main id="main-content">
-      <h1 class="mt-4">Довідкова інформація для бізнес-аналізу</h1>
+      <h1 class="mt-4">Довідник бізнес&ndash;аналітика</h1>
+      <p>
+        Поняття, методи, моделі та&nbsp;практичні матеріали &mdash; від
+        виявлення потреби до&nbsp;впровадження рішення.
+      </p>
 
-      <h2 class="mt-5 fs-4">Напрямки</h2>
-      <div>
-        Бізнес-аналіз<br />
-        Тестування<br />
-        Технології<br />
-        Інструменти<br />
-        Корпоративні системи
+      <div class="mt-0 mt-xl-5">
+        <h2 class="fs-4">Популярні теми</h2>
+        <div class="d-flex flex-wrap gap-2">
+          <a href="/bpmn/" class="btn btn-outline-secondary">BPMN</a>
+          <a href="/sql/" class="btn btn-outline-secondary">SQL</a>
+          <a href="/rest-api/" class="btn btn-outline-secondary">REST API</a>
+          <a href="/erd/" class="btn btn-outline-secondary">ERD</a>
+        </div>
       </div>
 
-      <h2 class="mt-5 fs-4">Популярне</h2>
-      <div>BPMN &middot; UML &middot; ERD</div>
+      <h2 class="mt-4 mt-xl-5 mb-3 fs-4">Основні розділи</h2>
+      <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4 text-center">
+        <!--Row 1-->
+        <div class="col">
+          <div class="card h-100 position-relative">
+            <img
+              src="../src/img/ba-concept.png"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h3 class="fs-4 card-title">
+                <a
+                  href="./concept.html"
+                  class="stretched-link card-link text-decoration-none"
+                  >Базові поняття</a
+                >
+              </h3>
+              <p class="card-text">
+                Базова концептуальна модель бізнес-аналізу (ВАССМ), класифікація
+                вимог, зацікавлені сторони, області знань, вимоги та дизайни
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100 position-relative">
+            <img
+              src="../src/img/ba-glossary.png"
+              class="card-img-top"
+              alt="Картинка для розділу Глосарій"
+            />
+            <div class="card-body">
+              <h3 class="fs-4 card-title">
+                <a
+                  href="./glossary.html"
+                  class="stretched-link card-link text-decoration-none"
+                  >Глосарій</a
+                >
+              </h3>
+              <p class="card-text">
+                Перелік основних термінів, понять, скорочень та їх визначень, що
+                використовуються в бізнес-аналізі
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100 position-relative">
+            <img src="../src/img/ba-tech.png" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h3 class="fs-4 card-title">
+                <a
+                  href="./tech.html"
+                  class="stretched-link card-link text-decoration-none"
+                  >Техніки</a
+                >
+              </h3>
+              <p class="card-text">
+                Методи, що використовуються для виконання задач бізнес-аналізу
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100 position-relative">
+            <img src="..." class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h3 class="fs-4 card-title">
+                <a href="" class="stretched-link card-link text-decoration-none"
+                  >Процес бізнес&ndash;аналізу</a
+                >
+              </h3>
+              <p class="card-text">
+                This is a longer card with supporting text below as a natural
+                lead-in to additional content. This content is a little bit
+                longer.
+              </p>
+            </div>
+          </div>
+        </div>
 
-      <h2 class="mt-5 fs-4">Швидкий доступ</h2>
-      <div>Області знань бізнес-аналізу</div>
+        <!--Row 2-->
+        <div class="col">
+          <div class="card h-100 position-relative">
+            <img src="..." class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h3 class="fs-4 card-title">
+                <a
+                  href="../ba/area-1.html"
+                  class="stretched-link card-link text-decoration-none"
+                  >Тестування</a
+                >
+              </h3>
+              <p class="card-text">
+                This is a longer card with supporting text below as a natural
+                lead-in to additional content. This content is a little bit
+                longer.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100 position-relative">
+            <img src="..." class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h3 class="fs-4 card-title">
+                <a
+                  href="../ba/area-1.html"
+                  class="stretched-link card-link text-decoration-none"
+                  >Технології</a
+                >
+              </h3>
+              <p class="card-text">
+                This is a longer card with supporting text below as a natural
+                lead-in to additional content. This content is a little bit
+                longer.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100 position-relative">
+            <img src="..." class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h3 class="fs-4 card-title">
+                <a
+                  href="../ba/area-1.html"
+                  class="stretched-link card-link text-decoration-none"
+                  >Інструменти</a
+                >
+              </h3>
+              <p class="card-text">
+                This is a longer card with supporting text below as a natural
+                lead-in to additional content. This content is a little bit
+                longer.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100 position-relative">
+            <img src="..." class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h3 class="fs-4 card-title">
+                <a
+                  href="../ba/area-1.html"
+                  class="stretched-link card-link text-decoration-none"
+                  >Артефакти та&nbsp;шаблони</a
+                >
+              </h3>
+              <p class="card-text">
+                This is a longer card with supporting text below as a natural
+                lead-in to additional content. This content is a little bit
+                longer.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
 
     <footer class="mb-3">

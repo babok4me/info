@@ -18,11 +18,8 @@
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Підтримка &mdash; babok4me</title>
-    <meta
-      name="description"
-      content="Матеріали з бізнес-аналізу: глосарій термінів, техніки, моделювання та нотації, артефакти й області знань для роботи аналітиків."
-    />
+    <title>Про сайт &mdash; babok4me</title>
+    <meta name="description" content="Мета та структура сайту" />
     <link rel="icon" type="image/png" sizes="32х32" href="./favicon.png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
@@ -50,8 +47,10 @@
     <header class="row">
       <!--Logo-->
       <div class="col-6 col-md-4 col-xl-2 text-center fw-semibold">
-        <div class="mt-2 fs-3 lh-1 mb-0">BABOK4ME</div>
-        <div class="lh-1 mb-3">знати &middot; вміти &middot; діяти</div>
+        <a href="../index.html" class="text-decoration-none text-dark">
+          <div class="mt-2 fs-3 lh-1 mb-0">BABOK4ME</div>
+          <div class="lh-1 mb-3">знати &middot; вміти &middot; діяти</div>
+        </a>
       </div>
 
       <!--Search for tablet+PC-->
@@ -76,16 +75,16 @@
       <!--Main menu-->
       <div class="col-6 col-md-2 col-xl-2 d-flex justify-content-end">
         <nav class="navbar">
-          <div class="container-fluid" aria-label="Головна навігація">
+          <div class="container-fluid" aria-label="Меню">
             <button
               class="navbar-toggler"
               type="button"
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasNavbar"
               aria-controls="offcanvasNavbar"
-              aria-label="Відкрити головне меню"
+              aria-label="Відкрити меню"
             >
-              <span class="navbar-toggler-icon" aria-hidden="true"></span>
+              <span class="navbar-toggler-icon"></span>
             </button>
             <div
               class="offcanvas offcanvas-end"
@@ -110,29 +109,18 @@
                   class="fs-5 navbar-nav justify-content-end flex-grow-1 pe-3"
                 >
                   <li class="nav-item">
-                    <a class="nav-link" href="./ba/main.html">Бізнес-аналіз</a>
+                    <a class="nav-link" href="./index.html">Головна</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Тестування</a>
+                    <a class="nav-link" href="./about.html">Про сайт</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Технології</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Інструменти</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Корпоративні системи</a>
+                    <a class="nav-link" href="./sitemap.html">Мапа сайту</a>
                   </li>
                 </ul>
 
-                <div class="mt-2">
-                  <a href="./sitemap.html">Мапа сайту</a>&emsp;
-                  <a href="./support.html">Підтримка</a>
-                </div>
-
                 <!--Settings-->
-                <div class="mt-5 position-relative">
+                <div class="mt-4 position-relative">
                   <p class="fs-5 mb-2 fw-semibold">Налаштування</p>
 
                   <!--https://gtranslate.io/website-translator-widget-->
@@ -181,15 +169,18 @@
                     onclick="this.href = 'https://i.ua/r.php?240065'"
                     title="Rated by I.UA"
                   >
-                    <script type="text/javascript">
+                    <script>
                       iS =
                         "http" +
-                        (window.location.protocol == "https:" ? "s" : "") +
+                        (window.location.protocol === "https:" ? "s" : "") +
                         "://r.i.ua/s?u240065&p191&n" +
                         Math.random();
+
                       iD = document;
+
                       if (!iD.cookie) iD.cookie = "b=b; path=/";
                       if (iD.cookie) iS += "&c1";
+
                       iS +=
                         "&d" +
                         (screen.colorDepth
@@ -199,21 +190,34 @@
                         screen.width +
                         "&h" +
                         screen.height;
+
                       iT = iR = iD.referrer.replace((iP = /^[a-z]*:\/\//), "");
                       iH = window.location.href.replace(iP, "");
-                      (iI = iT.indexOf("/")) != -1
+
+                      (iI = iT.indexOf("/")) !== -1
                         ? (iT = iT.substring(0, iI))
                         : (iI = iT.length);
-                      if (iT != iH.substring(0, iI)) iS += "&f" + escape(iR);
+
+                      if (iT !== iH.substring(0, iI)) {
+                        iS += "&f" + escape(iR);
+                      }
+
                       iS += "&r" + escape(iH);
+
                       iD.write(
                         '<img src="' +
                           iS +
                           '" border="0" width="160" height="19" />',
                       );
-                    </script></a
-                  >
+                    </script>
+                  </a>
                   <!-- End of I.UA counter -->
+                </div>
+
+                <!--Mistake-->
+                <div class="mt-4">
+                  <p class="fs-5 mb-0 fw-semibold">Повідомити про помилку</p>
+                  <a href="mailto:babok4me@gmail.com">babok4me@gmail.com</a>
                 </div>
               </div>
             </div>
@@ -242,9 +246,62 @@
 
     <main id="main-content">
       <div>
-        <span><a href="./index.html">Головна</a> &gt; Підтримка</span>
+        <span><a href="./index.html">Головна</a> &gt; Про сайт</span>
       </div>
-      <h1 class="mt-4">Підтримка</h1>
+      <h1 class="mt-4">Про сайт</h1>
+
+      <div class="mt-4">
+        <p>
+          <b>BABOK4ME</b> — довідковий вебресурс, із бізнес-аналізу, системного
+          аналізу та суміжних дисциплін. Матеріали довідника базуються на
+          міжнародних стандартах, професійній літературі та практичному досвіді.
+          Для окремих статей наведено посилання на використані джерела.
+        </p>
+        <p>
+          <b>Мета довідника</b> — зібрати в одному місці поняття, техніки,
+          моделі, шаблони, технології та практичні матеріали, які можуть бути
+          корисними бізнес-аналітикам, системним аналітикам, студентам і всім,
+          хто працює з вимогами та проєктуванням інформаційних систем.
+        </p>
+      </div>
+
+      <div class="mt-3 row">
+        <div class="col-12 col-md-6">
+          <b>Що містить довідник</b>
+          <ul>
+            <li>базові поняття бізнес-аналізу;</li>
+            <li>глосарій термінів;</li>
+            <li>техніки бізнес-аналізу;</li>
+            <li>артефакти та шаблони;</li>
+            <li>моделювання (BPMN, UML, ERD тощо);</li>
+            <li>тестування;</li>
+            <li>технології та інструменти.</li>
+          </ul>
+        </div>
+        <div class="col-12 col-md-6">
+          <b>Принципи довідника</b>
+          <ul>
+            <li>структурована подача матеріалу;</li>
+            <li>використання загальноприйнятої термінології;</li>
+            <li>практична спрямованість;</li>
+            <li>актуальність матеріалів;</li>
+            <li>вільний доступ до матеріалів.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-2">
+        <b>Зворотний зв'язок</b>
+        <p>
+          Якщо ви знайшли помилку, маєте пропозиції щодо покращення або хочете
+          запропонувати нову тему, будь ласка, повідомте нас за адресою
+          <a href="mailto:babok4me@gmail.com">babok4me@gmail.com</a>
+        </p>
+      </div>
+
+      <div class="mt-4 text-body-secondary">
+        Дата оновлення довідника: серпень 2026.
+      </div>
     </main>
 
     <footer class="mb-3">

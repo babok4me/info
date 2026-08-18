@@ -50,8 +50,10 @@
     <header class="row">
       <!--Logo-->
       <div class="col-6 col-md-4 col-xl-2 text-center fw-semibold">
-        <div class="mt-2 fs-3 lh-1 mb-0">BABOK4ME</div>
-        <div class="lh-1 mb-3">знати &middot; вміти &middot; діяти</div>
+        <a href="../index.html" class="text-decoration-none text-dark">
+          <div class="mt-2 fs-3 lh-1 mb-0">BABOK4ME</div>
+          <div class="lh-1 mb-3">знати &middot; вміти &middot; діяти</div>
+        </a>
       </div>
 
       <!--Search for tablet+PC-->
@@ -76,16 +78,16 @@
       <!--Main menu-->
       <div class="col-6 col-md-2 col-xl-2 d-flex justify-content-end">
         <nav class="navbar">
-          <div class="container-fluid" aria-label="Головна навігація">
+          <div class="container-fluid" aria-label="Меню">
             <button
               class="navbar-toggler"
               type="button"
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasNavbar"
               aria-controls="offcanvasNavbar"
-              aria-label="Відкрити головне меню"
+              aria-label="Відкрити меню"
             >
-              <span class="navbar-toggler-icon" aria-hidden="true"></span>
+              <span class="navbar-toggler-icon"></span>
             </button>
             <div
               class="offcanvas offcanvas-end"
@@ -110,31 +112,18 @@
                   class="fs-5 navbar-nav justify-content-end flex-grow-1 pe-3"
                 >
                   <li class="nav-item">
-                    <a class="nav-link active" href="../ba/main.html"
-                      ><b>Бізнес-аналіз</b></a
-                    >
+                    <a class="nav-link" href="./index.html">Головна</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Тестування</a>
+                    <a class="nav-link" href="./about.html">Про сайт</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Технології</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="../tools/main.html">Інструменти</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Корпоративні системи</a>
+                    <a class="nav-link" href="./sitemap.html">Мапа сайту</a>
                   </li>
                 </ul>
 
-                <div class="mt-2">
-                  <a href="../sitemap.html">Мапа сайту</a>&emsp;
-                  <a href="../support.html">Підтримка</a>
-                </div>
-
                 <!--Settings-->
-                <div class="mt-5 position-relative">
+                <div class="mt-4 position-relative">
                   <p class="fs-5 mb-2 fw-semibold">Налаштування</p>
 
                   <!--https://gtranslate.io/website-translator-widget-->
@@ -183,15 +172,18 @@
                     onclick="this.href = 'https://i.ua/r.php?240065'"
                     title="Rated by I.UA"
                   >
-                    <script type="text/javascript">
+                    <script>
                       iS =
                         "http" +
-                        (window.location.protocol == "https:" ? "s" : "") +
+                        (window.location.protocol === "https:" ? "s" : "") +
                         "://r.i.ua/s?u240065&p191&n" +
                         Math.random();
+
                       iD = document;
+
                       if (!iD.cookie) iD.cookie = "b=b; path=/";
                       if (iD.cookie) iS += "&c1";
+
                       iS +=
                         "&d" +
                         (screen.colorDepth
@@ -201,21 +193,34 @@
                         screen.width +
                         "&h" +
                         screen.height;
+
                       iT = iR = iD.referrer.replace((iP = /^[a-z]*:\/\//), "");
                       iH = window.location.href.replace(iP, "");
-                      (iI = iT.indexOf("/")) != -1
+
+                      (iI = iT.indexOf("/")) !== -1
                         ? (iT = iT.substring(0, iI))
                         : (iI = iT.length);
-                      if (iT != iH.substring(0, iI)) iS += "&f" + escape(iR);
+
+                      if (iT !== iH.substring(0, iI)) {
+                        iS += "&f" + escape(iR);
+                      }
+
                       iS += "&r" + escape(iH);
+
                       iD.write(
                         '<img src="' +
                           iS +
                           '" border="0" width="160" height="19" />',
                       );
-                    </script></a
-                  >
+                    </script>
+                  </a>
                   <!-- End of I.UA counter -->
+                </div>
+
+                <!--Mistake-->
+                <div class="mt-4">
+                  <p class="fs-5 mb-0 fw-semibold">Повідомити про помилку</p>
+                  <a href="mailto:babok4me@gmail.com">babok4me@gmail.com</a>
                 </div>
               </div>
             </div>
@@ -244,11 +249,7 @@
 
     <main id="main-content">
       <div>
-        <span
-          ><a href="../index.html">Головна</a> &gt;
-          <a href="../ba/main.html">Довідник бізнес-аналітика</a> &gt; Базові
-          поняття
-        </span>
+        <span><a href="./index.html">Головна</a> &gt; Базові поняття </span>
       </div>
       <h1 class="mt-4">Базові поняття</h1>
       <p>
@@ -592,7 +593,7 @@
               <li><a href="">##</a>&emsp;Визначення стратегії змін</li>
             </ul>
           </div>
-                    <div class="col">
+          <div class="col">
             <p class="mb-0 fs-5">
               <a href="">Аналіз вимог та визначення дизайну</a>
             </p>
@@ -602,10 +603,13 @@
               <li><a href="">##</a>&emsp;Валідація вимог</li>
               <li><a href="">##</a>&emsp;Визначення архітектури вимог</li>
               <li><a href="">##</a>&emsp;Визначення варіантів дизайну</li>
-              <li><a href="">##</a>&emsp;Аналіз потенційної цінності та рекомендація рішення</li>
+              <li>
+                <a href="">##</a>&emsp;Аналіз потенційної цінності та
+                рекомендація рішення
+              </li>
             </ul>
           </div>
-                    <div class="col">
+          <div class="col">
             <p class="mb-0 fs-5">
               <a href="">Оцінка рішення</a>
             </p>
@@ -614,7 +618,10 @@
               <li><a href="">##</a>&emsp;Аналіз показників ефективності</li>
               <li><a href="">##</a>&emsp;Оцінка обмежень рішення</li>
               <li><a href="">##</a>&emsp;Оцінка обмежень бізнесу</li>
-              <li><a href="">##</a>&emsp;Рекомендація дій для підвищення цінності рішення</li>
+              <li>
+                <a href="">##</a>&emsp;Рекомендація дій для підвищення цінності
+                рішення
+              </li>
             </ul>
           </div>
         </div>

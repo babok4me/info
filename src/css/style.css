@@ -66,3 +66,23 @@ main h2 {
   color: var(--bs-link-hover-color);
 }
 /*Glossary end*/
+
+.card{
+    transition: .2s;
+    cursor:pointer;
+}
+
+.card:hover{
+    transform: translateY(-4px);
+    box-shadow:0 .5rem 1rem rgba(0,0,0,.15);
+}
+
+.card-link {
+    color: #212529;
+    text-decoration: none;
+    transition: color .2s ease;
+}
+
+.card:hover .card-link {
+    color: var(--bs-primary);
+}
