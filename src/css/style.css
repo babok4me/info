@@ -1,8 +1,67 @@
+:root {
+  --bs-accordion-active-bg: #cfe2ff;
+  --bs-accordion-active-color: #084298;
+}
+
 h1,
 h2 {
   color: var(--bs-body-color);
 }
 
+.concept-table {
+  table-layout: fixed;
+}
+
+/*Accordion button*/
+.accordion-theme {
+  --toggle-bg: var(--bs-primary-bg-subtle);
+  --toggle-color: var(--bs-primary-text-emphasis);
+  --toggle-border: var(--bs-primary-border-subtle);
+}
+
+.accordion-theme .accordion {
+  --bs-accordion-active-bg: var(--toggle-bg);
+  --bs-accordion-active-color: var(--toggle-color);
+}
+
+/* Базові параметри кнопки */
+.accordion-toggle-btn {
+  border: 1px solid;
+  box-shadow: none;
+}
+
+/* Стан: Розгорнути всі */
+.accordion-toggle-btn.is-expand {
+  background-color: #fff;
+  color: var(--bs-primary);
+  border-color: var(--bs-primary);
+}
+
+.accordion-toggle-btn.is-expand:hover,
+.accordion-toggle-btn.is-expand:focus,
+.accordion-toggle-btn.is-expand:active {
+  background-color: #fff !important;
+  color: var(--bs-primary) !important;
+  border-color: var(--bs-primary) !important;
+  box-shadow: none !important;
+}
+
+/* Стан: Згорнути всі */
+.accordion-toggle-btn.is-collapse {
+  background-color: var(--toggle-bg);
+  color: var(--toggle-color);
+  border-color: var(--toggle-border);
+}
+
+.accordion-toggle-btn.is-collapse:hover,
+.accordion-toggle-btn.is-collapse:focus,
+.accordion-toggle-btn.is-collapse:active {
+  background-color: var(--toggle-bg) !important;
+  color: var(--toggle-color) !important;
+  border-color: var(--toggle-border) !important;
+  box-shadow: none !important;
+}
+/*end Accordion button*/
 
 /*Glossary*/
 .table tbody tr:target > td {
@@ -29,7 +88,7 @@ h2 {
 .alphabet-button {
   border: 1px solid #495057;
   background: transparent;
-  
+
   min-width: 32px;
   height: 32px;
 
@@ -67,22 +126,22 @@ h2 {
 }
 /*Glossary end*/
 
-.card{
-    transition: .2s;
-    cursor:pointer;
+.card {
+  transition: 0.2s;
+  cursor: pointer;
 }
 
-.card:hover{
-    transform: translateY(-4px);
-    box-shadow:0 .5rem 1rem rgba(0,0,0,.15);
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
 
 .card-link {
-    color: var(--bs-emphasis-color);
-    text-decoration: none;
-    transition: color .2s ease;
+  color: var(--bs-emphasis-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 .card:hover .card-link {
-    color: var(--bs-primary);
+  color: var(--bs-primary);
 }
