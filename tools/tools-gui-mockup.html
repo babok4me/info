@@ -2,9 +2,28 @@
 
 <html lang="uk">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-0T9SFVH57B"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-0T9SFVH57B");
+    </script>
+
     <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Редактор мокапів</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Редактор мокапів &mdash; babok4me</title>
+    <meta
+      name="description"
+      content="Інтструмент прототипування графічного інтерфейсу користувача"
+    />
     <style>
       :root {
         --bg: #f3f4f6;
@@ -88,13 +107,13 @@
         margin: 0 0 10px;
       }
 
-
-
       .panel.left,
       .panel.right {
         position: relative;
         z-index: 10;
-        transition: width 0.18s ease, box-shadow 0.18s ease;
+        transition:
+          width 0.18s ease,
+          box-shadow 0.18s ease;
       }
 
       .panel.left {
@@ -945,7 +964,6 @@
       .canvas-element select::-ms-expand {
         display: none;
       }
-    
 
       /* Pin layout fix: pinned panels occupy their grid columns; unpinned panels use a 44px rail and expand as overlays on hover without shifting the mockup. */
       .panel.left,
@@ -985,7 +1003,6 @@
         }
       }
 
-
       /* Panel overlap fix: when an unpinned side panel is opened by hover/focus,
          expand the grid column as well, so the workspace is pushed aside and
          the panel does not cover canvas text. */
@@ -1009,10 +1026,18 @@
         grid-template-columns: 44px 1fr 320px;
       }
 
-      .app.left-unpinned.right-unpinned:has(.panel.left:hover):has(.panel.right:hover),
-      .app.left-unpinned.right-unpinned:has(.panel.left:focus-within):has(.panel.right:hover),
-      .app.left-unpinned.right-unpinned:has(.panel.left:hover):has(.panel.right:focus-within),
-      .app.left-unpinned.right-unpinned:has(.panel.left:focus-within):has(.panel.right:focus-within) {
+      .app.left-unpinned.right-unpinned:has(.panel.left:hover):has(
+          .panel.right:hover
+        ),
+      .app.left-unpinned.right-unpinned:has(.panel.left:focus-within):has(
+          .panel.right:hover
+        ),
+      .app.left-unpinned.right-unpinned:has(.panel.left:hover):has(
+          .panel.right:focus-within
+        ),
+      .app.left-unpinned.right-unpinned:has(.panel.left:focus-within):has(
+          .panel.right:focus-within
+        ) {
         grid-template-columns: 290px 1fr 320px;
       }
 
@@ -1037,15 +1062,22 @@
           grid-template-columns: 44px 1fr 290px;
         }
 
-        .app.left-unpinned.right-unpinned:has(.panel.left:hover):has(.panel.right:hover),
-        .app.left-unpinned.right-unpinned:has(.panel.left:focus-within):has(.panel.right:hover),
-        .app.left-unpinned.right-unpinned:has(.panel.left:hover):has(.panel.right:focus-within),
-        .app.left-unpinned.right-unpinned:has(.panel.left:focus-within):has(.panel.right:focus-within) {
+        .app.left-unpinned.right-unpinned:has(.panel.left:hover):has(
+            .panel.right:hover
+          ),
+        .app.left-unpinned.right-unpinned:has(.panel.left:focus-within):has(
+            .panel.right:hover
+          ),
+        .app.left-unpinned.right-unpinned:has(.panel.left:hover):has(
+            .panel.right:focus-within
+          ),
+        .app.left-unpinned.right-unpinned:has(.panel.left:focus-within):has(
+            .panel.right:focus-within
+          ) {
           grid-template-columns: 250px 1fr 290px;
         }
       }
-
-</style>
+    </style>
   </head>
   <body>
     <div class="app">
@@ -1060,7 +1092,9 @@
               data-pin-panel="left"
               title="Закріпити панель"
               type="button"
-            >📌</button>
+            >
+              📌
+            </button>
           </div>
         </div>
         <div class="component-list" id="componentList"></div>
@@ -1075,7 +1109,6 @@
             Видалити компонент
           </button>
         </div>
-
       </aside>
       <main class="workspace-wrap">
         <div class="topbar">
@@ -1084,7 +1117,8 @@
               class="current-file-name unsaved"
               id="currentFileName"
               title="Новий файл"
-            >Файл: новий макет</span>
+              >Файл: новий макет</span
+            >
           </div>
           <label class="grid-toggle" for="gridToggle">
             <input id="gridToggle" type="checkbox" />
@@ -1145,7 +1179,9 @@
               data-pin-panel="right"
               title="Закріпити панель"
               type="button"
-            >📌</button>
+            >
+              📌
+            </button>
           </div>
         </div>
         <div class="settings-body" id="settingsBody"></div>
@@ -1523,9 +1559,16 @@
 
       function getSelectedIds() {
         const existingIds = new Set(state.project.elements.map((el) => el.id));
-        state.selectedIds = (Array.isArray(state.selectedIds) ? state.selectedIds : [])
-          .filter((id, index, arr) => existingIds.has(id) && arr.indexOf(id) === index);
-        if (state.selectedId && existingIds.has(state.selectedId) && !state.selectedIds.includes(state.selectedId)) {
+        state.selectedIds = (
+          Array.isArray(state.selectedIds) ? state.selectedIds : []
+        ).filter(
+          (id, index, arr) => existingIds.has(id) && arr.indexOf(id) === index,
+        );
+        if (
+          state.selectedId &&
+          existingIds.has(state.selectedId) &&
+          !state.selectedIds.includes(state.selectedId)
+        ) {
           state.selectedIds.push(state.selectedId);
         }
         if (!state.selectedId || !existingIds.has(state.selectedId)) {
@@ -1543,7 +1586,8 @@
         const selected = getSelectedIds();
         if (selected.includes(id)) {
           state.selectedIds = selected.filter((itemId) => itemId !== id);
-          if (state.selectedId === id) state.selectedId = state.selectedIds[0] || null;
+          if (state.selectedId === id)
+            state.selectedId = state.selectedIds[0] || null;
         } else {
           state.selectedIds = [...selected, id];
           state.selectedId = id;
@@ -1790,7 +1834,10 @@
         if (history.applying) return;
 
         const snapshot = serializeProject();
-        if (history.index >= 0 && history.snapshots[history.index] === snapshot) {
+        if (
+          history.index >= 0 &&
+          history.snapshots[history.index] === snapshot
+        ) {
           return;
         }
 
@@ -1818,8 +1865,12 @@
         history.applying = true;
         try {
           state.project = JSON.parse(snapshot);
-          const existingIds = new Set(state.project.elements.map((el) => el.id));
-          state.selectedIds = getSelectedIds().filter((id) => existingIds.has(id));
+          const existingIds = new Set(
+            state.project.elements.map((el) => el.id),
+          );
+          state.selectedIds = getSelectedIds().filter((id) =>
+            existingIds.has(id),
+          );
           if (!state.selectedId || !existingIds.has(state.selectedId)) {
             state.selectedId = state.selectedIds[0] || null;
           }
@@ -1930,7 +1981,8 @@
         if (!deleteSelectedBtn) return;
         const count = getSelectedIds().length;
         deleteSelectedBtn.disabled = count === 0;
-        deleteSelectedBtn.textContent = count > 1 ? `Видалити компоненти (${count})` : "Видалити компонент";
+        deleteSelectedBtn.textContent =
+          count > 1 ? `Видалити компоненти (${count})` : "Видалити компонент";
       }
 
       function renderCatalog() {
@@ -2572,7 +2624,9 @@
 
         settingsBody.querySelectorAll("[data-bind]").forEach((input) => {
           input.addEventListener("input", () => {
-            const el = state.project.elements.find((item) => item.id === boundElementId);
+            const el = state.project.elements.find(
+              (item) => item.id === boundElementId,
+            );
             if (!el) return;
             const key = input.dataset.bind;
             let value = Number(input.value) || 0;
@@ -2601,7 +2655,9 @@
 
         settingsBody.querySelectorAll("[data-prop]").forEach((input) => {
           const applyPropValue = () => {
-            const el = state.project.elements.find((item) => item.id === boundElementId);
+            const el = state.project.elements.find(
+              (item) => item.id === boundElementId,
+            );
             if (!el) return;
 
             const propName = input.dataset.prop;
@@ -2735,7 +2791,8 @@
         const rect = canvas.getBoundingClientRect();
         const deltaX = e.clientX - dragElementState.startX;
         const deltaY = e.clientY - dragElementState.startY;
-        dragStarted = dragStarted || Math.abs(deltaX) > 2 || Math.abs(deltaY) > 2;
+        dragStarted =
+          dragStarted || Math.abs(deltaX) > 2 || Math.abs(deltaY) > 2;
 
         const rawLeft = e.clientX - rect.left - dragElementState.pointerOffsetX;
         const rawTop = e.clientY - rect.top - dragElementState.pointerOffsetY;
@@ -2744,18 +2801,34 @@
         let colDelta = desiredPrimaryCol - dragElementState.startGridCol;
         let rowDelta = desiredPrimaryRow - dragElementState.startGridRow;
 
-        const maxCanvasRow = Math.floor(state.project.canvas.minHeight / GRID_ROW_HEIGHT);
-        const minColDelta = Math.max(...dragElementState.elements.map((item) => 1 - item.gridCol));
-        const maxColDelta = Math.min(...dragElementState.elements.map((item) => GRID_COLUMNS - item.gridSpan + 1 - item.gridCol));
-        const minRowDelta = Math.max(...dragElementState.elements.map((item) => 1 - item.gridRow));
-        const maxRowDelta = Math.min(...dragElementState.elements.map((item) => maxCanvasRow - item.rowSpan + 1 - item.gridRow));
+        const maxCanvasRow = Math.floor(
+          state.project.canvas.minHeight / GRID_ROW_HEIGHT,
+        );
+        const minColDelta = Math.max(
+          ...dragElementState.elements.map((item) => 1 - item.gridCol),
+        );
+        const maxColDelta = Math.min(
+          ...dragElementState.elements.map(
+            (item) => GRID_COLUMNS - item.gridSpan + 1 - item.gridCol,
+          ),
+        );
+        const minRowDelta = Math.max(
+          ...dragElementState.elements.map((item) => 1 - item.gridRow),
+        );
+        const maxRowDelta = Math.min(
+          ...dragElementState.elements.map(
+            (item) => maxCanvasRow - item.rowSpan + 1 - item.gridRow,
+          ),
+        );
 
         colDelta = Math.max(minColDelta, Math.min(maxColDelta, colDelta));
         rowDelta = Math.max(minRowDelta, Math.min(maxRowDelta, rowDelta));
 
         let changed = false;
         dragElementState.elements.forEach((startItem) => {
-          const item = state.project.elements.find((candidate) => candidate.id === startItem.id);
+          const item = state.project.elements.find(
+            (candidate) => candidate.id === startItem.id,
+          );
           if (!item) return;
           const nextCol = startItem.gridCol + colDelta;
           const nextRow = startItem.gridRow + rowDelta;
@@ -3100,9 +3173,18 @@
       document.addEventListener("keydown", (e) => {
         const selectedIds = getSelectedIds();
         if (!selectedIds.length) return;
-        if (["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement.tagName)) return;
+        if (
+          ["INPUT", "TEXTAREA", "SELECT"].includes(
+            document.activeElement.tagName,
+          )
+        )
+          return;
 
-        if ((e.key === "Delete" || e.key === "Backspace") && !e.ctrlKey && !e.metaKey) {
+        if (
+          (e.key === "Delete" || e.key === "Backspace") &&
+          !e.ctrlKey &&
+          !e.metaKey
+        ) {
           e.preventDefault();
           deleteSelectedElement();
           return;
@@ -3116,13 +3198,21 @@
         else if (e.key === "ArrowRight") colDelta = 1;
         else return;
 
-        const elements = state.project.elements.filter((el) => selectedIds.includes(el.id));
-        const maxCanvasRow = Math.floor(state.project.canvas.minHeight / GRID_ROW_HEIGHT);
+        const elements = state.project.elements.filter((el) =>
+          selectedIds.includes(el.id),
+        );
+        const maxCanvasRow = Math.floor(
+          state.project.canvas.minHeight / GRID_ROW_HEIGHT,
+        );
         const canMove = elements.every((el) => {
           const nextCol = el.gridCol + colDelta;
           const nextRow = el.gridRow + rowDelta;
-          return nextCol >= 1 && nextCol + el.gridSpan - 1 <= GRID_COLUMNS &&
-            nextRow >= 1 && nextRow + el.rowSpan - 1 <= maxCanvasRow;
+          return (
+            nextCol >= 1 &&
+            nextCol + el.gridSpan - 1 <= GRID_COLUMNS &&
+            nextRow >= 1 &&
+            nextRow + el.rowSpan - 1 <= maxCanvasRow
+          );
         });
         if (!canMove) return;
 
@@ -3136,8 +3226,6 @@
         renderSettings();
         updateComponentStats();
       });
-
-
 
       function getStoredPanelPins() {
         try {
@@ -3169,31 +3257,35 @@
         app.classList.toggle("left-unpinned", !pins.left);
         app.classList.toggle("right-unpinned", !pins.right);
 
-        document.querySelectorAll(".pin-toggle[data-pin-panel]").forEach((btn) => {
-          const side = btn.dataset.pinPanel;
-          const active = !!pins[side];
-          btn.classList.toggle("active", active);
-          btn.setAttribute("aria-pressed", String(active));
-          btn.title = active ? "Відкріпити панель" : "Закріпити панель";
-        });
+        document
+          .querySelectorAll(".pin-toggle[data-pin-panel]")
+          .forEach((btn) => {
+            const side = btn.dataset.pinPanel;
+            const active = !!pins[side];
+            btn.classList.toggle("active", active);
+            btn.setAttribute("aria-pressed", String(active));
+            btn.title = active ? "Відкріпити панель" : "Закріпити панель";
+          });
       }
 
       function initPanelPins() {
         const pins = getStoredPanelPins();
         applyPanelPins(pins);
 
-        document.querySelectorAll(".pin-toggle[data-pin-panel]").forEach((btn) => {
-          btn.addEventListener("click", (evt) => {
-            evt.preventDefault();
-            evt.stopPropagation();
+        document
+          .querySelectorAll(".pin-toggle[data-pin-panel]")
+          .forEach((btn) => {
+            btn.addEventListener("click", (evt) => {
+              evt.preventDefault();
+              evt.stopPropagation();
 
-            const side = btn.dataset.pinPanel;
-            const nextPins = getStoredPanelPins();
-            nextPins[side] = !nextPins[side];
-            savePanelPins(nextPins);
-            applyPanelPins(nextPins);
+              const side = btn.dataset.pinPanel;
+              const nextPins = getStoredPanelPins();
+              nextPins[side] = !nextPins[side];
+              savePanelPins(nextPins);
+              applyPanelPins(nextPins);
+            });
           });
-        });
       }
 
       restoreStateFromLocalStorage();
@@ -3293,30 +3385,37 @@
           return false;
         });
 
-      document.getElementById("screenBtn").addEventListener("click", async (e) => {
-        e.preventDefault();
-        e.stopPropagation();
+      document
+        .getElementById("screenBtn")
+        .addEventListener("click", async (e) => {
+          e.preventDefault();
+          e.stopPropagation();
 
-        if (!navigator.clipboard || typeof window.ClipboardItem === "undefined") {
-          alert("Буфер обміну зображень не підтримується у цьому браузері.");
+          if (
+            !navigator.clipboard ||
+            typeof window.ClipboardItem === "undefined"
+          ) {
+            alert("Буфер обміну зображень не підтримується у цьому браузері.");
+            return false;
+          }
+
+          try {
+            const blob = await createCanvasScreenshotBlob();
+            await navigator.clipboard.write([
+              new ClipboardItem({
+                "image/png": blob,
+              }),
+            ]);
+            alert(
+              "Скріншот полотна скопійовано. Тепер можна вставити його через Ctrl+V.",
+            );
+          } catch (error) {
+            console.error(error);
+            alert("Не вдалося скопіювати скріншот у буфер обміну.");
+          }
+
           return false;
-        }
-
-        try {
-          const blob = await createCanvasScreenshotBlob();
-          await navigator.clipboard.write([
-            new ClipboardItem({
-              "image/png": blob,
-            }),
-          ]);
-          alert("Скріншот полотна скопійовано. Тепер можна вставити його через Ctrl+V.");
-        } catch (error) {
-          console.error(error);
-          alert("Не вдалося скопіювати скріншот у буфер обміну.");
-        }
-
-        return false;
-      });
+        });
     </script>
   </body>
 </html>
