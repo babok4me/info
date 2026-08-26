@@ -149,7 +149,7 @@ h2 {
 /*Graph-Table view*/
 .btn-check + .btn-outline-primary {
   background: transparent;
-  color: #000;
+  color: var(--bs-body-color);
   border-color: #6899e3;
 }
 
