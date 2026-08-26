@@ -91,3 +91,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateToggleButton();
 });
+
+/**Graph-Table view */
+const graphView = document.getElementById("graphView");
+const tableView = document.getElementById("tableView");
+
+const graphContainer = document.getElementById("graphContainer");
+const tableContainer = document.getElementById("tableContainer");
+
+graphView.addEventListener("change", () => {
+  graphContainer.classList.remove("d-none");
+  tableContainer.classList.add("d-none");
+});
+
+tableView.addEventListener("change", () => {
+  graphContainer.classList.add("d-none");
+  tableContainer.classList.remove("d-none");
+});

@@ -145,3 +145,16 @@ h2 {
 .card:hover .card-link {
   color: var(--bs-primary);
 }
+
+/*Graph-Table view*/
+.btn-check + .btn-outline-primary {
+  background: transparent;
+  color: #000;
+  border-color: #6899e3;
+}
+
+.btn-check:checked + .btn-outline-primary {
+  background: #6899e3;
+  color: #fff;
+}
+/*Graph-Table view end*/
