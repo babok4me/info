@@ -1,0 +1,157 @@
+/* Каркас каруселі */
+#carouselExampleFade {
+  width: 100%;
+}
+
+/* Область слайдів */
+#carouselExampleFade .carousel-inner {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Слайд */
+#carouselExampleFade .carousel-item {
+  width: 100%;
+  text-align: center;
+}
+
+/* Зображення */
+#carouselExampleFade .carousel-item img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 75vh;
+  margin-right: auto;
+  margin-left: auto;
+  object-fit: contain;
+}
+
+/* Кнопки залишаються у стандартних позиціях Bootstrap */
+#carouselExampleFade .carousel-control-prev,
+#carouselExampleFade .carousel-control-next {
+  width: 10%;
+  opacity: 1;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Не змінювати прозорість усієї кнопки при hover/focus */
+#carouselExampleFade .carousel-control-prev:hover,
+#carouselExampleFade .carousel-control-next:hover,
+#carouselExampleFade .carousel-control-prev:focus,
+#carouselExampleFade .carousel-control-next:focus {
+  opacity: 1;
+  color: inherit;
+}
+
+/* Кругла кнопка з Bootstrap Icon */
+#carouselExampleFade .carousel-control-prev > .bi,
+#carouselExampleFade .carousel-control-next > .bi {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+
+  border: 1px solid transparent;
+  border-radius: 50%;
+
+  font-size: 1.75rem;
+  line-height: 1;
+
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* Світла тема */
+[data-bs-theme="light"]
+  #carouselExampleFade
+  .carousel-control-prev
+  > .bi,
+[data-bs-theme="light"]
+  #carouselExampleFade
+  .carousel-control-next
+  > .bi {
+  color: #343a40 !important;
+  background-color: rgba(33, 37, 41, 0.08);
+  border-color: rgba(33, 37, 41, 0.12);
+  box-shadow: 0 2px 8px rgba(33, 37, 41, 0.08);
+}
+
+/* Темна тема */
+[data-bs-theme="dark"]
+  #carouselExampleFade
+  .carousel-control-prev
+  > .bi,
+[data-bs-theme="dark"]
+  #carouselExampleFade
+  .carousel-control-next
+  > .bi {
+  color: #000 !important;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover у світлій темі */
+[data-bs-theme="light"]
+  #carouselExampleFade
+  .carousel-control-prev:hover
+  > .bi,
+[data-bs-theme="light"]
+  #carouselExampleFade
+  .carousel-control-next:hover
+  > .bi {
+  color: #000000 !important;
+  background-color: rgba(33, 37, 41, 0.12);
+  border-color: rgba(33, 37, 41, 0.16);
+  transform: scale(1.08);
+}
+
+/* Hover у темній темі */
+[data-bs-theme="dark"]
+  #carouselExampleFade
+  .carousel-control-prev:hover
+  > .bi,
+[data-bs-theme="dark"]
+  #carouselExampleFade
+  .carousel-control-next:hover
+  > .bi {
+  color: #000 !important;
+  background-color: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.16);
+  transform: scale(1.08);
+}
+
+/* Видимий фокус із клавіатури */
+#carouselExampleFade .carousel-control-prev:focus-visible > .bi,
+#carouselExampleFade .carousel-control-next:focus-visible > .bi {
+  outline: 3px solid var(--bs-primary);
+  outline-offset: 3px;
+}
+
+/* Адаптивність */
+@media (max-width: 767.98px) {
+  #carouselExampleFade .carousel-item img {
+    max-height: 65vh;
+  }
+
+  #carouselExampleFade .carousel-control-prev,
+  #carouselExampleFade .carousel-control-next {
+    width: 14%;
+  }
+
+  #carouselExampleFade .carousel-control-prev > .bi,
+  #carouselExampleFade .carousel-control-next > .bi {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+    font-size: 1.4rem;
+  }
+}
