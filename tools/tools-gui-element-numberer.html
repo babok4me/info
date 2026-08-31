@@ -155,6 +155,17 @@
         border-color: var(--green);
       }
 
+      .copy-success {
+        color: #fff;
+        background: #16a34a;
+        border-color: #16a34a;
+      }
+
+      .copy-success:hover:not(:disabled) {
+        background: #15803d;
+        border-color: #15803d;
+      }
+
       .content {
         display: grid;
         grid-template-columns: 320px minmax(0, 1fr);
@@ -466,7 +477,11 @@
         cursor: pointer;
       }
     </style>
-  </head>
+  
+<style>
+#downloadBtn{background:#16a34a!important;border-color:#16a34a!important;color:#fff!important;}#downloadBtn:hover{background:#15803d!important;border-color:#15803d!important;}
+</style>
+</head>
   
   <body>
     <div class="app">
@@ -3051,9 +3066,10 @@
       // Initial empty state. Opening an image resets this history.
       resetHistory();
 
-      document
-        .getElementById("copyScreenBtn")
-        ?.addEventListener("click", async () => {
+      const copyScreenBtn = document.getElementById("copyScreenBtn");
+      let copyFeedbackTimer = null;
+
+      copyScreenBtn?.addEventListener("click", async () => {
           try {
             const exportCanvas = document.createElement("canvas");
             exportCanvas.width = canvas.width + 2;
@@ -3089,6 +3105,19 @@
             ]);
 
             setStatus("Зображення з рамкою 1 px скопійовано в буфер обміну.");
+
+            if (copyFeedbackTimer) {
+              clearTimeout(copyFeedbackTimer);
+            }
+
+            copyScreenBtn.textContent = "✓ copy";
+            copyScreenBtn.classList.add("copy-success");
+
+            copyFeedbackTimer = setTimeout(() => {
+              copyScreenBtn.textContent = "screen";
+              copyScreenBtn.classList.remove("copy-success");
+              copyFeedbackTimer = null;
+            }, 1800);
           } catch (e) {
             setStatus("Не вдалося скопіювати зображення.");
           }
