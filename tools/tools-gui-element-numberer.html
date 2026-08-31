@@ -1,0 +1,3106 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-0T9SFVH57B"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-0T9SFVH57B");
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Нумератор елементів &mdash; babok4me</title>
+    <meta
+      name="description"
+      content="Інтструмент нумерації елементів графічного інтерфейсу користувача"
+    />
+    <link rel="icon" type="image/png" sizes="32х32" href="../favicon.png" />
+    <style>
+      :root {
+        --bg: #f3f6fb;
+        --panel: #ffffff;
+        --panel-2: #f8fafc;
+        --text: #1f2937;
+        --muted: #667085;
+        --border: #dfe5ee;
+        --primary: #2563eb;
+        --primary-2: #1d4ed8;
+        --green: #ef4444;
+        --red: #e32929;
+        --shadow: 0 8px 28px rgba(15, 23, 42, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family:
+          Inter,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      button,
+      input,
+      select {
+        font: inherit;
+      }
+
+      .app {
+        min-height: 100vh;
+        display: grid;
+        grid-template-rows: auto 1fr;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 18px 26px;
+        background: #fff;
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+      }
+
+      .brand {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+      }
+
+      .brand-icon {
+        width: 46px;
+        height: 46px;
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        color: #fff;
+        font-weight: 800;
+        box-shadow: 0 8px 18px rgba(37, 99, 235, 0.25);
+      }
+
+      .brand h1 {
+        margin: 0 0 4px;
+        font-size: 25px;
+        line-height: 1.1;
+      }
+
+      .brand p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .top-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .btn {
+        border: 1px solid var(--border);
+        background: #fff;
+        color: var(--text);
+        border-radius: 10px;
+        min-height: 42px;
+        padding: 0 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.18s ease;
+      }
+
+      .btn:hover:not(:disabled) {
+        transform: translateY(-1px);
+        border-color: #b8c3d4;
+      }
+
+      .btn:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+
+      .btn-primary {
+        color: #fff;
+        background: var(--primary);
+        border-color: var(--primary);
+      }
+
+      .btn-primary:hover:not(:disabled) {
+        background: var(--primary-2);
+      }
+
+      .btn-success {
+        color: #fff;
+        background: var(--green);
+        border-color: var(--green);
+      }
+
+      .content {
+        display: grid;
+        grid-template-columns: 320px minmax(0, 1fr);
+        gap: 18px;
+        padding: 18px;
+        min-height: 0;
+      }
+
+      .sidebar {
+        display: grid;
+        gap: 14px;
+        align-content: start;
+        max-height: calc(100vh - 108px);
+        overflow: auto;
+        padding-right: 2px;
+      }
+
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        box-shadow: var(--shadow);
+      }
+
+      .card-body {
+        padding: 16px;
+      }
+
+      .card-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 0 16px;
+        font-size: 16px;
+        color: #244a8f;
+      }
+
+      .field {
+        margin-top: 14px;
+      }
+
+      .field:first-of-type {
+        margin-top: 0;
+      }
+
+      .field label {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 7px;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .field small {
+        color: var(--muted);
+        font-weight: 500;
+      }
+
+      .field input[type="range"] {
+        width: 100%;
+      }
+
+      .field select,
+      .field input[type="number"] {
+        width: 100%;
+        min-height: 40px;
+        border: 1px solid var(--border);
+        border-radius: 9px;
+        padding: 8px 10px;
+        background: #fff;
+        color: var(--text);
+      }
+
+      .split {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .check {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin-top: 12px;
+        color: #445067;
+        font-size: 13px;
+      }
+
+      .check input {
+        width: 17px;
+        height: 17px;
+      }
+
+      .mode {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .mode .btn {
+        min-height: 38px;
+        padding: 0 10px;
+        font-size: 13px;
+      }
+
+      .mode .active {
+        color: #fff;
+        background: var(--primary);
+        border-color: var(--primary);
+      }
+
+      .status {
+        margin-top: 12px;
+        padding: 11px 12px;
+        border-radius: 9px;
+        background: #eef4ff;
+        color: #51627a;
+        font-size: 13px;
+        line-height: 1.45;
+      }
+
+      .main {
+        display: block;
+        min-width: 0;
+      }
+
+      .preview-card {
+        overflow: hidden;
+        min-height: calc(100vh - 126px);
+      }
+
+      .preview-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .preview-head h2 {
+        margin: 0;
+        font-size: 16px;
+      }
+
+      .preview-wrap {
+        min-height: 360px;
+        overflow: auto;
+        background:
+          linear-gradient(45deg, rgba(0, 0, 0, 0.025) 25%, transparent 25%),
+          linear-gradient(-45deg, rgba(0, 0, 0, 0.025) 25%, transparent 25%),
+          linear-gradient(45deg, transparent 75%, rgba(0, 0, 0, 0.025) 75%),
+          linear-gradient(-45deg, transparent 75%, rgba(0, 0, 0, 0.025) 75%);
+        background-size: 24px 24px;
+        background-position:
+          0 0,
+          0 12px,
+          12px -12px,
+          -12px 0;
+      }
+
+      .empty {
+        min-height: 360px;
+        display: grid;
+        place-items: center;
+        color: var(--muted);
+        text-align: center;
+        padding: 30px;
+      }
+
+      canvas {
+        display: block;
+        max-width: none;
+        touch-action: none;
+      }
+
+      .preview-foot {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        align-items: center;
+        padding: 11px 16px;
+        border-top: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 13px;
+        flex-wrap: wrap;
+      }
+
+      .zoom {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .zoom {
+        min-width: 520px;
+      }
+
+      .zoom-scale {
+        display: grid;
+        grid-template-rows: auto auto;
+        gap: 4px;
+        width: min(520px, 52vw);
+      }
+
+      .zoom-scale input {
+        width: 100%;
+        margin: 0;
+      }
+
+      .zoom-ticks {
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        align-items: start;
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1;
+        user-select: none;
+      }
+
+      .zoom-ticks span {
+        position: relative;
+        text-align: center;
+        padding-top: 8px;
+      }
+
+      .zoom-ticks span::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 1px;
+        height: 5px;
+        background: #94a3b8;
+        transform: translateX(-50%);
+      }
+
+      .zoom-ticks span:first-child {
+        text-align: left;
+      }
+
+      .zoom-ticks span:first-child::before {
+        left: 0;
+        transform: none;
+      }
+
+      .zoom-ticks span:last-child {
+        text-align: right;
+      }
+
+      .zoom-ticks span:last-child::before {
+        left: auto;
+        right: 0;
+        transform: none;
+      }
+
+      @media (max-width: 900px) {
+        .zoom {
+          min-width: 100%;
+        }
+
+        .zoom-scale {
+          width: 100%;
+        }
+      }
+      #fileInput {
+        display: none;
+      }
+
+      @media (max-width: 980px) {
+        .content {
+          grid-template-columns: 1fr;
+        }
+        .sidebar {
+          max-height: none;
+        }
+        .topbar {
+          align-items: flex-start;
+        }
+      }
+
+      .grid-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 42px;
+        padding: 0 12px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: #ffffff;
+        color: var(--text);
+        font-weight: 700;
+        white-space: nowrap;
+        user-select: none;
+        cursor: pointer;
+      }
+
+      .grid-toggle:hover {
+        border-color: #b8c3d4;
+      }
+
+      .grid-toggle input {
+        width: 17px;
+        height: 17px;
+        margin: 0;
+        accent-color: var(--primary);
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-icon">123</div>
+          <div>
+            <h1>Нумератор елементів інтерфейсу</h1>
+            <p>
+              Автоматичне розпізнавання та нумерація елементів на зображенні
+            </p>
+          </div>
+        </div>
+
+        <div class="top-actions">
+          <label class="grid-toggle" for="gridToggle">
+            <input id="gridToggle" type="checkbox" />
+            <span>Сітка</span>
+          </label>
+          <button class="btn" id="openBtn">Відкрити зображення</button>
+          <button class="btn btn-primary" id="detectBtn" disabled>
+            Розпізнати автоматично
+          </button>
+          <div class="export-row" style="display: flex; gap: 10px">
+            <button class="btn btn-success" id="downloadBtn" disabled>
+              file.png</button
+            ><button class="btn btn-secondary" id="copyScreenBtn">
+              screen
+            </button>
+          </div>
+        </div>
+
+        <input
+          id="fileInput"
+          type="file"
+          accept="image/png,image/jpeg,image/webp"
+        />
+      </header>
+
+      <div class="content">
+        <aside class="sidebar">
+          <section class="card">
+            <div class="card-body">
+              <h2 class="card-title">⚙ Налаштування</h2>
+
+              <div class="field">
+                <label
+                  >Розмір номера <small id="labelSizeOut">16 px</small></label
+                >
+                <input
+                  id="labelSize"
+                  type="range"
+                  min="12"
+                  max="30"
+                  value="12"
+                />
+              </div>
+
+              <div class="field">
+                <label
+                  >Відступ номера <small id="labelGapOut">10 px</small></label
+                >
+                <input id="labelGap" type="range" min="4" max="30" value="4" />
+              </div>
+
+              <label class="check">
+                <input id="showFrames" type="checkbox" checked />
+                Показувати рамки елементів
+              </label>
+
+              <label class="check">
+                <input id="showConnectors" type="checkbox" checked />
+                Показувати лінії до номерів
+              </label>
+
+              <div class="mode">
+                <button class="btn" id="removeModeBtn">Видаляти</button>
+                <button class="btn active" id="addModeBtn">Додавати</button>
+                <button class="btn" id="mergeModeBtn">Об'єднувати</button>
+              </div>
+
+              <button
+                class="btn btn-primary"
+                id="mergeSelectedBtn"
+                style="width: 100%; margin-top: 10px"
+                disabled
+              >
+                Об'єднати вибрані
+              </button>
+
+              <button
+                class="btn"
+                id="renumberBtn"
+                style="width: 100%; margin-top: 10px"
+                disabled
+              >
+                Прибрати всі рамки
+              </button>
+              <div
+                class="undo-redo-row"
+                style="
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 10px;
+                  margin-top: 10px;
+                "
+              >
+                <button class="btn" id="undoBtn" disabled>Назад</button>
+                <button class="btn" id="redoBtn" disabled>Вперед</button>
+              </div>
+
+              <div class="status" id="status">
+                Зображення ще не завантажено.
+              </div>
+            </div>
+          </section>
+        </aside>
+
+        <main class="main">
+          <section class="card preview-card">
+            <div class="preview-head">
+              <h2>◉ Попередній перегляд</h2>
+              <div id="countText">0 елементів</div>
+            </div>
+
+            <div class="preview-wrap" id="previewWrap">
+              <div class="empty" id="emptyState">
+                Завантажте зображення. Після цього можна додавати рамки вручну
+                або виконати автоматичне розпізнавання.
+              </div>
+              <canvas id="canvas" hidden></canvas>
+            </div>
+
+            <div class="preview-foot">
+              <div>Нумерація: зліва направо, зверху вниз</div>
+              <div class="zoom">
+                <span>Масштаб</span>
+
+                <div class="zoom-scale">
+                  <input
+                    id="zoomRange"
+                    type="range"
+                    min="25"
+                    max="200"
+                    step="25"
+                    value="100"
+                    aria-label="Масштаб зображення"
+                  />
+
+                  <div class="zoom-ticks" aria-hidden="true">
+                    <span>25%</span>
+                    <span>50%</span>
+                    <span>75%</span>
+                    <span>100%</span>
+                    <span>125%</span>
+                    <span>150%</span>
+                    <span>175%</span>
+                    <span>200%</span>
+                  </div>
+                </div>
+
+                <span id="zoomOut">100%</span>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script>
+      "use strict";
+
+      const $ = (id) => document.getElementById(id);
+
+      const fileInput = $("fileInput");
+      const openBtn = $("openBtn");
+      const detectBtn = $("detectBtn");
+      const downloadBtn = $("downloadBtn");
+      const renumberBtn = $("renumberBtn");
+
+      const canvas = $("canvas");
+      const ctx = canvas.getContext("2d");
+      const emptyState = $("emptyState");
+      const statusBox = $("status");
+      const countText = $("countText");
+
+      const sourceCanvas = document.createElement("canvas");
+      const sourceCtx = sourceCanvas.getContext("2d", {
+        willReadFrequently: true,
+      });
+
+      const controls = {
+        minWidth: { value: "10" },
+        minHeight: { value: "10" },
+        threshold: { value: "36" },
+        joinGap: { value: "8" },
+        rowTolerance: { value: "21" },
+        labelSize: $("labelSize"),
+        labelGap: $("labelGap"),
+        labelSpacing: { value: "2" },
+        frameGap: { value: "2" },
+        autoAlignFrames: { checked: true },
+        ignoreLarge: { checked: true },
+        removeNested: { checked: true },
+        groupText: { checked: true },
+        showFrames: $("showFrames"),
+        showConnectors: $("showConnectors"),
+        zoom: $("zoomRange"),
+      };
+
+      let sourceImage = null;
+      let sourceImageData = null;
+      let elements = [];
+      let editMode = "add";
+      let selectedForMerge = new Set();
+      let historyStack = [];
+      let historyIndex = -1;
+      let dragStart = null;
+      let dragRect = null;
+
+      // Перетягування номерів незалежно від режиму редагування рамок.
+      let numberDrag = null;
+
+      let renderState = {
+        topMargin: 0,
+        leftMargin: 0,
+        labelHitAreas: [],
+      };
+
+      const bindRange = (id, outId, suffix = "") => {
+        const input = $(id);
+        const out = $(outId);
+        const update = () => (out.textContent = input.value + suffix);
+        input.addEventListener("input", update);
+        update();
+      };
+
+      bindRange("labelSize", "labelSizeOut", " px");
+      bindRange("labelGap", "labelGapOut", " px");
+
+      controls.zoom.addEventListener("input", () => {
+        $("zoomOut").textContent = controls.zoom.value + "%";
+        canvas.style.width = `${(canvas.width * Number(controls.zoom.value)) / 100}px`;
+        canvas.style.height = "auto";
+      });
+
+      [
+        controls.labelSize,
+        controls.labelGap,
+        controls.showFrames,
+        controls.showConnectors,
+      ].forEach((el) => {
+        el.addEventListener("input", () => {
+          if (elements.length) {
+            sortAndNumber();
+            render();
+          }
+        });
+        el.addEventListener("change", () => {
+          if (elements.length) {
+            sortAndNumber();
+            render();
+          }
+        });
+      });
+
+      function setStatus(message) {
+        statusBox.textContent = message;
+      }
+
+      function snapshotElements() {
+        return JSON.parse(JSON.stringify(elements));
+      }
+
+      function snapshotsEqual(a, b) {
+        return JSON.stringify(a) === JSON.stringify(b);
+      }
+
+      function resetHistory() {
+        historyStack = [snapshotElements()];
+        historyIndex = 0;
+        updateHistoryButtons();
+      }
+
+      function commitHistory() {
+        const snapshot = snapshotElements();
+
+        // A new edit after Undo removes the obsolete Redo branch.
+        if (historyIndex < historyStack.length - 1) {
+          historyStack = historyStack.slice(0, historyIndex + 1);
+        }
+
+        const current = historyStack[historyIndex];
+        if (current && snapshotsEqual(current, snapshot)) {
+          updateHistoryButtons();
+          return;
+        }
+
+        historyStack.push(snapshot);
+
+        // Keep the baseline plus no more than 100 subsequent changes.
+        if (historyStack.length > 101) {
+          historyStack.shift();
+        }
+
+        historyIndex = historyStack.length - 1;
+        updateHistoryButtons();
+      }
+
+      function restoreSnapshot(snapshot) {
+        elements = JSON.parse(JSON.stringify(snapshot));
+        selectedForMerge.clear();
+        dragStart = null;
+        dragRect = null;
+        render();
+        updateUi();
+      }
+
+      function updateHistoryButtons() {
+        const undoButton = document.getElementById("undoBtn");
+        const redoButton = document.getElementById("redoBtn");
+
+        if (undoButton) {
+          undoButton.disabled = historyIndex <= 0;
+        }
+
+        if (redoButton) {
+          redoButton.disabled =
+            historyIndex < 0 || historyIndex >= historyStack.length - 1;
+        }
+      }
+
+      function updateUi() {
+        const loaded = !!sourceImage;
+        const hasElements = elements.length > 0;
+
+        detectBtn.disabled = !loaded;
+        downloadBtn.disabled = !loaded;
+        renumberBtn.disabled = !hasElements;
+        $("mergeSelectedBtn").disabled = selectedForMerge.size < 2;
+
+        countText.textContent = `${elements.length} елементів`;
+        updateHistoryButtons();
+      }
+
+      function setEditMode(mode) {
+        editMode = mode;
+        $("removeModeBtn").classList.toggle("active", mode === "remove");
+        $("addModeBtn").classList.toggle("active", mode === "add");
+        $("mergeModeBtn").classList.toggle("active", mode === "merge");
+
+        if (mode !== "merge") {
+          selectedForMerge.clear();
+        }
+
+        canvas.style.cursor = mode === "add" ? "crosshair" : "pointer";
+        updateUi();
+        if (sourceImage) render();
+
+        if (mode === "merge") {
+          setStatus(
+            "Клацніть два або більше елементів, потім натисніть «Об'єднати вибрані».",
+          );
+        }
+      }
+
+      $("removeModeBtn").addEventListener("click", () => setEditMode("remove"));
+      $("addModeBtn").addEventListener("click", () => setEditMode("add"));
+      $("mergeModeBtn").addEventListener("click", () => setEditMode("merge"));
+
+      openBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        fileInput.value = "";
+        fileInput.click();
+      });
+
+      fileInput.addEventListener("change", (event) => {
+        const file = event.target.files && event.target.files[0];
+        if (file) loadFile(file);
+      });
+
+      function loadFile(file) {
+        if (!file || !file.type.startsWith("image/")) {
+          setStatus("Оберіть файл зображення PNG, JPG або WebP.");
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const image = new Image();
+          image.onload = () => {
+            sourceImage = image;
+            sourceCanvas.width = image.naturalWidth;
+            sourceCanvas.height = image.naturalHeight;
+            sourceCtx.clearRect(0, 0, sourceCanvas.width, sourceCanvas.height);
+            sourceCtx.drawImage(image, 0, 0);
+            sourceImageData = sourceCtx.getImageData(
+              0,
+              0,
+              sourceCanvas.width,
+              sourceCanvas.height,
+            );
+
+            elements = [];
+            selectedForMerge.clear();
+            resetHistory();
+            emptyState.hidden = true;
+            canvas.hidden = false;
+
+            emptyState.hidden = true;
+            emptyState.style.display = "none";
+            // Після відкриття зображення користувач може відразу
+            // малювати рамки вручну. Автоматичне розпізнавання
+            // залишається доступним окремою кнопкою.
+            setEditMode("add");
+
+            setStatus(
+              `Завантажено ${file.name}. Можна додавати рамки вручну, виконати автоматичне розпізнавання та перетягувати номери мишею.`,
+            );
+
+            render();
+            updateUi();
+          };
+          image.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+
+      detectBtn.addEventListener("click", detectElements);
+
+      function detectElements() {
+        if (!sourceImageData) return;
+        setStatus("Виконується розпізнавання...");
+
+        requestAnimationFrame(() => {
+          const width = sourceCanvas.width;
+          const height = sourceCanvas.height;
+          const data = sourceImageData.data;
+          const minW = Number(controls.minWidth.value);
+          const minH = Number(controls.minHeight.value);
+          const threshold = Number(controls.threshold.value);
+          const gap = Number(controls.joinGap.value);
+
+          const gray = new Uint8Array(width * height);
+          const edge = new Uint8Array(width * height);
+
+          for (let p = 0, i = 0; p < gray.length; p++, i += 4) {
+            gray[p] = Math.round(
+              data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114,
+            );
+          }
+
+          for (let y = 1; y < height - 1; y++) {
+            for (let x = 1; x < width - 1; x++) {
+              const i = y * width + x;
+
+              const gx =
+                -gray[i - width - 1] -
+                2 * gray[i - 1] -
+                gray[i + width - 1] +
+                gray[i - width + 1] +
+                2 * gray[i + 1] +
+                gray[i + width + 1];
+
+              const gy =
+                -gray[i - width - 1] -
+                2 * gray[i - width] -
+                gray[i - width + 1] +
+                gray[i + width - 1] +
+                2 * gray[i + width] +
+                gray[i + width + 1];
+
+              if (Math.abs(gx) + Math.abs(gy) >= threshold * 2.0) {
+                edge[i] = 1;
+              }
+            }
+          }
+
+          const closed = closeBinary(
+            edge,
+            width,
+            height,
+            Math.max(1, Math.round(gap / 2)),
+            Math.max(1, Math.round(gap / 4)),
+          );
+
+          let boxes = connectedComponents(closed, width, height)
+            .map((c) => ({
+              x: c.minX,
+              y: c.minY,
+              width: c.maxX - c.minX + 1,
+              height: c.maxY - c.minY + 1,
+              area: c.area,
+            }))
+            .filter(
+              (b) =>
+                b.width >= Math.max(3, minW * 0.5) &&
+                b.height >= Math.max(3, minH * 0.5) &&
+                b.area >= 6,
+            );
+
+          // Додатковий пошук слабоконтрастних компактних іконок:
+          // назад, вперед, глобус та інші світло-сірі піктограми.
+          const faintIconBoxes = detectFaintCompactIcons(
+            data,
+            width,
+            height,
+            minW,
+            minH,
+          );
+
+          boxes.push(...faintIconBoxes);
+          boxes = mergeDetectedDuplicates(boxes);
+
+          if (controls.ignoreLarge.checked) {
+            boxes = boxes.filter(
+              (b) => b.width <= width * 0.55 && b.height <= height * 0.55,
+            );
+          }
+
+          if (controls.groupText.checked) {
+            boxes = groupBoxes(boxes, gap, width, height);
+          }
+
+          boxes = boxes.map((b) => expandBox(b, 2, width, height));
+
+          if (controls.removeNested.checked) {
+            boxes = removeNestedAndDuplicates(boxes);
+          }
+
+          boxes = boxes.filter((b) => b.width >= minW && b.height >= minH);
+
+          // Відсіюємо хибні елементи: розділювачі, поодинокі лінії
+          // та майже порожні області, які не є реальними контролами.
+          boxes = boxes.filter((b) => isLikelyRealElement(b));
+
+          // Об'єднуємо дублікати складених контролів. Наприклад, адресний
+          // рядок має визначатися як один елемент, а не як рамка, текст,
+          // внутрішня лінія та правий край окремо.
+          boxes = consolidateCompositeControls(boxes);
+
+          elements = boxes;
+          selectedForMerge.clear();
+
+          if (controls.autoAlignFrames.checked) {
+            alignFramesInRows();
+          }
+
+          sortAndNumber();
+          commitHistory();
+          render();
+          updateUi();
+
+          setEditMode("add");
+
+          setStatus(
+            elements.length
+              ? `Автоматично знайдено ${elements.length} елементів. Можна одразу додати пропущені рамки вручну.`
+              : "Елементи автоматично не знайдено. Додайте рамки вручну.",
+          );
+        });
+      }
+
+      function detectFaintCompactIcons(data, width, height, minW, minH) {
+        const mask = new Uint8Array(width * height);
+
+        for (let y = 1; y < height - 1; y++) {
+          for (let x = 1; x < width - 1; x++) {
+            const i = (y * width + x) * 4;
+            const r = data[i];
+            const g = data[i + 1];
+            const b = data[i + 2];
+
+            const brightness = (r + g + b) / 3;
+            const max = Math.max(r, g, b);
+            const min = Math.min(r, g, b);
+            const saturation = max === 0 ? 0 : (max - min) / max;
+
+            // Світло-сірі та кольорові лінії піктограм на світлому фоні.
+            if ((brightness >= 105 && brightness <= 238) || saturation > 0.12) {
+              mask[y * width + x] = 1;
+            }
+          }
+        }
+
+        const joined = closeBinary(mask, width, height, 1, 1);
+
+        return connectedComponents(joined, width, height)
+          .map((c) => ({
+            x: Math.max(0, c.minX - 2),
+            y: Math.max(0, c.minY - 2),
+            width: Math.min(width, c.maxX + 3) - Math.max(0, c.minX - 2),
+            height: Math.min(height, c.maxY + 3) - Math.max(0, c.minY - 2),
+            area: c.area,
+            faintCandidate: true,
+          }))
+          .filter(
+            (b) =>
+              b.width >= Math.max(6, minW * 0.45) &&
+              b.height >= Math.max(6, minH * 0.45) &&
+              b.width <= 48 &&
+              b.height <= 48 &&
+              b.area >= 4,
+          );
+      }
+
+      function mergeDetectedDuplicates(input) {
+        const sorted = [...input].sort(
+          (a, b) =>
+            (b.faintCandidate ? 0 : 1) - (a.faintCandidate ? 0 : 1) ||
+            b.width * b.height - a.width * a.height,
+        );
+
+        const result = [];
+
+        for (const box of sorted) {
+          const duplicateIndex = result.findIndex((existing) => {
+            const x1 = Math.max(box.x, existing.x);
+            const y1 = Math.max(box.y, existing.y);
+            const x2 = Math.min(box.x + box.width, existing.x + existing.width);
+            const y2 = Math.min(
+              box.y + box.height,
+              existing.y + existing.height,
+            );
+            const intersection = Math.max(0, x2 - x1) * Math.max(0, y2 - y1);
+            const union =
+              box.width * box.height +
+              existing.width * existing.height -
+              intersection;
+            return intersection / Math.max(1, union) >= 0.55;
+          });
+
+          if (duplicateIndex === -1) {
+            result.push(box);
+          } else {
+            const existing = result[duplicateIndex];
+            // Залишаємо більш повну рамку.
+            if (box.width * box.height > existing.width * existing.height) {
+              result[duplicateIndex] = box;
+            }
+          }
+        }
+
+        return result;
+      }
+
+      function closeBinary(input, width, height, rx, ry) {
+        return erodeBinary(
+          dilateBinary(input, width, height, rx, ry),
+          width,
+          height,
+          Math.max(1, rx - 1),
+          Math.max(1, ry - 1),
+        );
+      }
+
+      function dilateBinary(input, width, height, rx, ry) {
+        const temp = new Uint8Array(input.length);
+        const out = new Uint8Array(input.length);
+
+        for (let y = 0; y < height; y++) {
+          let count = 0;
+          for (let x = -rx; x < width + rx; x++) {
+            const add = x + rx;
+            const remove = x - rx - 1;
+            if (add >= 0 && add < width && input[y * width + add]) count++;
+            if (remove >= 0 && remove < width && input[y * width + remove])
+              count--;
+            if (x >= 0 && x < width && count > 0) temp[y * width + x] = 1;
+          }
+        }
+
+        for (let x = 0; x < width; x++) {
+          let count = 0;
+          for (let y = -ry; y < height + ry; y++) {
+            const add = y + ry;
+            const remove = y - ry - 1;
+            if (add >= 0 && add < height && temp[add * width + x]) count++;
+            if (remove >= 0 && remove < height && temp[remove * width + x])
+              count--;
+            if (y >= 0 && y < height && count > 0) out[y * width + x] = 1;
+          }
+        }
+
+        return out;
+      }
+
+      function erodeBinary(input, width, height, rx, ry) {
+        const out = new Uint8Array(input.length);
+
+        for (let y = ry; y < height - ry; y++) {
+          for (let x = rx; x < width - rx; x++) {
+            let ok = true;
+            for (let yy = y - ry; yy <= y + ry && ok; yy++) {
+              for (let xx = x - rx; xx <= x + rx; xx++) {
+                if (!input[yy * width + xx]) {
+                  ok = false;
+                  break;
+                }
+              }
+            }
+            if (ok) out[y * width + x] = 1;
+          }
+        }
+
+        return out;
+      }
+
+      function connectedComponents(binary, width, height) {
+        const visited = new Uint8Array(binary.length);
+        const stack = [];
+        const result = [];
+
+        for (let y = 0; y < height; y++) {
+          for (let x = 0; x < width; x++) {
+            const start = y * width + x;
+            if (!binary[start] || visited[start]) continue;
+
+            let minX = x,
+              minY = y,
+              maxX = x,
+              maxY = y,
+              area = 0;
+            stack.length = 0;
+            stack.push(start);
+            visited[start] = 1;
+
+            while (stack.length) {
+              const i = stack.pop();
+              const cx = i % width;
+              const cy = (i / width) | 0;
+              area++;
+
+              if (cx < minX) minX = cx;
+              if (cx > maxX) maxX = cx;
+              if (cy < minY) minY = cy;
+              if (cy > maxY) maxY = cy;
+
+              for (let dy = -1; dy <= 1; dy++) {
+                for (let dx = -1; dx <= 1; dx++) {
+                  if (!dx && !dy) continue;
+                  const nx = cx + dx;
+                  const ny = cy + dy;
+                  if (nx < 0 || ny < 0 || nx >= width || ny >= height) continue;
+                  const ni = ny * width + nx;
+                  if (binary[ni] && !visited[ni]) {
+                    visited[ni] = 1;
+                    stack.push(ni);
+                  }
+                }
+              }
+            }
+
+            result.push({ minX, minY, maxX, maxY, area });
+          }
+        }
+
+        return result;
+      }
+
+      function verticalOverlap(a, b) {
+        const top = Math.max(a.y, b.y);
+        const bottom = Math.min(a.y + a.height, b.y + b.height);
+        return (
+          Math.max(0, bottom - top) / Math.max(1, Math.min(a.height, b.height))
+        );
+      }
+
+      function horizontalGap(a, b) {
+        if (a.x <= b.x) return b.x - (a.x + a.width);
+        return a.x - (b.x + b.width);
+      }
+
+      function unionBox(a, b) {
+        const x1 = Math.min(a.x, b.x);
+        const y1 = Math.min(a.y, b.y);
+        const x2 = Math.max(a.x + a.width, b.x + b.width);
+        const y2 = Math.max(a.y + a.height, b.y + b.height);
+        return { x: x1, y: y1, width: x2 - x1, height: y2 - y1 };
+      }
+
+      function groupBoxes(input, gap, width, height) {
+        const boxes = input.map((b) => ({ ...b }));
+        let changed = true;
+
+        while (changed) {
+          changed = false;
+
+          outer: for (let i = 0; i < boxes.length; i++) {
+            for (let j = i + 1; j < boxes.length; j++) {
+              const a = boxes[i];
+              const b = boxes[j];
+              const sameRow =
+                verticalOverlap(a, b) >= 0.45 ||
+                Math.abs(a.y + a.height / 2 - (b.y + b.height / 2)) <=
+                  Math.max(a.height, b.height) * 0.45;
+
+              const distance = horizontalGap(a, b);
+
+              if (sameRow && distance >= -2 && distance <= gap) {
+                const merged = unionBox(a, b);
+                if (
+                  merged.width <= width * 0.48 &&
+                  merged.height <= height * 0.45
+                ) {
+                  boxes[i] = merged;
+                  boxes.splice(j, 1);
+                  changed = true;
+                  break outer;
+                }
+              }
+            }
+          }
+        }
+
+        return boxes;
+      }
+
+      function expandBox(b, pad, width, height) {
+        const x = Math.max(0, b.x - pad);
+        const y = Math.max(0, b.y - pad);
+        const x2 = Math.min(width, b.x + b.width + pad);
+        const y2 = Math.min(height, b.y + b.height + pad);
+        return { x, y, width: x2 - x, height: y2 - y };
+      }
+
+      function intersectionArea(a, b) {
+        const x1 = Math.max(a.x, b.x);
+        const y1 = Math.max(a.y, b.y);
+        const x2 = Math.min(a.x + a.width, b.x + b.width);
+        const y2 = Math.min(a.y + a.height, b.y + b.height);
+        return Math.max(0, x2 - x1) * Math.max(0, y2 - y1);
+      }
+
+      function iou(a, b) {
+        const inter = intersectionArea(a, b);
+        const union = a.width * a.height + b.width * b.height - inter;
+        return inter / Math.max(1, union);
+      }
+
+      function containmentRatio(inner, outer) {
+        return (
+          intersectionArea(inner, outer) /
+          Math.max(1, inner.width * inner.height)
+        );
+      }
+
+      function removeNestedAndDuplicates(input) {
+        const sorted = [...input].sort(
+          (a, b) => b.width * b.height - a.width * a.height,
+        );
+        const kept = [];
+
+        for (const box of sorted) {
+          const duplicate = kept.some((k) => iou(box, k) >= 0.72);
+          if (duplicate) continue;
+
+          const nestedInSimilarControl = kept.some(
+            (k) =>
+              containmentRatio(box, k) >= 0.92 &&
+              k.width <= box.width * 2.8 &&
+              k.height <= box.height * 2.8,
+          );
+
+          if (!nestedInSimilarControl) kept.push(box);
+        }
+
+        return kept;
+      }
+
+      function consolidateCompositeControls(input) {
+        if (!input.length) return input;
+
+        const area = (box) => box.width * box.height;
+        const centerInside = (inner, outer) => {
+          const cx = inner.x + inner.width / 2;
+          const cy = inner.y + inner.height / 2;
+          return (
+            cx >= outer.x &&
+            cx <= outer.x + outer.width &&
+            cy >= outer.y &&
+            cy <= outer.y + outer.height
+          );
+        };
+
+        const verticalOverlapRatio = (a, b) => {
+          const top = Math.max(a.y, b.y);
+          const bottom = Math.min(a.y + a.height, b.y + b.height);
+          return (
+            Math.max(0, bottom - top) /
+            Math.max(1, Math.min(a.height, b.height))
+          );
+        };
+
+        const overlapOfSmaller = (a, b) => {
+          const inter = intersectionArea(a, b);
+          return inter / Math.max(1, Math.min(area(a), area(b)));
+        };
+
+        // Спочатку залишаємо найповніші рамки.
+        const sorted = [...input].sort((a, b) => area(b) - area(a));
+        const removed = new Set();
+
+        for (let i = 0; i < sorted.length; i++) {
+          if (removed.has(i)) continue;
+
+          const anchor = sorted[i];
+          const anchorIsComposite =
+            anchor.width >= Math.max(72, anchor.height * 2.6) &&
+            anchor.height <= 90;
+
+          for (let j = i + 1; j < sorted.length; j++) {
+            if (removed.has(j)) continue;
+            const candidate = sorted[j];
+
+            const overlap = overlapOfSmaller(anchor, candidate);
+            const verticalOverlap = verticalOverlapRatio(anchor, candidate);
+            const candidateContained = containmentRatio(candidate, anchor);
+            const sameControl =
+              overlap >= 0.68 ||
+              candidateContained >= 0.82 ||
+              (anchorIsComposite &&
+                centerInside(candidate, anchor) &&
+                verticalOverlap >= 0.62);
+
+            if (!sameControl) continue;
+
+            // Не поглинаємо сусідні компактні іконки, які лише торкаються
+            // широкого поля. Центр такої іконки має бути поза рамкою поля.
+            const candidateCompact =
+              candidate.width <= 54 && candidate.height <= 54;
+            if (
+              candidateCompact &&
+              !centerInside(candidate, anchor) &&
+              candidateContained < 0.82
+            ) {
+              continue;
+            }
+
+            removed.add(j);
+          }
+        }
+
+        const result = sorted.filter((_, index) => !removed.has(index));
+
+        // Друга перевірка прибирає майже однакові великі рамки, які могли
+        // відрізнятися лише на кілька пікселів.
+        const finalResult = [];
+        for (const box of result) {
+          const duplicate = finalResult.some(
+            (existing) =>
+              iou(box, existing) >= 0.58 ||
+              overlapOfSmaller(box, existing) >= 0.86,
+          );
+          if (!duplicate) finalResult.push(box);
+        }
+
+        return finalResult;
+      }
+
+      function isLikelyRealElement(box) {
+        if (!sourceImageData) return true;
+
+        const data = sourceImageData.data;
+        const imageWidth = sourceCanvas.width;
+
+        const x1 = Math.max(0, Math.floor(box.x));
+        const y1 = Math.max(0, Math.floor(box.y));
+        const x2 = Math.min(sourceCanvas.width, Math.ceil(box.x + box.width));
+        const y2 = Math.min(sourceCanvas.height, Math.ceil(box.y + box.height));
+
+        const width = Math.max(1, x2 - x1);
+        const height = Math.max(1, y2 - y1);
+
+        // Відсіюємо лише справді тонкі розділювачі.
+        // Маленькі стрілки та контурні іконки більше не відкидаються.
+        if ((width <= 3 && height >= 18) || (height <= 3 && width >= 18)) {
+          return false;
+        }
+
+        const columnHits = new Uint16Array(width);
+        const rowHits = new Uint16Array(height);
+
+        let visiblePixels = 0;
+        let strongPixels = 0;
+        let sampledPixels = 0;
+
+        // Для дрібних іконок аналізуємо кожен піксель.
+        const step =
+          width <= 40 || height <= 40
+            ? 1
+            : Math.max(1, Math.floor(Math.min(width, height) / 30));
+
+        for (let y = y1; y < y2; y += step) {
+          for (let x = x1; x < x2; x += step) {
+            const i = (y * imageWidth + x) * 4;
+            const r = data[i];
+            const g = data[i + 1];
+            const b = data[i + 2];
+
+            const max = Math.max(r, g, b);
+            const min = Math.min(r, g, b);
+            const brightness = (r + g + b) / 3;
+            const saturation = max === 0 ? 0 : (max - min) / max;
+
+            // Враховуємо світло-сірі контурні піктограми,
+            // які раніше не проходили поріг.
+            const visible = brightness < 232 || saturation > 0.1;
+
+            if (visible) {
+              const cx = Math.min(width - 1, x - x1);
+              const cy = Math.min(height - 1, y - y1);
+              columnHits[cx]++;
+              rowHits[cy]++;
+              visiblePixels++;
+
+              if (brightness < 190 || saturation > 0.16) {
+                strongPixels++;
+              }
+            }
+
+            sampledPixels++;
+          }
+        }
+
+        const activeColumns = Array.from(columnHits).filter(
+          (value) => value > 0,
+        ).length;
+        const activeRows = Array.from(rowHits).filter(
+          (value) => value > 0,
+        ).length;
+
+        const activeColumnRatio = activeColumns / width;
+        const activeRowRatio = activeRows / height;
+        const visibleRatio = visiblePixels / Math.max(1, sampledPixels);
+        const strongRatio = strongPixels / Math.max(1, sampledPixels);
+
+        // Компактні елементи (стрілки, глобус, піктограми) мають м'якші пороги.
+        const compact = width <= 48 && height <= 48;
+
+        if (compact) {
+          if (activeColumnRatio < 0.08 || activeRowRatio < 0.08) {
+            return false;
+          }
+
+          if (visibleRatio < 0.012 && strongRatio < 0.006) {
+            return false;
+          }
+
+          return true;
+        }
+
+        if (activeColumnRatio < 0.12 || activeRowRatio < 0.12) {
+          return false;
+        }
+
+        if (visibleRatio < 0.018 && strongRatio < 0.009) {
+          return false;
+        }
+
+        return true;
+      }
+
+      function boxesBelongToSameVisualRow(box, row, tolerance) {
+        const rowTop = Math.min(...row.items.map((item) => item.y));
+        const rowBottom = Math.max(
+          ...row.items.map((item) => item.y + item.height),
+        );
+        const rowHeight = Math.max(1, rowBottom - rowTop);
+
+        const boxTop = box.y;
+        const boxBottom = box.y + box.height;
+        const overlap = Math.max(
+          0,
+          Math.min(rowBottom, boxBottom) - Math.max(rowTop, boxTop),
+        );
+        const overlapRatio =
+          overlap / Math.max(1, Math.min(rowHeight, box.height));
+
+        const boxCenter = box.y + box.height / 2;
+        const rowCenter = (rowTop + rowBottom) / 2;
+        const centerDistance = Math.abs(boxCenter - rowCenter);
+
+        /*
+         * Елементи належать одному рядку, якщо вони суттєво перекриваються
+         * по вертикалі. Сам лише великий параметр "Допуск рядка" більше не
+         * об'єднує заголовок і підзаголовок в один рядок.
+         */
+        return (
+          overlapRatio >= 0.42 ||
+          (centerDistance <=
+            Math.min(
+              tolerance,
+              Math.max(4, Math.min(rowHeight, box.height) * 0.38),
+            ) &&
+            overlapRatio >= 0.16)
+        );
+      }
+
+      function createVisualRows(items) {
+        const tolerance = Number(controls.rowTolerance.value);
+        const sorted = [...items].sort(
+          (a, b) =>
+            a.y - b.y || a.y + a.height / 2 - (b.y + b.height / 2) || a.x - b.x,
+        );
+
+        const rows = [];
+
+        for (const box of sorted) {
+          let bestRow = null;
+          let bestDistance = Infinity;
+
+          for (const row of rows) {
+            if (!boxesBelongToSameVisualRow(box, row, tolerance)) continue;
+
+            const rowCenter =
+              row.items.reduce(
+                (sum, item) => sum + item.y + item.height / 2,
+                0,
+              ) / row.items.length;
+
+            const distance = Math.abs(box.y + box.height / 2 - rowCenter);
+
+            if (distance < bestDistance) {
+              bestDistance = distance;
+              bestRow = row;
+            }
+          }
+
+          if (!bestRow) {
+            bestRow = { items: [] };
+            rows.push(bestRow);
+          }
+
+          bestRow.items.push(box);
+        }
+
+        rows.sort(
+          (a, b) =>
+            Math.min(...a.items.map((item) => item.y)) -
+            Math.min(...b.items.map((item) => item.y)),
+        );
+
+        rows.forEach((row) => row.items.sort((a, b) => a.x - b.x));
+
+        return rows;
+      }
+
+      function median(values) {
+        if (!values.length) return 0;
+        const sorted = [...values].sort((a, b) => a - b);
+        const middle = Math.floor(sorted.length / 2);
+        return sorted.length % 2
+          ? sorted[middle]
+          : (sorted[middle - 1] + sorted[middle]) / 2;
+      }
+
+      function alignFramesInRows() {
+        if (!elements.length) return;
+
+        const gap = Number(controls.frameGap.value);
+        const rows = createVisualRows(elements);
+
+        for (const row of rows) {
+          const items = [...row.items].sort((a, b) => a.x - b.x);
+          if (!items.length) continue;
+
+          /*
+           * Єдина висота рамок у рядку:
+           * беремо медіанний вертикальний центр та максимальну висоту.
+           * Це вирівнює верхню і нижню межі, але не залежить від одного
+           * випадкового зміщеного елемента.
+           */
+          const targetCenterY = median(
+            items.map((item) => item.y + item.height / 2),
+          );
+          const targetHeight = Math.max(1, ...items.map((item) => item.height));
+
+          for (const item of items) {
+            item.y = Math.max(0, Math.round(targetCenterY - targetHeight / 2));
+            item.height = Math.min(targetHeight, sourceCanvas.height - item.y);
+          }
+
+          /*
+           * Мінімальний горизонтальний відступ:
+           * якщо сусідні рамки торкаються або перекриваються,
+           * їхні межі розділяються відносно середини між центрами.
+           */
+          for (let index = 0; index < items.length - 1; index++) {
+            const left = items[index];
+            const right = items[index + 1];
+
+            const leftCenter = left.x + left.width / 2;
+            const rightCenter = right.x + right.width / 2;
+
+            if (rightCenter <= leftCenter) continue;
+
+            const currentGap = right.x - (left.x + left.width);
+            if (currentGap >= gap) continue;
+
+            const boundary = (leftCenter + rightCenter) / 2;
+            const leftRightEdge = boundary - gap / 2;
+            const rightLeftEdge = boundary + gap / 2;
+
+            const minimumWidth = 4;
+
+            left.width = Math.max(
+              minimumWidth,
+              Math.round(leftRightEdge - left.x),
+            );
+
+            const rightEdge = right.x + right.width;
+            right.x = Math.round(rightLeftEdge);
+            right.width = Math.max(
+              minimumWidth,
+              Math.round(rightEdge - right.x),
+            );
+          }
+
+          // Захист від виходу рамок за межі зображення.
+          for (const item of items) {
+            item.x = Math.max(0, Math.round(item.x));
+            item.y = Math.max(0, Math.round(item.y));
+            item.width = Math.max(
+              1,
+              Math.min(Math.round(item.width), sourceCanvas.width - item.x),
+            );
+            item.height = Math.max(
+              1,
+              Math.min(Math.round(item.height), sourceCanvas.height - item.y),
+            );
+          }
+        }
+      }
+
+      function alignAndRefresh(message = "Рамки вирівняно.") {
+        alignFramesInRows();
+        sortAndNumber();
+        render();
+        updateUi();
+        setStatus(message);
+      }
+
+      function sortAndNumber() {
+        const rows = createVisualRows(elements);
+        elements = rows.flatMap((row) => row.items);
+        elements.forEach((box, index) => {
+          box.number = index + 1;
+        });
+      }
+
+      function buildRows() {
+        return createVisualRows(elements);
+      }
+
+      function assignLabelLanes(rows, radius, spacing, gap) {
+        /*
+         * Нумерація виконується окремо для кожного візуального рядка.
+         * Перед кожним рядком резервується власна смуга для номерів.
+         * Завдяки цьому номери другого рядка фізично не можуть потрапити
+         * на елементи першого рядка.
+         */
+        const rowLayouts = [];
+        const diameter = radius * 2;
+        let addedOffset = 0;
+
+        rows.forEach((row, rowIndex) => {
+          const items = [...row.items].sort((a, b) => a.x - b.x);
+          const lanes = [];
+          const labels = [];
+
+          for (const item of items) {
+            const desiredX = item.x + item.width / 2;
+            let lane = 0;
+
+            while (true) {
+              if (!lanes[lane]) lanes[lane] = [];
+
+              const collision = lanes[lane].some(
+                (existingX) =>
+                  Math.abs(existingX - desiredX) < diameter + spacing,
+              );
+
+              if (!collision) break;
+              lane++;
+            }
+
+            lanes[lane].push(desiredX);
+            labels.push({
+              item,
+              x: desiredX,
+              lane,
+              rowIndex,
+            });
+          }
+
+          const laneCount = Math.max(1, lanes.length);
+          const labelBandHeight =
+            gap +
+            laneCount * diameter +
+            Math.max(0, laneCount - 1) * spacing +
+            8;
+
+          rowLayouts.push({
+            row,
+            rowIndex,
+            labels,
+            laneCount,
+            labelBandHeight,
+            addedOffset,
+          });
+
+          addedOffset += labelBandHeight;
+        });
+
+        return {
+          rowLayouts,
+          totalAddedHeight: addedOffset,
+        };
+      }
+
+      function render() {
+        if (!sourceImage) return;
+
+        const fontSize = Number(controls.labelSize.value);
+        const radius = Math.max(11, fontSize * 0.9);
+        const spacing = Number(controls.labelSpacing.value);
+        const gap = Number(controls.labelGap.value);
+        const rows = buildRows();
+
+        /*
+         * Рядки для позиціонування номерів визначаємо спочатку за звичайними
+         * елементами. Вручну об'єднані рамки додаємо до збереженого рядка,
+         * щоб після об'єднання другий рядок не перетворювався на перший.
+         */
+        let visualRows = createVisualRows(
+          elements.filter((item) => !item.manuallyMerged),
+        );
+
+        if (!visualRows.length) {
+          visualRows = rows;
+        } else {
+          for (const merged of elements.filter((item) => item.manuallyMerged)) {
+            let rowIndex = Number.isInteger(merged.preferredRowIndex)
+              ? merged.preferredRowIndex
+              : -1;
+
+            if (rowIndex < 0 || rowIndex >= visualRows.length) {
+              const centerY = merged.y + merged.height / 2;
+              let bestDistance = Infinity;
+              rowIndex = 0;
+
+              visualRows.forEach((row, index) => {
+                const rowCenter =
+                  row.items.reduce(
+                    (sum, item) => sum + item.y + item.height / 2,
+                    0,
+                  ) / row.items.length;
+
+                const distance = Math.abs(centerY - rowCenter);
+                if (distance < bestDistance) {
+                  bestDistance = distance;
+                  rowIndex = index;
+                }
+              });
+            }
+
+            visualRows[rowIndex].items.push(merged);
+            visualRows[rowIndex].items.sort((a, b) => a.x - b.x);
+          }
+        }
+
+        /*
+         * Для двох рядків:
+         *   – номери першого рядка розташовуються зверху;
+         *   – номери другого рядка розташовуються знизу.
+         * Саме зображення не розрізається і не зміщується між рядками.
+         */
+        /*
+         * Якщо на зображенні є щонайменше два візуальні рядки,
+         * перший рядок нумеруємо зверху, а всі наступні — знизу.
+         * Це не дозволяє номерам другого рядка накладатися на перший.
+         */
+        if (elements.length === 0) {
+          renderImageWithoutFrames();
+          return;
+        }
+
+        if (visualRows.length >= 2) {
+          renderTopAndBottomRows(visualRows, fontSize, radius, spacing, gap);
+          return;
+        }
+
+        if (visualRows.length === 1) {
+          renderSingleRowWithoutSplitting(
+            visualRows[0],
+            fontSize,
+            radius,
+            spacing,
+            gap,
+          );
+          return;
+        }
+
+        const layout = assignLabelLanes(
+          visualRows.length ? visualRows : rows,
+          radius,
+          spacing,
+          gap,
+        );
+
+        const leftMargin = radius + 10;
+        const rightMargin = radius + 10;
+        const bottomMargin = 12;
+
+        canvas.width = sourceCanvas.width + leftMargin + rightMargin;
+        canvas.height =
+          sourceCanvas.height + layout.totalAddedHeight + bottomMargin;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        const sortedLayouts = [...layout.rowLayouts].sort(
+          (a, b) =>
+            Math.min(...a.row.items.map((i) => i.y)) -
+            Math.min(...b.row.items.map((i) => i.y)),
+        );
+
+        let sourceY = 0;
+        let destinationY = 0;
+        const rowMappings = [];
+
+        for (let index = 0; index < sortedLayouts.length; index++) {
+          const rowLayout = sortedLayouts[index];
+          const rowTop = Math.max(
+            sourceY,
+            Math.min(...rowLayout.row.items.map((i) => i.y)),
+          );
+
+          const nextRowTop =
+            index + 1 < sortedLayouts.length
+              ? Math.min(...sortedLayouts[index + 1].row.items.map((i) => i.y))
+              : sourceCanvas.height;
+
+          const preHeight = Math.max(0, rowTop - sourceY);
+
+          if (preHeight > 0) {
+            ctx.drawImage(
+              sourceImage,
+              0,
+              sourceY,
+              sourceCanvas.width,
+              preHeight,
+              leftMargin,
+              destinationY,
+              sourceCanvas.width,
+              preHeight,
+            );
+            destinationY += preHeight;
+          }
+
+          const labelBandTop = destinationY;
+          destinationY += rowLayout.labelBandHeight;
+
+          const rowSliceHeight = Math.max(1, nextRowTop - rowTop);
+
+          ctx.drawImage(
+            sourceImage,
+            0,
+            rowTop,
+            sourceCanvas.width,
+            rowSliceHeight,
+            leftMargin,
+            destinationY,
+            sourceCanvas.width,
+            rowSliceHeight,
+          );
+
+          rowMappings.push({
+            rowLayout,
+            sourceTop: rowTop,
+            sourceBottom: rowTop + rowSliceHeight,
+            destinationTop: destinationY,
+            labelBandTop,
+            labelBandHeight: rowLayout.labelBandHeight,
+          });
+
+          destinationY += rowSliceHeight;
+          sourceY = rowTop + rowSliceHeight;
+        }
+
+        if (sourceY < sourceCanvas.height) {
+          const remaining = sourceCanvas.height - sourceY;
+          ctx.drawImage(
+            sourceImage,
+            0,
+            sourceY,
+            sourceCanvas.width,
+            remaining,
+            leftMargin,
+            destinationY,
+            sourceCanvas.width,
+            remaining,
+          );
+        }
+
+        renderState = {
+          mode: "separated",
+          leftMargin,
+          rowMappings,
+          labelHitAreas: [],
+        };
+
+        ctx.save();
+
+        for (const mapping of rowMappings) {
+          const {
+            rowLayout,
+            sourceTop,
+            destinationTop,
+            labelBandTop,
+            labelBandHeight,
+          } = mapping;
+
+          for (const box of rowLayout.row.items) {
+            const drawY = destinationTop + (box.y - sourceTop);
+
+            if (controls.showFrames.checked || selectedForMerge.has(box)) {
+              const selected = selectedForMerge.has(box);
+              ctx.strokeStyle = selected ? "#2563eb" : "#ef4444";
+              ctx.lineWidth = selected ? 4 : 2;
+              ctx.setLineDash(selected ? [] : [7, 5]);
+              ctx.strokeRect(leftMargin + box.x, drawY, box.width, box.height);
+              ctx.setLineDash([]);
+
+              if (selected) {
+                ctx.fillStyle = "rgba(37, 99, 235, .12)";
+                ctx.fillRect(leftMargin + box.x, drawY, box.width, box.height);
+              }
+            }
+          }
+
+          for (const label of rowLayout.labels) {
+            const box = label.item;
+            const circleX = leftMargin + label.x;
+            const circleY =
+              labelBandTop +
+              labelBandHeight -
+              gap -
+              radius -
+              label.lane * (radius * 2 + spacing);
+
+            const targetY = destinationTop + (box.y - sourceTop);
+
+            drawConnectorAndNumber(
+              circleX,
+              circleY,
+              leftMargin + box.x + box.width / 2,
+              targetY,
+              box.number,
+              fontSize,
+              radius,
+              true,
+              box,
+            );
+          }
+        }
+
+        if (dragRect) {
+          const mapped = mapSourceBoxToCanvas(dragRect);
+          if (mapped) {
+            ctx.strokeStyle = "#ef4444";
+            ctx.lineWidth = 2;
+            ctx.setLineDash([8, 5]);
+            ctx.strokeRect(mapped.x, mapped.y, mapped.width, mapped.height);
+            ctx.setLineDash([]);
+          }
+        }
+
+        ctx.restore();
+        drawGridOverlay();
+        applyCanvasZoom();
+      }
+
+      function renderImageWithoutFrames() {
+        const leftMargin = 12;
+        const topMargin = 12;
+        const rightMargin = 12;
+        const bottomMargin = 12;
+
+        canvas.width = sourceCanvas.width + leftMargin + rightMargin;
+        canvas.height = sourceCanvas.height + topMargin + bottomMargin;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(sourceImage, leftMargin, topMargin);
+
+        renderState = {
+          mode: "plain",
+          leftMargin,
+          topMargin,
+          rowMappings: [],
+          labelHitAreas: [],
+        };
+
+        if (dragRect) {
+          ctx.save();
+          ctx.strokeStyle = "#ef4444";
+          ctx.lineWidth = 2;
+          ctx.setLineDash([8, 5]);
+          ctx.strokeRect(
+            leftMargin + dragRect.x,
+            topMargin + dragRect.y,
+            dragRect.width,
+            dragRect.height,
+          );
+          ctx.setLineDash([]);
+          ctx.restore();
+        }
+
+        drawGridOverlay();
+        applyCanvasZoom();
+      }
+
+      function renderSingleRowWithoutSplitting(
+        row,
+        fontSize,
+        radius,
+        spacing,
+        gap,
+      ) {
+        const layout = buildRowLabelLayout(row, radius, spacing);
+        const diameter = radius * 2;
+
+        const topMargin =
+          gap +
+          layout.laneCount * diameter +
+          Math.max(0, layout.laneCount - 1) * spacing +
+          14;
+
+        const leftMargin = radius + 10;
+        const rightMargin = radius + 10;
+        const bottomMargin = 12;
+
+        canvas.width = sourceCanvas.width + leftMargin + rightMargin;
+        canvas.height = sourceCanvas.height + topMargin + bottomMargin;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Джерельне зображення малюється один раз, без розрізання на смуги.
+        ctx.drawImage(sourceImage, leftMargin, topMargin);
+
+        renderState = {
+          mode: "singleRow",
+          leftMargin,
+          topMargin,
+          rowMappings: [],
+          labelHitAreas: [],
+        };
+
+        ctx.save();
+
+        for (const box of elements) {
+          if (controls.showFrames.checked || selectedForMerge.has(box)) {
+            const selected = selectedForMerge.has(box);
+
+            ctx.strokeStyle = selected ? "#2563eb" : "#ef4444";
+            ctx.lineWidth = selected ? 4 : 2;
+            ctx.setLineDash(selected ? [] : [7, 5]);
+            ctx.strokeRect(
+              leftMargin + box.x,
+              topMargin + box.y,
+              box.width,
+              box.height,
+            );
+            ctx.setLineDash([]);
+
+            if (selected) {
+              ctx.fillStyle = "rgba(37, 99, 235, .12)";
+              ctx.fillRect(
+                leftMargin + box.x,
+                topMargin + box.y,
+                box.width,
+                box.height,
+              );
+            }
+          }
+        }
+
+        for (const label of layout.labels) {
+          const box = label.item;
+          const circleX = leftMargin + label.x;
+          const circleY =
+            topMargin - gap - radius - label.lane * (diameter + spacing);
+
+          drawConnectorAndNumber(
+            circleX,
+            circleY,
+            leftMargin + box.x + box.width / 2,
+            topMargin + box.y,
+            box.number,
+            fontSize,
+            radius,
+            true,
+          );
+        }
+
+        if (dragRect) {
+          ctx.strokeStyle = "#ef4444";
+          ctx.lineWidth = 2;
+          ctx.setLineDash([8, 5]);
+          ctx.strokeRect(
+            leftMargin + dragRect.x,
+            topMargin + dragRect.y,
+            dragRect.width,
+            dragRect.height,
+          );
+          ctx.setLineDash([]);
+        }
+
+        ctx.restore();
+        drawGridOverlay();
+        applyCanvasZoom();
+      }
+
+      function buildRowLabelLayout(row, radius, spacing) {
+        const lanes = [];
+        const labels = [];
+        const diameter = radius * 2;
+
+        for (const item of [...row.items].sort((a, b) => a.x - b.x)) {
+          const desiredX = item.x + item.width / 2;
+          let lane = 0;
+
+          while (true) {
+            if (!lanes[lane]) lanes[lane] = [];
+
+            const collision = lanes[lane].some(
+              (existingX) =>
+                Math.abs(existingX - desiredX) < diameter + spacing,
+            );
+
+            if (!collision) break;
+            lane++;
+          }
+
+          lanes[lane].push(desiredX);
+          labels.push({ item, x: desiredX, lane });
+        }
+
+        return {
+          labels,
+          laneCount: Math.max(1, lanes.length),
+        };
+      }
+
+      function renderTopAndBottomRows(rows, fontSize, radius, spacing, gap) {
+        const firstRow = buildRowLabelLayout(rows[0], radius, spacing);
+        const lowerRows = rows.slice(1);
+        const diameter = radius * 2;
+
+        const lowerLayouts = lowerRows.map((row) =>
+          buildRowLabelLayout(row, radius, spacing),
+        );
+
+        const topMargin =
+          gap +
+          firstRow.laneCount * diameter +
+          Math.max(0, firstRow.laneCount - 1) * spacing +
+          12;
+
+        /*
+         * Для нижніх рядків кожному рядку виділяється власна смуга.
+         * Тому номери різних нижніх рядків не накладаються один на одного.
+         */
+        const bottomBands = [];
+        let bottomOffset = 0;
+
+        for (let i = 0; i < lowerLayouts.length; i++) {
+          const layout = lowerLayouts[i];
+          const bandHeight =
+            gap +
+            layout.laneCount * diameter +
+            Math.max(0, layout.laneCount - 1) * spacing +
+            10;
+
+          bottomBands.push({
+            row: lowerRows[i],
+            layout,
+            top: bottomOffset,
+            height: bandHeight,
+          });
+
+          bottomOffset += bandHeight;
+        }
+
+        const bottomMargin = Math.max(12, bottomOffset + 8);
+        const leftMargin = radius + 10;
+        const rightMargin = radius + 10;
+
+        canvas.width = sourceCanvas.width + leftMargin + rightMargin;
+        canvas.height = sourceCanvas.height + topMargin + bottomMargin;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(sourceImage, leftMargin, topMargin);
+
+        renderState = {
+          mode: "twoRows",
+          leftMargin,
+          topMargin,
+          rowMappings: [],
+          labelHitAreas: [],
+        };
+
+        ctx.save();
+
+        // Додаємо вручну об'єднані елементи до найближчого верхнього рядка лише
+        // для відображення рамки; логіка розміщення номерів вже визначена.
+        for (const box of elements) {
+          if (controls.showFrames.checked || selectedForMerge.has(box)) {
+            const selected = selectedForMerge.has(box);
+            ctx.strokeStyle = selected ? "#2563eb" : "#ef4444";
+            ctx.lineWidth = selected ? 4 : 2;
+            ctx.setLineDash(selected ? [] : [7, 5]);
+            ctx.strokeRect(
+              leftMargin + box.x,
+              topMargin + box.y,
+              box.width,
+              box.height,
+            );
+            ctx.setLineDash([]);
+
+            if (selected) {
+              ctx.fillStyle = "rgba(37, 99, 235, .12)";
+              ctx.fillRect(
+                leftMargin + box.x,
+                topMargin + box.y,
+                box.width,
+                box.height,
+              );
+            }
+          }
+        }
+
+        // Перший візуальний рядок — номери тільки зверху.
+        for (const label of firstRow.labels) {
+          const box = label.item;
+          const circleX = leftMargin + label.x;
+          const circleY =
+            topMargin - gap - radius - label.lane * (diameter + spacing);
+
+          drawConnectorAndNumber(
+            circleX,
+            circleY,
+            leftMargin + box.x + box.width / 2,
+            topMargin + box.y,
+            box.number,
+            fontSize,
+            radius,
+            true,
+          );
+        }
+
+        // Другий та наступні візуальні рядки — номери тільки знизу.
+        for (const band of bottomBands) {
+          for (const label of band.layout.labels) {
+            const box = label.item;
+            const circleX = leftMargin + label.x;
+            const circleY =
+              topMargin +
+              sourceCanvas.height +
+              band.top +
+              gap +
+              radius +
+              label.lane * (diameter + spacing);
+
+            drawConnectorAndNumber(
+              circleX,
+              circleY,
+              leftMargin + box.x + box.width / 2,
+              topMargin + box.y + box.height,
+              box.number,
+              fontSize,
+              radius,
+              false,
+              box,
+            );
+          }
+        }
+
+        if (dragRect) {
+          ctx.strokeStyle = "#ef4444";
+          ctx.lineWidth = 2;
+          ctx.setLineDash([8, 5]);
+          ctx.strokeRect(
+            leftMargin + dragRect.x,
+            topMargin + dragRect.y,
+            dragRect.width,
+            dragRect.height,
+          );
+          ctx.setLineDash([]);
+        }
+
+        ctx.restore();
+        drawGridOverlay();
+        applyCanvasZoom();
+      }
+
+      function drawConnectorAndNumber(
+        circleX,
+        circleY,
+        targetX,
+        targetY,
+        number,
+        fontSize,
+        radius,
+        connectorDown,
+        element,
+      ) {
+        const offsetX = Number(element?.labelOffsetX || 0);
+        const offsetY = Number(element?.labelOffsetY || 0);
+
+        circleX += offsetX;
+        circleY += offsetY;
+
+        // Зберігаємо фактичну область номера для подальшого перетягування.
+        if (element) {
+          renderState.labelHitAreas ||= [];
+          renderState.labelHitAreas.push({
+            element,
+            x: circleX,
+            y: circleY,
+            radius: radius + 5,
+            baseX: circleX - offsetX,
+            baseY: circleY - offsetY,
+          });
+        }
+        if (controls.showConnectors.checked) {
+          ctx.strokeStyle = "rgba(227, 41, 41, .65)";
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.moveTo(circleX, circleY + (connectorDown ? radius : -radius));
+          ctx.lineTo(targetX, targetY);
+          ctx.stroke();
+        }
+
+        ctx.beginPath();
+        ctx.arc(circleX, circleY, radius, 0, Math.PI * 2);
+
+        // Білий фон номера.
+        ctx.fillStyle = "#ffffff";
+        ctx.fill();
+
+        // Червона рамка номера.
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = "#e32929";
+        ctx.stroke();
+
+        // Чорна цифра.
+        ctx.fillStyle = "#000000";
+        ctx.font = `700 ${fontSize}px system-ui, sans-serif`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(String(number), circleX, circleY + 0.5);
+      }
+
+      function drawGridOverlay() {
+        if (!document.getElementById("gridToggle")?.checked) return;
+
+        ctx.save();
+        ctx.strokeStyle = "rgba(0,0,0,.10)";
+        ctx.lineWidth = 1;
+
+        const step = 20;
+
+        for (let x = 0; x <= canvas.width; x += step) {
+          ctx.beginPath();
+          ctx.moveTo(x + 0.5, 0);
+          ctx.lineTo(x + 0.5, canvas.height);
+          ctx.stroke();
+        }
+
+        for (let y = 0; y <= canvas.height; y += step) {
+          ctx.beginPath();
+          ctx.moveTo(0, y + 0.5);
+          ctx.lineTo(canvas.width, y + 0.5);
+          ctx.stroke();
+        }
+
+        ctx.restore();
+      }
+
+      function applyCanvasZoom() {
+        canvas.style.width = `${(canvas.width * Number(controls.zoom.value)) / 100}px`;
+        canvas.style.height = "auto";
+      }
+
+      function mapSourceBoxToCanvas(box) {
+        if (
+          renderState.mode === "twoRows" ||
+          renderState.mode === "singleRow" ||
+          renderState.mode === "plain"
+        ) {
+          return {
+            x: renderState.leftMargin + box.x,
+            y: renderState.topMargin + box.y,
+            width: box.width,
+            height: box.height,
+          };
+        }
+
+        if (!renderState.rowMappings) return null;
+
+        const centerY = box.y + box.height / 2;
+        const mapping = renderState.rowMappings.find(
+          (m) => centerY >= m.sourceTop && centerY < m.sourceBottom,
+        );
+
+        if (!mapping) return null;
+
+        return {
+          x: renderState.leftMargin + box.x,
+          y: mapping.destinationTop + (box.y - mapping.sourceTop),
+          width: box.width,
+          height: box.height,
+        };
+      }
+
+      function getSourcePoint(event) {
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+
+        const canvasX = (event.clientX - rect.left) * scaleX;
+        const canvasY = (event.clientY - rect.top) * scaleY;
+        const sourceX = canvasX - renderState.leftMargin;
+
+        if (
+          renderState.mode === "twoRows" ||
+          renderState.mode === "singleRow" ||
+          renderState.mode === "plain"
+        ) {
+          return {
+            x: Math.max(0, Math.min(sourceCanvas.width, Math.round(sourceX))),
+            y: Math.max(
+              0,
+              Math.min(
+                sourceCanvas.height,
+                Math.round(canvasY - renderState.topMargin),
+              ),
+            ),
+          };
+        }
+
+        let sourceY = 0;
+
+        if (renderState.rowMappings?.length) {
+          const mapping = renderState.rowMappings.find(
+            (m) =>
+              canvasY >= m.destinationTop &&
+              canvasY < m.destinationTop + (m.sourceBottom - m.sourceTop),
+          );
+
+          if (mapping) {
+            sourceY = mapping.sourceTop + (canvasY - mapping.destinationTop);
+          } else {
+            const nearest = renderState.rowMappings.reduce((best, m) => {
+              const distance = Math.min(
+                Math.abs(canvasY - m.destinationTop),
+                Math.abs(
+                  canvasY - (m.destinationTop + m.sourceBottom - m.sourceTop),
+                ),
+              );
+
+              return !best || distance < best.distance
+                ? { mapping: m, distance }
+                : best;
+            }, null);
+
+            sourceY = nearest ? nearest.mapping.sourceTop : 0;
+          }
+        }
+
+        return {
+          x: Math.max(0, Math.min(sourceCanvas.width, Math.round(sourceX))),
+          y: Math.max(0, Math.min(sourceCanvas.height, Math.round(sourceY))),
+        };
+      }
+
+      function getElementCandidatesAtPoint(point) {
+        return elements
+          .map((box, index) => ({ box, index }))
+          .filter(
+            ({ box }) =>
+              point.x >= box.x &&
+              point.x <= box.x + box.width &&
+              point.y >= box.y &&
+              point.y <= box.y + box.height,
+          )
+          .sort(
+            (a, b) => a.box.width * a.box.height - b.box.width * b.box.height,
+          );
+      }
+
+      function toggleMergeSelection(point) {
+        const candidates = getElementCandidatesAtPoint(point);
+        if (!candidates.length) {
+          setStatus("У цій точці немає розпізнаного елемента.");
+          return;
+        }
+
+        const box = candidates[0].box;
+
+        if (selectedForMerge.has(box)) {
+          selectedForMerge.delete(box);
+        } else {
+          selectedForMerge.add(box);
+        }
+
+        render();
+        updateUi();
+
+        setStatus(
+          selectedForMerge.size
+            ? `Вибрано для об'єднання: ${selectedForMerge.size}.`
+            : "Вибір для об'єднання скасовано.",
+        );
+      }
+
+      function mergeSelectedElements() {
+        const selected = [...selectedForMerge].filter((box) =>
+          elements.includes(box),
+        );
+        if (selected.length < 2) {
+          setStatus("Для об'єднання виберіть щонайменше два елементи.");
+          return;
+        }
+
+        const x1 = Math.min(...selected.map((box) => box.x));
+        const y1 = Math.min(...selected.map((box) => box.y));
+        const x2 = Math.max(...selected.map((box) => box.x + box.width));
+        const y2 = Math.max(...selected.map((box) => box.y + box.height));
+
+        const rowsBeforeMerge = createVisualRows(elements);
+        const selectedRowIndexes = selected
+          .map((item) =>
+            rowsBeforeMerge.findIndex((row) => row.items.includes(item)),
+          )
+          .filter((index) => index >= 0);
+
+        const preferredRowIndex = selectedRowIndexes.length
+          ? Math.min(...selectedRowIndexes)
+          : 0;
+
+        const merged = {
+          x: x1,
+          y: y1,
+          width: x2 - x1,
+          height: y2 - y1,
+          manuallyMerged: true,
+          preferredRowIndex,
+        };
+
+        const selectedSet = new Set(selected);
+        elements = elements.filter((box) => !selectedSet.has(box));
+        elements.push(merged);
+
+        selectedForMerge.clear();
+
+        if (controls.autoAlignFrames.checked) {
+          alignFramesInRows();
+        }
+
+        sortAndNumber();
+        commitHistory();
+        render();
+        updateUi();
+
+        setStatus(
+          `Об'єднано ${selected.length} елементи в один. Рамки вирівняно, нумерацію перераховано.`,
+        );
+      }
+
+      $("mergeSelectedBtn").addEventListener("click", mergeSelectedElements);
+
+      function getCanvasPoint(event) {
+        const rect = canvas.getBoundingClientRect();
+
+        return {
+          x: (event.clientX - rect.left) * (canvas.width / rect.width),
+          y: (event.clientY - rect.top) * (canvas.height / rect.height),
+        };
+      }
+
+      function findNumberAtCanvasPoint(point) {
+        const areas = renderState.labelHitAreas || [];
+
+        // Перевіряємо у зворотному порядку, щоб обирати верхній номер.
+        for (let index = areas.length - 1; index >= 0; index--) {
+          const area = areas[index];
+          const dx = point.x - area.x;
+          const dy = point.y - area.y;
+
+          if (dx * dx + dy * dy <= area.radius * area.radius) {
+            return area;
+          }
+        }
+
+        return null;
+      }
+
+      function beginNumberDrag(event) {
+        const point = getCanvasPoint(event);
+        const hit = findNumberAtCanvasPoint(point);
+
+        if (!hit) return false;
+
+        numberDrag = {
+          element: hit.element,
+          startX: point.x,
+          startY: point.y,
+          originalOffsetX: Number(hit.element.labelOffsetX || 0),
+          originalOffsetY: Number(hit.element.labelOffsetY || 0),
+          moved: false,
+        };
+
+        canvas.setPointerCapture(event.pointerId);
+        canvas.style.cursor = "grabbing";
+        event.preventDefault();
+        return true;
+      }
+
+      function updateNumberDrag(event) {
+        if (!numberDrag) return false;
+
+        const point = getCanvasPoint(event);
+        const dx = point.x - numberDrag.startX;
+        const dy = point.y - numberDrag.startY;
+
+        numberDrag.element.labelOffsetX = numberDrag.originalOffsetX + dx;
+        numberDrag.element.labelOffsetY = numberDrag.originalOffsetY + dy;
+
+        if (Math.abs(dx) >= 1 || Math.abs(dy) >= 1) {
+          numberDrag.moved = true;
+        }
+
+        render();
+        event.preventDefault();
+        return true;
+      }
+
+      function finishNumberDrag(event) {
+        if (!numberDrag) return false;
+
+        const moved = numberDrag.moved;
+        numberDrag = null;
+
+        if (canvas.hasPointerCapture(event.pointerId)) {
+          canvas.releasePointerCapture(event.pointerId);
+        }
+
+        canvas.style.cursor = editMode === "add" ? "crosshair" : "pointer";
+
+        if (moved) {
+          commitHistory();
+          updateUi();
+          setStatus(
+            "Положення номера змінено. Його можна переміщувати повторно.",
+          );
+        }
+
+        render();
+        event.preventDefault();
+        return true;
+      }
+
+      canvas.addEventListener("pointerdown", (event) => {
+        if (!sourceImage) return;
+
+        // Номер можна перетягувати у будь-якому режимі.
+        if (beginNumberDrag(event)) return;
+
+        const p = getSourcePoint(event);
+
+        if (editMode === "merge") {
+          toggleMergeSelection(p);
+          return;
+        }
+
+        if (editMode === "remove") {
+          const candidates = elements
+            .map((b, i) => ({ i, b }))
+            .filter(
+              ({ b }) =>
+                p.x >= b.x &&
+                p.x <= b.x + b.width &&
+                p.y >= b.y &&
+                p.y <= b.y + b.height,
+            )
+            .sort((a, b) => a.b.width * a.b.height - b.b.width * b.b.height);
+
+          if (candidates.length) {
+            const removed = elements[candidates[0].i];
+            elements.splice(candidates[0].i, 1);
+            selectedForMerge.delete(removed);
+            sortAndNumber();
+            commitHistory();
+            render();
+            updateUi();
+            setStatus(`Елемент видалено. Залишилося: ${elements.length}.`);
+          }
+          return;
+        }
+
+        dragStart = p;
+        dragRect = { x: p.x, y: p.y, width: 0, height: 0 };
+        canvas.setPointerCapture(event.pointerId);
+        render();
+      });
+
+      canvas.addEventListener("pointermove", (event) => {
+        if (updateNumberDrag(event)) return;
+        if (editMode !== "add" || !dragStart) return;
+        const p = getSourcePoint(event);
+
+        dragRect = {
+          x: Math.min(dragStart.x, p.x),
+          y: Math.min(dragStart.y, p.y),
+          width: Math.abs(p.x - dragStart.x),
+          height: Math.abs(p.y - dragStart.y),
+        };
+
+        render();
+      });
+
+      canvas.addEventListener("pointerup", (event) => {
+        if (finishNumberDrag(event)) return;
+        if (editMode !== "add" || !dragStart || !dragRect) return;
+
+        if (dragRect.width >= 4 && dragRect.height >= 4) {
+          elements.push({ ...dragRect });
+
+          if (controls.autoAlignFrames.checked) {
+            alignFramesInRows();
+          }
+
+          sortAndNumber();
+          commitHistory();
+          setStatus(`Елемент додано. Всього: ${elements.length}.`);
+        }
+
+        dragStart = null;
+        dragRect = null;
+
+        if (canvas.hasPointerCapture(event.pointerId)) {
+          canvas.releasePointerCapture(event.pointerId);
+        }
+
+        render();
+        updateUi();
+      });
+
+      canvas.addEventListener("pointercancel", (event) => {
+        if (numberDrag) {
+          numberDrag.element.labelOffsetX = numberDrag.originalOffsetX;
+          numberDrag.element.labelOffsetY = numberDrag.originalOffsetY;
+          numberDrag = null;
+        }
+
+        dragStart = null;
+        dragRect = null;
+
+        if (canvas.hasPointerCapture(event.pointerId)) {
+          canvas.releasePointerCapture(event.pointerId);
+        }
+
+        render();
+      });
+
+      canvas.addEventListener("lostpointercapture", () => {
+        if (numberDrag) {
+          const moved = numberDrag.moved;
+          numberDrag = null;
+
+          if (moved) {
+            commitHistory();
+            updateUi();
+            setStatus("Положення номера змінено.");
+          }
+
+          render();
+          return;
+        }
+
+        if (
+          dragStart &&
+          dragRect &&
+          dragRect.width >= 4 &&
+          dragRect.height >= 4
+        ) {
+          elements.push({ ...dragRect });
+
+          if (controls.autoAlignFrames.checked) {
+            alignFramesInRows();
+          }
+
+          sortAndNumber();
+          commitHistory();
+          setStatus(`Елемент додано. Всього: ${elements.length}.`);
+        }
+
+        dragStart = null;
+        dragRect = null;
+        render();
+        updateUi();
+      });
+
+      // Швидке видалення зайвого елемента з автоматичною перенумерацією.
+      canvas.addEventListener("dblclick", (event) => {
+        if (!elements.length || editMode === "merge") return;
+
+        const p = getSourcePoint(event);
+        // Видаляємо найменший елемент під курсором.
+        // Це дозволяє прибрати внутрішні хибні рамки (кути, фрагменти),
+        // навіть якщо вони перекриваються великою рамкою.
+        const candidates = elements
+          .map((b, i) => ({ i, b }))
+          .filter(
+            ({ b }) =>
+              p.x >= b.x &&
+              p.x <= b.x + b.width &&
+              p.y >= b.y &&
+              p.y <= b.y + b.height,
+          )
+          .sort((a, b) => a.b.width * a.b.height - b.b.width * b.b.height);
+
+        if (!candidates.length) return;
+
+        elements.splice(candidates[0].i, 1);
+        sortAndNumber();
+        commitHistory();
+        render();
+        updateUi();
+        setStatus(
+          `Елемент видалено. Автоматично перенумеровано: ${elements.length} елементів.`,
+        );
+      });
+      renumberBtn.addEventListener("click", () => {
+        elements = [];
+        selectedForMerge.clear();
+        dragRect = null;
+        dragStart = null;
+        commitHistory();
+
+        render();
+        updateUi();
+        setStatus(
+          "Усі рамки видалено. Можна додавати нові вручну або виконати автоматичне розпізнавання.",
+        );
+      });
+
+      function classifyElement(box) {
+        const width = box.width;
+        const height = box.height;
+        const ratio = width / Math.max(1, height);
+        const area = width * height;
+
+        // Аналіз вмісту області: частка кольорових, темних і світлих пікселів.
+        let colored = 0;
+        let dark = 0;
+        let light = 0;
+        let sampled = 0;
+
+        if (sourceImageData) {
+          const data = sourceImageData.data;
+          const imageWidth = sourceCanvas.width;
+          const x1 = Math.max(0, Math.floor(box.x));
+          const y1 = Math.max(0, Math.floor(box.y));
+          const x2 = Math.min(sourceCanvas.width, Math.ceil(box.x + box.width));
+          const y2 = Math.min(
+            sourceCanvas.height,
+            Math.ceil(box.y + box.height),
+          );
+
+          const stepX = Math.max(1, Math.floor((x2 - x1) / 24));
+          const stepY = Math.max(1, Math.floor((y2 - y1) / 16));
+
+          for (let y = y1; y < y2; y += stepY) {
+            for (let x = x1; x < x2; x += stepX) {
+              const i = (y * imageWidth + x) * 4;
+              const r = data[i];
+              const g = data[i + 1];
+              const b = data[i + 2];
+
+              const max = Math.max(r, g, b);
+              const min = Math.min(r, g, b);
+              const saturation = max === 0 ? 0 : (max - min) / max;
+              const brightness = (r + g + b) / 3;
+
+              if (saturation > 0.22) colored++;
+              if (brightness < 75) dark++;
+              if (brightness > 210) light++;
+              sampled++;
+            }
+          }
+        }
+
+        const coloredRatio = sampled ? colored / sampled : 0;
+        const darkRatio = sampled ? dark / sampled : 0;
+        const lightRatio = sampled ? light / sampled : 0;
+
+        // Довгі вузькі області зазвичай є текстом, назвою файла або адресним рядком.
+        if (ratio >= 4.2 && height <= 42) {
+          return "Текстове поле";
+        }
+
+        // Широка область із висотою стандартного контролу — кнопка з текстом.
+        if (ratio >= 2.2 && ratio < 4.2 && height >= 22 && height <= 60) {
+          return coloredRatio > 0.12 ? "Кнопка" : "Текст";
+        }
+
+        // Компактний квадратний або майже квадратний елемент.
+        if (ratio >= 0.72 && ratio <= 1.38 && width <= 64 && height <= 64) {
+          if (coloredRatio > 0.18) return "Кольорова іконка";
+          return "Іконка";
+        }
+
+        // Невисока широка область із кольоровою заливкою.
+        if (ratio >= 1.4 && height <= 70 && coloredRatio > 0.13) {
+          return "Кнопка";
+        }
+
+        // Дуже вузький елемент.
+        if (ratio < 0.72 && height <= 70) {
+          return "Розділювач";
+        }
+
+        // Великі світлі прямокутні області.
+        if (area > 14000 && lightRatio > 0.55) {
+          return "Панель";
+        }
+
+        // Великі темні області.
+        if (area > 14000 && darkRatio > 0.55) {
+          return "Панель інструментів";
+        }
+
+        if (ratio >= 1.5) return "Текст";
+        return "Елемент";
+      }
+
+      downloadBtn.addEventListener("click", () => {
+        render();
+        const link = document.createElement("a");
+        link.download = "numbered-elements.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      });
+
+      document.getElementById("undoBtn")?.addEventListener("click", () => {
+        if (historyIndex <= 0) return;
+
+        historyIndex -= 1;
+        restoreSnapshot(historyStack[historyIndex]);
+        setStatus("Останню зміну скасовано.");
+      });
+
+      document.getElementById("redoBtn")?.addEventListener("click", () => {
+        if (historyIndex >= historyStack.length - 1) return;
+
+        historyIndex += 1;
+        restoreSnapshot(historyStack[historyIndex]);
+        setStatus("Скасовану зміну відновлено.");
+      });
+
+      // Initial empty state. Opening an image resets this history.
+      resetHistory();
+
+      document
+        .getElementById("copyScreenBtn")
+        ?.addEventListener("click", async () => {
+          try {
+            const exportCanvas = document.createElement("canvas");
+            exportCanvas.width = canvas.width + 2;
+            exportCanvas.height = canvas.height + 2;
+
+            const exportCtx = exportCanvas.getContext("2d");
+
+            // Білий фон
+            exportCtx.fillStyle = "#ffffff";
+            exportCtx.fillRect(0, 0, exportCanvas.width, exportCanvas.height);
+
+            // Зображення
+            exportCtx.drawImage(canvas, 1, 1);
+
+            // Чорна рамка 1 px
+            exportCtx.strokeStyle = "#000000";
+            exportCtx.lineWidth = 1;
+            exportCtx.strokeRect(
+              0.5,
+              0.5,
+              exportCanvas.width - 1,
+              exportCanvas.height - 1,
+            );
+
+            const blob = await new Promise((resolve) =>
+              exportCanvas.toBlob(resolve, "image/png"),
+            );
+
+            await navigator.clipboard.write([
+              new ClipboardItem({
+                "image/png": blob,
+              }),
+            ]);
+
+            setStatus("Зображення з рамкою 1 px скопійовано в буфер обміну.");
+          } catch (e) {
+            setStatus("Не вдалося скопіювати зображення.");
+          }
+        });
+
+      document.getElementById("gridToggle")?.addEventListener("change", () => {
+        render();
+      });
+
+      document.getElementById("gridToggle")?.addEventListener("change", () => {
+        if (sourceImage) render();
+      });
+    </script>
+  </body>
+</html>
